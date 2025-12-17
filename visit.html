@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Schedule a campus visit to Fort Lewis College. Experience Durango and the San Juan Mountains.">
+  <title>Visit Campus | SKYRIDGE - Fort Lewis College</title>
+  <link rel="stylesheet" href="src/css/design-system.css">
+  <style>
+    /* Hero with Parallax */
+    .hero {
+      min-height: 70vh;
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80') center/cover no-repeat fixed;
+      color: var(--color-text-inverse);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.03)" points="0,100 40,80 70,90 100,75 100,100"/></svg>') no-repeat bottom;
+      background-size: 100% 25%;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: var(--space-3) 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      color: var(--color-text-inverse);
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: none;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav__links {
+        display: flex;
+      }
+    }
+
+    .nav__link {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: var(--text-body-sm);
+      transition: color var(--duration-fast) var(--ease-default);
+    }
+
+    .nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    .nav__cta {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--text-caption);
+    }
+
+    /* Hero Content */
+    .hero__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-8) var(--container-padding);
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      background: rgba(255, 184, 28, 0.2);
+      color: var(--color-accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-caption);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+    }
+
+    .hero__title {
+      font-size: var(--text-hero);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-3);
+      animation: fadeInUp 0.6s var(--ease-out) 0.1s forwards;
+      opacity: 0;
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-h3);
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: var(--space-5);
+      animation: fadeInUp 0.6s var(--ease-out) 0.2s forwards;
+      opacity: 0;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      animation: fadeInUp 0.6s var(--ease-out) 0.3s forwards;
+      opacity: 0;
+    }
+
+    /* Visit Options Section */
+    .visit-options {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .visit-options__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .visit-options__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .visit-options__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .visit-options__subtitle {
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .visit-options__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .visit-options__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .visit-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      border: 2px solid var(--color-border);
+      text-align: center;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .visit-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .visit-card--featured {
+      border-color: var(--color-accent);
+      background: linear-gradient(to bottom, rgba(255, 184, 28, 0.05), var(--color-surface));
+    }
+
+    .visit-card__badge {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-overline);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .visit-card__icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-3);
+    }
+
+    .visit-card__title {
+      font-size: var(--text-h3);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .visit-card__text {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+      margin-bottom: var(--space-3);
+    }
+
+    .visit-card__details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .visit-card__detail {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-caption);
+      color: var(--color-text-secondary);
+    }
+
+    .visit-card__detail svg {
+      color: var(--color-primary);
+    }
+
+    /* Scheduler Section */
+    .scheduler {
+      padding: var(--space-12) 0;
+      background: var(--color-bg-light);
+    }
+
+    .scheduler__container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .scheduler__header {
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .scheduler__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .scheduler__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .scheduler__widget {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .scheduler__steps {
+      display: flex;
+      background: var(--color-primary);
+      padding: var(--space-3);
+      gap: var(--space-2);
+    }
+
+    .scheduler__step {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2);
+      border-radius: var(--radius-md);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: var(--text-body-sm);
+    }
+
+    .scheduler__step--active {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--color-text-inverse);
+    }
+
+    .scheduler__step--completed {
+      color: var(--color-accent);
+    }
+
+    .scheduler__step-number {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--text-caption);
+    }
+
+    .scheduler__step--active .scheduler__step-number {
+      background: var(--color-accent);
+      color: var(--color-primary);
+    }
+
+    .scheduler__body {
+      padding: var(--space-5);
+    }
+
+    .scheduler__calendar {
+      margin-bottom: var(--space-4);
+    }
+
+    .calendar {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .calendar__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-3);
+      background: var(--color-bg-light);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .calendar__nav {
+      background: none;
+      border: none;
+      padding: var(--space-1);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .calendar__nav:hover {
+      background: var(--color-surface);
+      color: var(--color-primary);
+    }
+
+    .calendar__month {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .calendar__weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: var(--color-bg-light);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .calendar__weekday {
+      padding: var(--space-2);
+      text-align: center;
+      font-size: var(--text-caption);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    .calendar__days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar__day {
+      padding: var(--space-2);
+      text-align: center;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: var(--text-body-sm);
+      transition: all var(--duration-fast);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      margin: 2px;
+    }
+
+    .calendar__day:hover:not(:disabled) {
+      background: var(--color-bg-light);
+    }
+
+    .calendar__day--other {
+      color: var(--color-text-secondary);
+      opacity: 0.5;
+    }
+
+    .calendar__day--today {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .calendar__day--available {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--color-success);
+    }
+
+    .calendar__day--available:hover {
+      background: rgba(16, 185, 129, 0.2);
+    }
+
+    .calendar__day--selected {
+      background: var(--color-primary) !important;
+      color: var(--color-text-inverse) !important;
+    }
+
+    .calendar__day:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .scheduler__legend {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      margin-top: var(--space-3);
+      font-size: var(--text-caption);
+    }
+
+    .scheduler__legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      color: var(--color-text-secondary);
+    }
+
+    .scheduler__legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .scheduler__legend-dot--available {
+      background: rgba(16, 185, 129, 0.3);
+    }
+
+    .scheduler__legend-dot--selected {
+      background: var(--color-primary);
+    }
+
+    .scheduler__times {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .scheduler__times-title {
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .scheduler__time-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2);
+    }
+
+    @media (max-width: 640px) {
+      .scheduler__time-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .scheduler__time {
+      padding: var(--space-2);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: none;
+      cursor: pointer;
+      font-size: var(--text-body-sm);
+      transition: all var(--duration-fast);
+    }
+
+    .scheduler__time:hover {
+      border-color: var(--color-primary);
+      background: var(--color-bg-light);
+    }
+
+    .scheduler__time--selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .scheduler__footer {
+      padding: var(--space-4) var(--space-5);
+      background: var(--color-bg-light);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .scheduler__selected {
+      font-size: var(--text-body-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .scheduler__selected strong {
+      color: var(--color-primary);
+    }
+
+    /* Virtual Section */
+    .virtual {
+      padding: var(--space-12) 0;
+      background: var(--gradient-dark);
+      color: var(--color-text-inverse);
+    }
+
+    .virtual__inner {
+      display: grid;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .virtual__inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .virtual__content {
+      order: 2;
+    }
+
+    @media (min-width: 768px) {
+      .virtual__content {
+        order: 1;
+      }
+    }
+
+    .virtual__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .virtual__title {
+      font-size: var(--text-h2);
+      margin-bottom: var(--space-3);
+    }
+
+    .virtual__text {
+      opacity: 0.9;
+      margin-bottom: var(--space-4);
+    }
+
+    .virtual__features {
+      list-style: none;
+      margin-bottom: var(--space-4);
+    }
+
+    .virtual__feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) 0;
+      opacity: 0.9;
+    }
+
+    .virtual__feature svg {
+      color: var(--color-accent);
+    }
+
+    .virtual__preview {
+      order: 1;
+      position: relative;
+    }
+
+    @media (min-width: 768px) {
+      .virtual__preview {
+        order: 2;
+      }
+    }
+
+    .virtual__video {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-xl);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all var(--duration-fast);
+    }
+
+    .virtual__video:hover {
+      border-color: var(--color-accent);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .virtual__play {
+      width: 80px;
+      height: 80px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      transition: transform var(--duration-fast);
+    }
+
+    .virtual__video:hover .virtual__play {
+      transform: scale(1.1);
+    }
+
+    /* What to Expect Section */
+    .expect {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .expect__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .expect__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .expect__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .expect__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .expect__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .expect-card {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-4);
+    }
+
+    .expect-card__icon {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .expect-card__title {
+      font-size: var(--text-h4);
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .expect-card__text {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      padding: var(--space-6) 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      list-style: none;
+    }
+
+    .footer__link {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: var(--text-body-sm);
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__concept {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      opacity: 0.5;
+      font-size: var(--text-caption);
+    }
+
+    .footer__pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a href="index.html" class="nav__logo">SKYRIDGE</a>
+        <ul class="nav__links">
+          <li><a href="programs.html" class="nav__link">Programs</a></li>
+          <li><a href="admission.html" class="nav__link">Admission</a></li>
+          <li><a href="tuition.html" class="nav__link">Tuition & Aid</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+        </ul>
+        <a href="admission.html" class="nav__cta">Apply Now</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <span class="hero__badge">Visit Campus</span>
+      <h1 class="hero__title">See It For Yourself</h1>
+      <p class="hero__subtitle">
+        Experience the mountain campus. Meet students and faculty. Discover why Fort Lewis feels like home.
+      </p>
+      <div class="hero__actions">
+        <a href="#schedule" class="btn btn--primary">Schedule Your Visit</a>
+        <a href="#virtual" class="btn btn--ghost">Take a Virtual Tour</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit Options Section -->
+  <section class="visit-options">
+    <div class="container">
+      <header class="visit-options__header reveal">
+        <span class="visit-options__overline">Visit Options</span>
+        <h2 class="visit-options__title">Choose Your Experience</h2>
+        <p class="visit-options__subtitle">Multiple ways to explore Fort Lewis College, in person or from anywhere.</p>
+      </header>
+
+      <div class="visit-options__grid">
+        <article class="visit-card visit-card--featured reveal">
+          <span class="visit-card__badge">Most Popular</span>
+          <div class="visit-card__icon">🎓</div>
+          <h3 class="visit-card__title">Campus Tour</h3>
+          <p class="visit-card__text">Walk the campus with a current student guide. See residence halls, classrooms, and the Student Union.</p>
+          <div class="visit-card__details">
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              90 minutes
+            </span>
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Student-led
+            </span>
+          </div>
+          <a href="#schedule" class="btn btn--primary">Schedule Tour</a>
+        </article>
+
+        <article class="visit-card reveal reveal--delay-1">
+          <div class="visit-card__icon">📅</div>
+          <h3 class="visit-card__title">Admission Visit</h3>
+          <p class="visit-card__text">Tour plus a one-on-one meeting with an admission counselor to discuss your path to FLC.</p>
+          <div class="visit-card__details">
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              2 hours
+            </span>
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Personalized
+            </span>
+          </div>
+          <a href="#schedule" class="btn btn--secondary">Schedule Visit</a>
+        </article>
+
+        <article class="visit-card reveal reveal--delay-2">
+          <div class="visit-card__icon">👨‍👩‍👧</div>
+          <h3 class="visit-card__title">Family Visit Day</h3>
+          <p class="visit-card__text">Special events for families. Information sessions, campus tour, and Q&A with current parents.</p>
+          <div class="visit-card__details">
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Half day
+            </span>
+            <span class="visit-card__detail">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+              Select Saturdays
+            </span>
+          </div>
+          <a href="#schedule" class="btn btn--secondary">View Dates</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scheduler Section -->
+  <section class="scheduler" id="schedule">
+    <div class="container">
+      <div class="scheduler__container">
+        <header class="scheduler__header reveal">
+          <span class="scheduler__overline">Schedule Online</span>
+          <h2 class="scheduler__title">Pick Your Date & Time</h2>
+        </header>
+
+        <div class="scheduler__widget reveal">
+          <div class="scheduler__steps">
+            <div class="scheduler__step scheduler__step--active">
+              <span class="scheduler__step-number">1</span>
+              <span>Select Date</span>
+            </div>
+            <div class="scheduler__step">
+              <span class="scheduler__step-number">2</span>
+              <span>Choose Time</span>
+            </div>
+            <div class="scheduler__step">
+              <span class="scheduler__step-number">3</span>
+              <span>Your Info</span>
+            </div>
+          </div>
+
+          <div class="scheduler__body">
+            <div class="scheduler__calendar">
+              <div class="calendar" id="calendar">
+                <div class="calendar__header">
+                  <button class="calendar__nav" type="button" id="prevMonth">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                  </button>
+                  <span class="calendar__month" id="currentMonth">January 2025</span>
+                  <button class="calendar__nav" type="button" id="nextMonth">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                  </button>
+                </div>
+                <div class="calendar__weekdays">
+                  <div class="calendar__weekday">Sun</div>
+                  <div class="calendar__weekday">Mon</div>
+                  <div class="calendar__weekday">Tue</div>
+                  <div class="calendar__weekday">Wed</div>
+                  <div class="calendar__weekday">Thu</div>
+                  <div class="calendar__weekday">Fri</div>
+                  <div class="calendar__weekday">Sat</div>
+                </div>
+                <div class="calendar__days" id="calendarDays">
+                  <!-- Days generated by JavaScript -->
+                </div>
+              </div>
+
+              <div class="scheduler__legend">
+                <div class="scheduler__legend-item">
+                  <span class="scheduler__legend-dot scheduler__legend-dot--available"></span>
+                  <span>Available</span>
+                </div>
+                <div class="scheduler__legend-item">
+                  <span class="scheduler__legend-dot scheduler__legend-dot--selected"></span>
+                  <span>Selected</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="scheduler__times" id="timeSlots" style="display: none;">
+              <h4 class="scheduler__times-title">Available Times for <span id="selectedDateDisplay">-</span></h4>
+              <div class="scheduler__time-grid" id="timeGrid">
+                <!-- Times generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <div class="scheduler__footer">
+            <div class="scheduler__selected">
+              <span id="selectionSummary">Select a date to see available times</span>
+            </div>
+            <button class="btn btn--primary" type="button" id="continueBtn" disabled onclick="alert('This is a concept prototype. In production, this would continue to your contact information form.')">
+              Continue →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Virtual Tour Section -->
+  <section class="virtual" id="virtual">
+    <div class="container">
+      <div class="virtual__inner">
+        <div class="virtual__content reveal">
+          <span class="virtual__overline">Can't Visit In Person?</span>
+          <h2 class="virtual__title">Take a Virtual Tour</h2>
+          <p class="virtual__text">
+            Explore our 350-acre mountain campus from anywhere. Interactive 360° views of residence halls, classrooms, and the stunning San Juan Mountain backdrop.
+          </p>
+          <ul class="virtual__features">
+            <li class="virtual__feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+              Interactive 360° campus views
+            </li>
+            <li class="virtual__feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+              Student and faculty video stories
+            </li>
+            <li class="virtual__feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+              Explore Durango and surroundings
+            </li>
+            <li class="virtual__feature">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+              Available 24/7, any device
+            </li>
+          </ul>
+          <a href="#" class="btn btn--primary" onclick="alert('Virtual tour would launch here in the production site.')">Start Virtual Tour</a>
+        </div>
+        <div class="virtual__preview reveal reveal--delay-1">
+          <div class="virtual__video" onclick="alert('Virtual tour video would play here.')">
+            <div class="virtual__play">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect Section -->
+  <section class="expect">
+    <div class="container">
+      <header class="expect__header reveal">
+        <span class="expect__overline">Plan Ahead</span>
+        <h2 class="expect__title">What to Expect on Your Visit</h2>
+      </header>
+
+      <div class="expect__grid">
+        <article class="card expect-card reveal">
+          <div class="expect-card__icon">🚗</div>
+          <div>
+            <h3 class="expect-card__title">Getting Here</h3>
+            <p class="expect-card__text">Durango is accessible by car (scenic drives from all directions) or fly into Durango-La Plata County Airport (DRO). We're 1000 Rim Drive, right off Highway 160.</p>
+          </div>
+        </article>
+
+        <article class="card expect-card reveal reveal--delay-1">
+          <div class="expect-card__icon">🏨</div>
+          <div>
+            <h3 class="expect-card__title">Where to Stay</h3>
+            <p class="expect-card__text">Downtown Durango has hotels for every budget, just 10 minutes from campus. Ask about our special visitor rates at select properties.</p>
+          </div>
+        </article>
+
+        <article class="card expect-card reveal reveal--delay-2">
+          <div class="expect-card__icon">👟</div>
+          <div>
+            <h3 class="expect-card__title">What to Wear</h3>
+            <p class="expect-card__text">Comfortable walking shoes are a must! Our campus is hilly. Dress in layers—mountain weather can change quickly at 7,600 feet.</p>
+          </div>
+        </article>
+
+        <article class="card expect-card reveal reveal--delay-3">
+          <div class="expect-card__icon">🍽️</div>
+          <div>
+            <h3 class="expect-card__title">Dining Options</h3>
+            <p class="expect-card__text">Eat lunch at the Student Union during your visit. Durango's historic downtown offers 100+ restaurants for dinner.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <ul class="footer__links">
+        <li><a href="index.html" class="footer__link">Home</a></li>
+        <li><a href="programs.html" class="footer__link">Programs</a></li>
+        <li><a href="admission.html" class="footer__link">Admission</a></li>
+        <li><a href="events.html" class="footer__link">Events</a></li>
+        <li><a href="contact.html" class="footer__link">Contact</a></li>
+      </ul>
+      <div class="footer__concept">
+        <span class="footer__pulse"></span>
+        <span>SKYRIDGE Concept</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll reveals
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Calendar functionality
+    let currentDate = new Date();
+    let selectedDate = null;
+    let selectedTime = null;
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+
+    // Available dates (for demo - Mon-Fri, not weekends, not past)
+    function isAvailable(date) {
+      const day = date.getDay();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return day !== 0 && day !== 6 && date >= today;
+    }
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDay = firstDay.getDay();
+      const totalDays = lastDay.getDate();
+
+      const calendarDays = document.getElementById('calendarDays');
+      calendarDays.innerHTML = '';
+
+      // Previous month days
+      const prevLastDay = new Date(year, month, 0).getDate();
+      for (let i = startDay - 1; i >= 0; i--) {
+        const btn = document.createElement('button');
+        btn.className = 'calendar__day calendar__day--other';
+        btn.textContent = prevLastDay - i;
+        btn.disabled = true;
+        calendarDays.appendChild(btn);
+      }
+
+      // Current month days
+      const today = new Date();
+      for (let day = 1; day <= totalDays; day++) {
+        const date = new Date(year, month, day);
+        const btn = document.createElement('button');
+        btn.className = 'calendar__day';
+        btn.textContent = day;
+
+        if (date.toDateString() === today.toDateString()) {
+          btn.classList.add('calendar__day--today');
+        }
+
+        if (isAvailable(date)) {
+          btn.classList.add('calendar__day--available');
+          btn.addEventListener('click', () => selectDate(date));
+        } else if (date < today) {
+          btn.disabled = true;
+        }
+
+        if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
+          btn.classList.add('calendar__day--selected');
+        }
+
+        calendarDays.appendChild(btn);
+      }
+
+      // Next month days
+      const remaining = 42 - (startDay + totalDays);
+      for (let i = 1; i <= remaining; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'calendar__day calendar__day--other';
+        btn.textContent = i;
+        btn.disabled = true;
+        calendarDays.appendChild(btn);
+      }
+    }
+
+    function selectDate(date) {
+      selectedDate = date;
+      selectedTime = null;
+      renderCalendar();
+      showTimeSlots(date);
+      updateSummary();
+    }
+
+    function showTimeSlots(date) {
+      const timeSlotsSection = document.getElementById('timeSlots');
+      const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+      const timeGrid = document.getElementById('timeGrid');
+
+      timeSlotsSection.style.display = 'block';
+      selectedDateDisplay.textContent = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+      const times = ['9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM'];
+      timeGrid.innerHTML = '';
+
+      times.forEach(time => {
+        const btn = document.createElement('button');
+        btn.className = 'scheduler__time';
+        btn.textContent = time;
+        btn.addEventListener('click', () => selectTime(time, btn));
+        timeGrid.appendChild(btn);
+      });
+    }
+
+    function selectTime(time, btn) {
+      selectedTime = time;
+      document.querySelectorAll('.scheduler__time').forEach(b => b.classList.remove('scheduler__time--selected'));
+      btn.classList.add('scheduler__time--selected');
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summary = document.getElementById('selectionSummary');
+      const continueBtn = document.getElementById('continueBtn');
+
+      if (selectedDate && selectedTime) {
+        const dateStr = selectedDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+        summary.innerHTML = `<strong>${dateStr}</strong> at <strong>${selectedTime}</strong>`;
+        continueBtn.disabled = false;
+      } else if (selectedDate) {
+        summary.textContent = 'Select a time slot';
+        continueBtn.disabled = true;
+      } else {
+        summary.textContent = 'Select a date to see available times';
+        continueBtn.disabled = true;
+      }
+    }
+
+    document.getElementById('prevMonth').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+
+    document.getElementById('nextMonth').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
+
+    // Initialize
+    renderCalendar();
+  </script>
+</body>
+</html>

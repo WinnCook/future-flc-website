@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Fort Lewis College - Colorado's only public liberal arts college. Our mission, history, and leadership.">
+  <title>About | SKYRIDGE - Fort Lewis College</title>
+  <link rel="stylesheet" href="src/css/design-system.css">
+  <style>
+    /* Hero */
+    .hero {
+      min-height: 60vh;
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.88) 0%, rgba(0, 26, 51, 0.92) 100%),
+                  url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover no-repeat fixed;
+      color: var(--color-text-inverse);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: var(--space-3) 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      color: var(--color-text-inverse);
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: none;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav__links {
+        display: flex;
+      }
+    }
+
+    .nav__link {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: var(--text-body-sm);
+    }
+
+    .nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    .nav__cta {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--text-caption);
+    }
+
+    /* Hero Content */
+    .hero__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-8) var(--container-padding);
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      background: rgba(255, 184, 28, 0.2);
+      color: var(--color-accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-caption);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .hero__title {
+      font-size: var(--text-hero);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-3);
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-h3);
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* Mission Section */
+    .mission {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .mission__inner {
+      display: grid;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .mission__inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .mission__content {
+      order: 2;
+    }
+
+    @media (min-width: 768px) {
+      .mission__content {
+        order: 1;
+      }
+    }
+
+    .mission__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .mission__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .mission__text {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-3);
+      line-height: 1.8;
+    }
+
+    .mission__quote {
+      padding: var(--space-4);
+      background: var(--color-bg-light);
+      border-left: 4px solid var(--color-accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: italic;
+      color: var(--color-primary);
+    }
+
+    .mission__image {
+      order: 1;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      border-radius: var(--radius-xl);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+
+    @media (min-width: 768px) {
+      .mission__image {
+        order: 2;
+      }
+    }
+
+    /* Values Section */
+    .values {
+      padding: var(--space-12) 0;
+      background: var(--color-bg-light);
+    }
+
+    .values__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .values__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .values__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .values__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .values__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .values__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .value-card {
+      text-align: center;
+      padding: var(--space-5);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--color-border);
+      transition: all var(--duration-fast);
+    }
+
+    .value-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+    }
+
+    .value-card__icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .value-card__title {
+      font-size: var(--text-h4);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .value-card__text {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+    }
+
+    /* History Section */
+    .history {
+      padding: var(--space-12) 0;
+      background: var(--gradient-dark);
+      color: var(--color-text-inverse);
+    }
+
+    .history__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .history__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .history__title {
+      font-size: var(--text-h2);
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+    }
+
+    .timeline__item {
+      display: flex;
+      margin-bottom: var(--space-6);
+    }
+
+    .timeline__item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .timeline__item,
+      .timeline__item:nth-child(odd) {
+        flex-direction: row;
+        padding-left: 50px;
+      }
+    }
+
+    .timeline__marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      border: 3px solid var(--color-bg-dark);
+    }
+
+    @media (max-width: 768px) {
+      .timeline__marker {
+        left: 20px;
+      }
+    }
+
+    .timeline__content {
+      width: calc(50% - 40px);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+
+    @media (max-width: 768px) {
+      .timeline__content {
+        width: 100%;
+      }
+    }
+
+    .timeline__year {
+      font-size: var(--text-h3);
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: var(--space-1);
+    }
+
+    .timeline__text {
+      opacity: 0.9;
+      font-size: var(--text-body-sm);
+    }
+
+    /* Leadership Section */
+    .leadership {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .leadership__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .leadership__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .leadership__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .leadership__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .leadership__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .leader-card {
+      text-align: center;
+      padding: var(--space-5);
+    }
+
+    .leader-card__photo {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      border-radius: 50%;
+      margin: 0 auto var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .leader-card__name {
+      font-size: var(--text-h4);
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .leader-card__title {
+      color: var(--color-accent);
+      font-size: var(--text-body-sm);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .leader-card__bio {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: var(--space-10) 0;
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .stats__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .stats__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat__number {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1;
+      margin-bottom: var(--space-1);
+    }
+
+    .stat__label {
+      font-size: var(--text-body-sm);
+      opacity: 0.9;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: var(--space-10) 0;
+      background: var(--color-bg-light);
+      text-align: center;
+    }
+
+    .cta__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .cta__text {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      padding: var(--space-6) 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      list-style: none;
+    }
+
+    .footer__link {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: var(--text-body-sm);
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__concept {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      opacity: 0.5;
+      font-size: var(--text-caption);
+    }
+
+    .footer__pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a href="index.html" class="nav__logo">SKYRIDGE</a>
+        <ul class="nav__links">
+          <li><a href="programs.html" class="nav__link">Programs</a></li>
+          <li><a href="admission.html" class="nav__link">Admission</a></li>
+          <li><a href="campus.html" class="nav__link">Campus</a></li>
+          <li><a href="tuition.html" class="nav__link">Tuition</a></li>
+        </ul>
+        <a href="admission.html" class="nav__cta">Apply Now</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <span class="hero__badge">About Fort Lewis College</span>
+      <h1 class="hero__title">Where Possibility Meets Purpose</h1>
+      <p class="hero__subtitle">
+        Colorado's only public liberal arts college. A place where students discover who they are and who they want to become.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission">
+    <div class="container">
+      <div class="mission__inner">
+        <div class="mission__content reveal">
+          <span class="mission__overline">Our Mission</span>
+          <h2 class="mission__title">Excellence in the Liberal Arts</h2>
+          <p class="mission__text">
+            Fort Lewis College offers accessible, high-quality baccalaureate liberal arts education to a diverse student population. We prepare our students to become successful learners and leaders in their own lives, the Four Corners region, and the world.
+          </p>
+          <p class="mission__text">
+            Nestled at 7,600 feet in the San Juan Mountains, our campus provides a unique learning environment where classroom education meets real-world application. Students engage in research, service, and experiential learning from their first semester.
+          </p>
+          <blockquote class="mission__quote">
+            "Education is not preparation for life; education is life itself."
+          </blockquote>
+        </div>
+        <div class="mission__image reveal reveal--delay-1">
+          🏔️
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <header class="values__header reveal">
+        <span class="values__overline">What We Stand For</span>
+        <h2 class="values__title">Our Core Values</h2>
+      </header>
+
+      <div class="values__grid">
+        <article class="value-card reveal">
+          <div class="value-card__icon">📚</div>
+          <h3 class="value-card__title">Academic Excellence</h3>
+          <p class="value-card__text">Rigorous curriculum with small classes and faculty mentorship.</p>
+        </article>
+
+        <article class="value-card reveal reveal--delay-1">
+          <div class="value-card__icon">🤝</div>
+          <h3 class="value-card__title">Inclusive Community</h3>
+          <p class="value-card__text">Celebrating diversity and creating belonging for all students.</p>
+        </article>
+
+        <article class="value-card reveal reveal--delay-2">
+          <div class="value-card__icon">🌍</div>
+          <h3 class="value-card__title">Environmental Stewardship</h3>
+          <p class="value-card__text">Sustainability and respect for the land we call home.</p>
+        </article>
+
+        <article class="value-card reveal reveal--delay-3">
+          <div class="value-card__icon">💡</div>
+          <h3 class="value-card__title">Experiential Learning</h3>
+          <p class="value-card__text">Hands-on research and real-world application from day one.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section class="history">
+    <div class="container">
+      <header class="history__header reveal">
+        <span class="history__overline">Our Story</span>
+        <h2 class="history__title">A Rich History</h2>
+      </header>
+
+      <div class="timeline">
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <div class="timeline__year">1891</div>
+            <p class="timeline__text">Established as a military post, Fort Lewis was originally designed to serve the region's growing population.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-1">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <div class="timeline__year">1911</div>
+            <p class="timeline__text">Transformed into Fort Lewis School, an agricultural and mechanical arts school for Native American students.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-2">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <div class="timeline__year">1956</div>
+            <p class="timeline__text">Relocated to Durango and renamed Fort Lewis A&M College, later becoming Fort Lewis College.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-3">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Today</div>
+            <p class="timeline__text">Colorado's only public liberal arts college, serving 3,500+ students with 60+ programs while honoring our commitment to Native American education.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Section -->
+  <section class="leadership">
+    <div class="container">
+      <header class="leadership__header reveal">
+        <span class="leadership__overline">Executive Team</span>
+        <h2 class="leadership__title">College Leadership</h2>
+      </header>
+
+      <div class="leadership__grid">
+        <article class="card leader-card reveal">
+          <div class="leader-card__photo">👤</div>
+          <h3 class="leader-card__name">Dr. Thomas Stritikus</h3>
+          <p class="leader-card__title">President</p>
+          <p class="leader-card__bio">Leading FLC's mission to provide accessible liberal arts education in the Four Corners region.</p>
+        </article>
+
+        <article class="card leader-card reveal reveal--delay-1">
+          <div class="leader-card__photo">👤</div>
+          <h3 class="leader-card__name">Dr. Cheryl Nixon</h3>
+          <p class="leader-card__title">Provost & VP Academic Affairs</p>
+          <p class="leader-card__bio">Overseeing academic programs, faculty development, and educational excellence.</p>
+        </article>
+
+        <article class="card leader-card reveal reveal--delay-2">
+          <div class="leader-card__photo">👤</div>
+          <h3 class="leader-card__name">Steve Schwartz</h3>
+          <p class="leader-card__title">VP Finance & Administration</p>
+          <p class="leader-card__bio">Managing institutional resources and campus operations.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat reveal">
+          <div class="stat__number">1891</div>
+          <div class="stat__label">Year Founded</div>
+        </div>
+        <div class="stat reveal reveal--delay-1">
+          <div class="stat__number">350</div>
+          <div class="stat__label">Acre Campus</div>
+        </div>
+        <div class="stat reveal reveal--delay-2">
+          <div class="stat__number">3,500+</div>
+          <div class="stat__label">Students</div>
+        </div>
+        <div class="stat reveal reveal--delay-3">
+          <div class="stat__number">50+</div>
+          <div class="stat__label">States Represented</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta__title reveal">Experience Fort Lewis</h2>
+      <p class="cta__text reveal reveal--delay-1">See for yourself why FLC is unlike any other college.</p>
+      <div class="cta__buttons reveal reveal--delay-2">
+        <a href="visit.html" class="btn btn--primary">Schedule a Visit</a>
+        <a href="contact.html" class="btn btn--secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <ul class="footer__links">
+        <li><a href="index.html" class="footer__link">Home</a></li>
+        <li><a href="programs.html" class="footer__link">Programs</a></li>
+        <li><a href="admission.html" class="footer__link">Admission</a></li>
+        <li><a href="events.html" class="footer__link">Events</a></li>
+        <li><a href="contact.html" class="footer__link">Contact</a></li>
+      </ul>
+      <div class="footer__concept">
+        <span class="footer__pulse"></span>
+        <span>SKYRIDGE Concept</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

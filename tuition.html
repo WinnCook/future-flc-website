@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tuition, costs, and financial aid at Fort Lewis College. Affordable excellence in the Colorado mountains.">
+  <title>Tuition & Aid | SKYRIDGE - Fort Lewis College</title>
+  <link rel="stylesheet" href="src/css/design-system.css">
+  <style>
+    /* Hero */
+    .hero {
+      min-height: 50vh;
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.92) 0%, rgba(0, 26, 51, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&q=80') center/cover no-repeat;
+      color: var(--color-text-inverse);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: var(--space-3) 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      color: var(--color-text-inverse);
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: none;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav__links {
+        display: flex;
+      }
+    }
+
+    .nav__link {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: var(--text-body-sm);
+    }
+
+    .nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    .nav__cta {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--text-caption);
+    }
+
+    /* Hero Content */
+    .hero__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-8) var(--container-padding);
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      background: rgba(255, 184, 28, 0.2);
+      color: var(--color-accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-caption);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .hero__title {
+      font-size: var(--text-hero);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-3);
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-h3);
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* Costs Overview */
+    .costs {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .costs__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .costs__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .costs__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .costs__subtitle {
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .costs__toggle {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .costs__toggle-group {
+      display: flex;
+      background: var(--color-bg-light);
+      padding: var(--space-1);
+      border-radius: var(--radius-full);
+    }
+
+    .costs__toggle-btn {
+      padding: var(--space-2) var(--space-4);
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--text-body-sm);
+      cursor: pointer;
+      transition: all var(--duration-fast);
+      color: var(--color-text-secondary);
+    }
+
+    .costs__toggle-btn--active {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .costs__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .costs__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .costs__grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .cost-card {
+      background: var(--color-bg-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      text-align: center;
+      border: 2px solid var(--color-border);
+      transition: all var(--duration-fast);
+    }
+
+    .cost-card:hover {
+      border-color: var(--color-primary);
+    }
+
+    .cost-card__label {
+      font-size: var(--text-body-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-1);
+    }
+
+    .cost-card__amount {
+      font-size: var(--text-h2);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .cost-card__note {
+      font-size: var(--text-caption);
+      color: var(--color-text-secondary);
+      margin-top: var(--space-1);
+    }
+
+    .costs__total {
+      text-align: center;
+      margin-top: var(--space-6);
+      padding: var(--space-4);
+      background: var(--color-primary);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-inverse);
+    }
+
+    .costs__total-label {
+      font-size: var(--text-body-sm);
+      opacity: 0.9;
+    }
+
+    .costs__total-amount {
+      font-size: var(--text-h1);
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .costs__total-note {
+      font-size: var(--text-caption);
+      opacity: 0.8;
+      margin-top: var(--space-1);
+    }
+
+    /* Calculator Section */
+    .calculator {
+      padding: var(--space-12) 0;
+      background: var(--color-bg-light);
+    }
+
+    .calculator__container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .calculator__header {
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .calculator__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .calculator__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .calculator__subtitle {
+      color: var(--color-text-secondary);
+    }
+
+    .calculator__widget {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .calculator__form {
+      padding: var(--space-5);
+    }
+
+    .calculator__row {
+      display: grid;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    @media (min-width: 640px) {
+      .calculator__row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-field__label {
+      display: block;
+      font-weight: 600;
+      font-size: var(--text-body-sm);
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .form-field__input,
+    .form-field__select {
+      width: 100%;
+      padding: var(--space-2);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-body-sm);
+      transition: border-color var(--duration-fast);
+    }
+
+    .form-field__input:focus,
+    .form-field__select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .form-field__select {
+      appearance: none;
+      background: var(--color-surface) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236B7280" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>') right 12px center/16px no-repeat;
+    }
+
+    .calculator__slider-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .calculator__slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-1);
+    }
+
+    .calculator__slider-value {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .calculator__slider {
+      width: 100%;
+      height: 8px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--color-border);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .calculator__slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 4px solid var(--color-surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    .calculator__results {
+      background: var(--gradient-dark);
+      padding: var(--space-5);
+      color: var(--color-text-inverse);
+    }
+
+    .calculator__results-title {
+      font-size: var(--text-h4);
+      margin-bottom: var(--space-4);
+      text-align: center;
+    }
+
+    .calculator__breakdown {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .calculator__line {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .calculator__line-label {
+      opacity: 0.9;
+    }
+
+    .calculator__line-amount {
+      font-weight: 600;
+    }
+
+    .calculator__line--negative .calculator__line-amount {
+      color: var(--color-success);
+    }
+
+    .calculator__line--total {
+      border-bottom: none;
+      padding-top: var(--space-3);
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .calculator__line--total .calculator__line-label {
+      font-weight: 700;
+      font-size: var(--text-h4);
+    }
+
+    .calculator__line--total .calculator__line-amount {
+      font-size: var(--text-h3);
+      color: var(--color-accent);
+    }
+
+    .calculator__disclaimer {
+      text-align: center;
+      font-size: var(--text-caption);
+      opacity: 0.7;
+    }
+
+    /* Financial Aid Section */
+    .aid {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .aid__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .aid__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .aid__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .aid__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .aid__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .aid__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .aid-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      border: 2px solid var(--color-border);
+      transition: all var(--duration-fast);
+    }
+
+    .aid-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .aid-card--featured {
+      border-color: var(--color-accent);
+      background: linear-gradient(to bottom, rgba(255, 184, 28, 0.05), var(--color-surface));
+    }
+
+    .aid-card__badge {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-overline);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      text-transform: uppercase;
+    }
+
+    .aid-card__icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .aid-card__title {
+      font-size: var(--text-h3);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .aid-card__text {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+      margin-bottom: var(--space-3);
+    }
+
+    .aid-card__amount {
+      display: inline-block;
+      background: var(--color-bg-light);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      color: var(--color-primary);
+      font-size: var(--text-body-sm);
+    }
+
+    /* Deadlines Section */
+    .deadlines {
+      padding: var(--space-12) 0;
+      background: var(--gradient-dark);
+      color: var(--color-text-inverse);
+    }
+
+    .deadlines__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .deadlines__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .deadlines__title {
+      font-size: var(--text-h2);
+    }
+
+    .deadlines__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .deadlines__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .deadline-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      text-align: center;
+    }
+
+    .deadline-card__date {
+      font-size: var(--text-h3);
+      color: var(--color-accent);
+      font-weight: 700;
+      margin-bottom: var(--space-1);
+    }
+
+    .deadline-card__title {
+      font-size: var(--text-h4);
+      margin-bottom: var(--space-2);
+    }
+
+    .deadline-card__text {
+      font-size: var(--text-body-sm);
+      opacity: 0.8;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: var(--space-10) 0;
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      text-align: center;
+    }
+
+    .cta__title {
+      font-size: var(--text-h2);
+      margin-bottom: var(--space-2);
+    }
+
+    .cta__text {
+      opacity: 0.9;
+      margin-bottom: var(--space-4);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      padding: var(--space-6) 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      list-style: none;
+    }
+
+    .footer__link {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: var(--text-body-sm);
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__concept {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      opacity: 0.5;
+      font-size: var(--text-caption);
+    }
+
+    .footer__pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a href="index.html" class="nav__logo">SKYRIDGE</a>
+        <ul class="nav__links">
+          <li><a href="programs.html" class="nav__link">Programs</a></li>
+          <li><a href="admission.html" class="nav__link">Admission</a></li>
+          <li><a href="visit.html" class="nav__link">Visit</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+        </ul>
+        <a href="admission.html" class="nav__cta">Apply Now</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <span class="hero__badge">Tuition & Financial Aid</span>
+      <h1 class="hero__title">Affordable Excellence</h1>
+      <p class="hero__subtitle">
+        A Fort Lewis education is more attainable than you think. Multiple pathways to make your dreams reality.
+      </p>
+    </div>
+  </section>
+
+  <!-- Costs Overview Section -->
+  <section class="costs">
+    <div class="container">
+      <header class="costs__header reveal">
+        <span class="costs__overline">2024-2025 Costs</span>
+        <h2 class="costs__title">Know What to Expect</h2>
+        <p class="costs__subtitle">Transparent pricing so you can plan ahead. Most students pay less than the sticker price.</p>
+      </header>
+
+      <div class="costs__toggle reveal">
+        <div class="costs__toggle-group">
+          <button class="costs__toggle-btn costs__toggle-btn--active" type="button" data-residency="colorado">Colorado Resident</button>
+          <button class="costs__toggle-btn" type="button" data-residency="nonresident">Non-Resident</button>
+        </div>
+      </div>
+
+      <div class="costs__grid">
+        <div class="cost-card reveal">
+          <div class="cost-card__label">Tuition & Fees</div>
+          <div class="cost-card__amount" id="tuitionAmount">$9,672</div>
+          <div class="cost-card__note">per year</div>
+        </div>
+
+        <div class="cost-card reveal reveal--delay-1">
+          <div class="cost-card__label">Room & Board</div>
+          <div class="cost-card__amount">$12,800</div>
+          <div class="cost-card__note">standard double</div>
+        </div>
+
+        <div class="cost-card reveal reveal--delay-2">
+          <div class="cost-card__label">Books & Supplies</div>
+          <div class="cost-card__amount">$1,200</div>
+          <div class="cost-card__note">estimated</div>
+        </div>
+
+        <div class="cost-card reveal reveal--delay-3">
+          <div class="cost-card__label">Personal Expenses</div>
+          <div class="cost-card__amount">$2,400</div>
+          <div class="cost-card__note">estimated</div>
+        </div>
+      </div>
+
+      <div class="costs__total reveal">
+        <div class="costs__total-label">Estimated Total Cost of Attendance</div>
+        <div class="costs__total-amount" id="totalAmount">$26,072</div>
+        <div class="costs__total-note">Before financial aid. Most students pay significantly less.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <section class="calculator" id="calculator">
+    <div class="container">
+      <div class="calculator__container">
+        <header class="calculator__header reveal">
+          <span class="calculator__overline">Net Price Calculator</span>
+          <h2 class="calculator__title">Estimate Your Actual Cost</h2>
+          <p class="calculator__subtitle">Answer a few questions to see your personalized estimate.</p>
+        </header>
+
+        <div class="calculator__widget reveal">
+          <div class="calculator__form">
+            <div class="calculator__row">
+              <div class="form-field">
+                <label class="form-field__label" for="calcResidency">State of Residence</label>
+                <select id="calcResidency" class="form-field__select">
+                  <option value="colorado">Colorado</option>
+                  <option value="western">WUE State (Western US)</option>
+                  <option value="other">Other US State</option>
+                  <option value="native">Native American (any state)</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="form-field__label" for="calcHousing">Housing</label>
+                <select id="calcHousing" class="form-field__select">
+                  <option value="oncampus">On Campus</option>
+                  <option value="offcampus">Off Campus</option>
+                  <option value="home">Living at Home</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="calculator__slider-group">
+              <div class="calculator__slider-header">
+                <label class="form-field__label">Household Income</label>
+                <span class="calculator__slider-value" id="incomeDisplay">$75,000</span>
+              </div>
+              <input type="range" class="calculator__slider" id="incomeSlider" min="0" max="200000" step="5000" value="75000">
+            </div>
+
+            <div class="calculator__slider-group">
+              <div class="calculator__slider-header">
+                <label class="form-field__label">High School GPA</label>
+                <span class="calculator__slider-value" id="gpaDisplay">3.5</span>
+              </div>
+              <input type="range" class="calculator__slider" id="gpaSlider" min="2.0" max="4.0" step="0.1" value="3.5">
+            </div>
+          </div>
+
+          <div class="calculator__results">
+            <h3 class="calculator__results-title">Your Estimated Annual Cost</h3>
+
+            <div class="calculator__breakdown">
+              <div class="calculator__line">
+                <span class="calculator__line-label">Tuition & Fees</span>
+                <span class="calculator__line-amount" id="resultTuition">$9,672</span>
+              </div>
+              <div class="calculator__line">
+                <span class="calculator__line-label">Room & Board</span>
+                <span class="calculator__line-amount" id="resultHousing">$12,800</span>
+              </div>
+              <div class="calculator__line">
+                <span class="calculator__line-label">Books & Personal</span>
+                <span class="calculator__line-amount">$3,600</span>
+              </div>
+              <div class="calculator__line calculator__line--negative">
+                <span class="calculator__line-label">Estimated Grants & Scholarships</span>
+                <span class="calculator__line-amount" id="resultAid">-$8,000</span>
+              </div>
+              <div class="calculator__line calculator__line--total">
+                <span class="calculator__line-label">Your Net Cost</span>
+                <span class="calculator__line-amount" id="resultNet">$18,072</span>
+              </div>
+            </div>
+
+            <p class="calculator__disclaimer">This is an estimate only. Actual aid depends on FAFSA results and admission status.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Financial Aid Section -->
+  <section class="aid">
+    <div class="container">
+      <header class="aid__header reveal">
+        <span class="aid__overline">Financial Aid Options</span>
+        <h2 class="aid__title">Ways to Make It Affordable</h2>
+      </header>
+
+      <div class="aid__grid">
+        <article class="aid-card aid-card--featured reveal">
+          <span class="aid-card__badge">Colorado Only</span>
+          <div class="aid-card__icon">💰</div>
+          <h3 class="aid-card__title">Tuition Promise</h3>
+          <p class="aid-card__text">Colorado families earning $70,000 or less get tuition fully covered. Period. No loans required.</p>
+          <span class="aid-card__amount">Up to $9,672/year</span>
+        </article>
+
+        <article class="aid-card aid-card--featured reveal reveal--delay-1">
+          <span class="aid-card__badge">Nationwide</span>
+          <div class="aid-card__icon">🪶</div>
+          <h3 class="aid-card__title">Native American Waiver</h3>
+          <p class="aid-card__text">Full tuition waiver for all federally recognized tribal members, regardless of state of residence.</p>
+          <span class="aid-card__amount">Full Tuition</span>
+        </article>
+
+        <article class="aid-card reveal reveal--delay-2">
+          <div class="aid-card__icon">⭐</div>
+          <h3 class="aid-card__title">Merit Scholarships</h3>
+          <p class="aid-card__text">Academic achievement scholarships based on GPA and test scores. No separate application.</p>
+          <span class="aid-card__amount">$1,000 - $8,000/year</span>
+        </article>
+
+        <article class="aid-card reveal reveal--delay-3">
+          <div class="aid-card__icon">🌎</div>
+          <h3 class="aid-card__title">WUE Scholarship</h3>
+          <p class="aid-card__text">Students from 15 western states pay 150% of Colorado resident tuition instead of full non-resident.</p>
+          <span class="aid-card__amount">Save ~$10,000/year</span>
+        </article>
+
+        <article class="aid-card reveal reveal--delay-4">
+          <div class="aid-card__icon">💼</div>
+          <h3 class="aid-card__title">Work-Study</h3>
+          <p class="aid-card__text">On-campus employment opportunities to earn money while gaining experience.</p>
+          <span class="aid-card__amount">~$3,000/year</span>
+        </article>
+
+        <article class="aid-card reveal reveal--delay-5">
+          <div class="aid-card__icon">📋</div>
+          <h3 class="aid-card__title">Federal Aid (FAFSA)</h3>
+          <p class="aid-card__text">Pell Grants, federal loans, and more. File your FAFSA early for maximum aid.</p>
+          <span class="aid-card__amount">Varies</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deadlines Section -->
+  <section class="deadlines">
+    <div class="container">
+      <header class="deadlines__header reveal">
+        <span class="deadlines__overline">Important Dates</span>
+        <h2 class="deadlines__title">Financial Aid Deadlines</h2>
+      </header>
+
+      <div class="deadlines__grid">
+        <article class="deadline-card reveal">
+          <div class="deadline-card__date">Oct 1</div>
+          <h3 class="deadline-card__title">FAFSA Opens</h3>
+          <p class="deadline-card__text">File early for best aid consideration. Use prior-prior year tax info.</p>
+        </article>
+
+        <article class="deadline-card reveal reveal--delay-1">
+          <div class="deadline-card__date">Feb 1</div>
+          <h3 class="deadline-card__title">Priority Deadline</h3>
+          <p class="deadline-card__text">Complete FAFSA by this date for maximum institutional aid consideration.</p>
+        </article>
+
+        <article class="deadline-card reveal reveal--delay-2">
+          <div class="deadline-card__date">Apr 15</div>
+          <h3 class="deadline-card__title">Award Letters</h3>
+          <p class="deadline-card__text">Financial aid packages sent to admitted students who completed FAFSA.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta__title reveal">Questions About Costs?</h2>
+      <p class="cta__text reveal reveal--delay-1">Our financial aid team is here to help you understand your options.</p>
+      <div class="cta__buttons reveal reveal--delay-2">
+        <a href="contact.html" class="btn btn--primary">Contact Financial Aid</a>
+        <a href="admission.html" class="btn btn--ghost">Start Your Application</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <ul class="footer__links">
+        <li><a href="index.html" class="footer__link">Home</a></li>
+        <li><a href="programs.html" class="footer__link">Programs</a></li>
+        <li><a href="admission.html" class="footer__link">Admission</a></li>
+        <li><a href="events.html" class="footer__link">Events</a></li>
+        <li><a href="contact.html" class="footer__link">Contact</a></li>
+      </ul>
+      <div class="footer__concept">
+        <span class="footer__pulse"></span>
+        <span>SKYRIDGE Concept</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll reveals
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Residency toggle
+    const toggleBtns = document.querySelectorAll('.costs__toggle-btn');
+    const tuitionAmount = document.getElementById('tuitionAmount');
+    const totalAmount = document.getElementById('totalAmount');
+
+    const tuitionRates = {
+      colorado: { tuition: '$9,672', total: '$26,072' },
+      nonresident: { tuition: '$22,248', total: '$38,648' }
+    };
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleBtns.forEach(b => b.classList.remove('costs__toggle-btn--active'));
+        btn.classList.add('costs__toggle-btn--active');
+        const residency = btn.dataset.residency;
+        tuitionAmount.textContent = tuitionRates[residency].tuition;
+        totalAmount.textContent = tuitionRates[residency].total;
+      });
+    });
+
+    // Calculator functionality
+    const incomeSlider = document.getElementById('incomeSlider');
+    const gpaSlider = document.getElementById('gpaSlider');
+    const incomeDisplay = document.getElementById('incomeDisplay');
+    const gpaDisplay = document.getElementById('gpaDisplay');
+    const calcResidency = document.getElementById('calcResidency');
+    const calcHousing = document.getElementById('calcHousing');
+
+    const resultTuition = document.getElementById('resultTuition');
+    const resultHousing = document.getElementById('resultHousing');
+    const resultAid = document.getElementById('resultAid');
+    const resultNet = document.getElementById('resultNet');
+
+    function formatCurrency(num) {
+      return '$' + num.toLocaleString();
+    }
+
+    function calculateCost() {
+      const income = parseInt(incomeSlider.value);
+      const gpa = parseFloat(gpaSlider.value);
+      const residency = calcResidency.value;
+      const housing = calcHousing.value;
+
+      // Base tuition
+      let tuition;
+      switch(residency) {
+        case 'colorado':
+          tuition = 9672;
+          break;
+        case 'western':
+          tuition = 14508; // 150% of resident
+          break;
+        case 'native':
+          tuition = 0; // Full waiver
+          break;
+        default:
+          tuition = 22248;
+      }
+
+      // Housing
+      let housingCost;
+      switch(housing) {
+        case 'oncampus':
+          housingCost = 12800;
+          break;
+        case 'offcampus':
+          housingCost = 10000;
+          break;
+        case 'home':
+          housingCost = 0;
+          break;
+      }
+
+      // Calculate aid estimate
+      let aid = 0;
+
+      // Need-based aid
+      if (income < 70000 && residency === 'colorado') {
+        aid += 9672; // Tuition Promise
+      } else if (income < 50000) {
+        aid += 7000;
+      } else if (income < 80000) {
+        aid += 5000;
+      } else if (income < 120000) {
+        aid += 3000;
+      }
+
+      // Merit scholarships
+      if (gpa >= 3.9) {
+        aid += 8000;
+      } else if (gpa >= 3.5) {
+        aid += 5000;
+      } else if (gpa >= 3.0) {
+        aid += 2000;
+      }
+
+      // Native American waiver (additional)
+      if (residency === 'native') {
+        aid = Math.max(aid, 22248); // Effectively full tuition
+      }
+
+      const booksPersonal = 3600;
+      const total = tuition + housingCost + booksPersonal;
+      const net = Math.max(0, total - aid);
+
+      // Update display
+      resultTuition.textContent = formatCurrency(tuition);
+      resultHousing.textContent = formatCurrency(housingCost);
+      resultAid.textContent = '-' + formatCurrency(aid);
+      resultNet.textContent = formatCurrency(net);
+    }
+
+    incomeSlider.addEventListener('input', () => {
+      incomeDisplay.textContent = formatCurrency(parseInt(incomeSlider.value));
+      calculateCost();
+    });
+
+    gpaSlider.addEventListener('input', () => {
+      gpaDisplay.textContent = parseFloat(gpaSlider.value).toFixed(1);
+      calculateCost();
+    });
+
+    calcResidency.addEventListener('change', calculateCost);
+    calcHousing.addEventListener('change', calculateCost);
+
+    // Initialize
+    calculateCost();
+  </script>
+</body>
+</html>

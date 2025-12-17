@@ -18,20 +18,62 @@
       overflow: hidden;
     }
 
+    /* Parallax Mountain Background */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.03)" points="0,100 50,60 100,100"/></svg>') no-repeat bottom;
-      background-size: 100% 40%;
+      background:
+        linear-gradient(180deg, rgba(0, 51, 102, 0.7) 0%, rgba(0, 51, 102, 0.5) 50%, rgba(0, 51, 102, 0.8) 100%),
+        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover no-repeat;
+      background-attachment: fixed;
+      z-index: 1;
+    }
+
+    /* Mountain Silhouette Overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="%23f8f9fa" d="M0,320 L0,200 Q120,100 240,150 Q360,200 480,120 Q600,40 720,80 Q840,120 960,60 Q1080,0 1200,50 Q1320,100 1440,80 L1440,320 Z"/></svg>') no-repeat bottom;
+      background-size: 100% 100%;
       pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Animated snow particles effect (optional, CSS-only) */
+    @keyframes snowfall {
+      0% { transform: translateY(-10px) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh) translateX(50px); opacity: 0; }
+    }
+
+    .hero__particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero__particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: snowfall linear infinite;
     }
 
     /* Navigation */
     .nav {
       padding: var(--space-3) 0;
       position: relative;
-      z-index: 10;
+      z-index: 20;
     }
 
     .nav__inner {
@@ -252,6 +294,28 @@
       gap: var(--space-1);
     }
 
+    .omnisearch__empty {
+      text-align: center;
+      padding: var(--space-6) var(--space-4);
+    }
+
+    .omnisearch__empty-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-2);
+      opacity: 0.5;
+    }
+
+    .omnisearch__empty-text {
+      font-size: var(--text-h3);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .omnisearch__empty-hint {
+      font-size: var(--text-caption);
+      color: var(--color-text-secondary);
+    }
+
     /* Hero Content */
     .hero__content {
       flex: 1;
@@ -262,7 +326,7 @@
       text-align: center;
       padding: var(--space-8) var(--container-padding);
       position: relative;
-      z-index: 5;
+      z-index: 10;
     }
 
     .hero__overline {
@@ -398,7 +462,7 @@
       color: var(--color-text-inverse);
       opacity: 0.5;
       animation: float 2s ease-in-out infinite;
-      z-index: 5;
+      z-index: 15;
     }
 
     .scroll-indicator svg {
@@ -470,9 +534,13 @@
 
     /* Stats Section */
     .stats {
-      background: var(--gradient-dark);
+      background:
+        linear-gradient(180deg, rgba(0, 42, 84, 0.95) 0%, rgba(0, 51, 102, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80') center/cover no-repeat;
+      background-attachment: fixed;
       color: var(--color-text-inverse);
       padding: var(--space-12) 0;
+      position: relative;
     }
 
     .stats__grid {
@@ -691,14 +759,27 @@
 <body>
   <!-- Hero Section -->
   <section class="hero">
+    <!-- Animated Snow Particles -->
+    <div class="hero__particles" aria-hidden="true">
+      <div class="hero__particle" style="left: 10%; animation-duration: 8s; animation-delay: 0s;"></div>
+      <div class="hero__particle" style="left: 20%; animation-duration: 12s; animation-delay: 1s;"></div>
+      <div class="hero__particle" style="left: 35%; animation-duration: 10s; animation-delay: 2s;"></div>
+      <div class="hero__particle" style="left: 50%; animation-duration: 15s; animation-delay: 0.5s;"></div>
+      <div class="hero__particle" style="left: 65%; animation-duration: 9s; animation-delay: 3s;"></div>
+      <div class="hero__particle" style="left: 80%; animation-duration: 11s; animation-delay: 1.5s;"></div>
+      <div class="hero__particle" style="left: 90%; animation-duration: 13s; animation-delay: 2.5s;"></div>
+      <div class="hero__particle" style="left: 5%; animation-duration: 14s; animation-delay: 4s;"></div>
+      <div class="hero__particle" style="left: 45%; animation-duration: 7s; animation-delay: 0.8s;"></div>
+      <div class="hero__particle" style="left: 75%; animation-duration: 16s; animation-delay: 3.5s;"></div>
+    </div>
     <nav class="nav">
       <div class="container nav__inner">
         <a href="/" class="nav__logo">SKYRIDGE</a>
         <ul class="nav__links">
           <li><a href="programs.html" class="nav__link">Programs</a></li>
-          <li><a href="#" class="nav__link">Admission</a></li>
-          <li><a href="#" class="nav__link">Campus</a></li>
-          <li><a href="#" class="nav__link">About</a></li>
+          <li><a href="admission.html" class="nav__link">Admission</a></li>
+          <li><a href="campus.html" class="nav__link">Campus</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
         </ul>
         <div class="nav__actions">
           <button class="nav__search" id="searchTrigger" aria-label="Search">
@@ -707,7 +788,10 @@
               <path d="M21 21l-4.35-4.35"/>
             </svg>
           </button>
-          <a href="#" class="nav__cta">Apply Now</a>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <span class="theme-toggle__icon">🌙</span>
+          </button>
+          <a href="admission.html" class="nav__cta">Apply Now</a>
         </div>
       </div>
     </nav>
@@ -800,19 +884,19 @@
     <div class="container">
       <div class="stats__grid">
         <div class="stat reveal">
-          <div class="stat__number">60</div>
+          <div class="stat__number" data-count="60" data-suffix="">0</div>
           <div class="stat__label">Majors & Programs</div>
         </div>
         <div class="stat reveal reveal--delay-1">
-          <div class="stat__number">15:1</div>
+          <div class="stat__number" data-count="15" data-suffix=":1">0:1</div>
           <div class="stat__label">Student-Faculty Ratio</div>
         </div>
         <div class="stat reveal reveal--delay-2">
-          <div class="stat__number">300+</div>
+          <div class="stat__number" data-count="300" data-suffix="+">0+</div>
           <div class="stat__label">Miles of Nearby Trails</div>
         </div>
         <div class="stat reveal reveal--delay-3">
-          <div class="stat__number">7,600</div>
+          <div class="stat__number" data-count="7600" data-suffix="" data-format="comma">0</div>
           <div class="stat__label">Feet Elevation</div>
         </div>
       </div>
@@ -870,9 +954,9 @@
       <h2 class="cta__title reveal">Ready to Rise?</h2>
       <p class="cta__subtitle reveal reveal--delay-1">Take the first step toward your Fort Lewis adventure.</p>
       <div class="cta__buttons reveal reveal--delay-2">
-        <a href="#" class="btn btn--primary">Apply Now</a>
-        <a href="#" class="btn btn--ghost">Schedule a Visit</a>
-        <a href="#" class="btn btn--ghost">Request Info</a>
+        <a href="admission.html" class="btn btn--primary">Apply Now</a>
+        <a href="visit.html" class="btn btn--ghost">Schedule a Visit</a>
+        <a href="contact.html#request-info" class="btn btn--ghost">Request Info</a>
       </div>
     </div>
   </section>
@@ -890,19 +974,19 @@
           <h4 class="footer__heading">Explore</h4>
           <ul class="footer__links">
             <li><a href="programs.html" class="footer__link">Programs</a></li>
-            <li><a href="#" class="footer__link">Admission</a></li>
-            <li><a href="#" class="footer__link">Campus</a></li>
-            <li><a href="#" class="footer__link">About</a></li>
+            <li><a href="admission.html" class="footer__link">Admission</a></li>
+            <li><a href="campus.html" class="footer__link">Campus</a></li>
+            <li><a href="about.html" class="footer__link">About</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="footer__heading">Resources</h4>
           <ul class="footer__links">
-            <li><a href="#" class="footer__link">Tuition & Aid</a></li>
-            <li><a href="#" class="footer__link">Visit Campus</a></li>
-            <li><a href="#" class="footer__link">Campus Map</a></li>
-            <li><a href="#" class="footer__link">Contact</a></li>
+            <li><a href="tuition.html" class="footer__link">Tuition & Aid</a></li>
+            <li><a href="visit.html" class="footer__link">Visit Campus</a></li>
+            <li><a href="campus.html#map" class="footer__link">Campus Map</a></li>
+            <li><a href="contact.html" class="footer__link">Contact</a></li>
           </ul>
         </div>
 
@@ -927,6 +1011,9 @@
     </div>
   </footer>
 
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
   <!-- Omnisearch Modal -->
   <div class="omnisearch" id="omnisearch" role="dialog" aria-modal="true" aria-label="Search">
     <div class="omnisearch__container">
@@ -939,87 +1026,26 @@
           type="text"
           class="omnisearch__input"
           id="omnisearchInput"
-          placeholder="Search programs, pages, people..."
+          placeholder="Search programs, events, jobs, pages..."
           autocomplete="off"
         >
         <kbd class="omnisearch__kbd">ESC</kbd>
       </div>
       <div class="omnisearch__results" id="omnisearchResults">
-        <div class="omnisearch__section">
-          <div class="omnisearch__label">Quick Actions</div>
-          <a href="#" class="omnisearch__item">
-            <div class="omnisearch__item-icon">📝</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Apply Now</div>
-              <div class="omnisearch__item-meta">Start your application</div>
-            </div>
-          </a>
-          <a href="#" class="omnisearch__item">
-            <div class="omnisearch__item-icon">🗓️</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Schedule a Visit</div>
-              <div class="omnisearch__item-meta">Campus tours available daily</div>
-            </div>
-          </a>
-          <a href="#" class="omnisearch__item">
-            <div class="omnisearch__item-icon">💰</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Tuition & Aid</div>
-              <div class="omnisearch__item-meta">Cost, scholarships, financial aid</div>
-            </div>
-          </a>
-        </div>
-        <div class="omnisearch__section">
-          <div class="omnisearch__label">Popular Programs</div>
-          <a href="programs.html" class="omnisearch__item">
-            <div class="omnisearch__item-icon">🏔️</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Adventure Education</div>
-              <div class="omnisearch__item-meta">B.A. · School of Education</div>
-            </div>
-          </a>
-          <a href="programs.html" class="omnisearch__item">
-            <div class="omnisearch__item-icon">📈</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Business Administration</div>
-              <div class="omnisearch__item-meta">B.S. · Katz School of Business</div>
-            </div>
-          </a>
-          <a href="programs.html" class="omnisearch__item">
-            <div class="omnisearch__item-icon">🔬</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Biology</div>
-              <div class="omnisearch__item-meta">B.S. · School of Arts & Sciences</div>
-            </div>
-          </a>
-        </div>
-        <div class="omnisearch__section">
-          <div class="omnisearch__label">Pages</div>
-          <a href="future-student.html" class="omnisearch__item">
-            <div class="omnisearch__item-icon">🎓</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">Future Students</div>
-              <div class="omnisearch__item-meta">Explore what FLC offers you</div>
-            </div>
-          </a>
-          <a href="programs.html" class="omnisearch__item">
-            <div class="omnisearch__item-icon">📚</div>
-            <div class="omnisearch__item-content">
-              <div class="omnisearch__item-title">All Programs</div>
-              <div class="omnisearch__item-meta">Browse 60+ majors and minors</div>
-            </div>
-          </a>
-        </div>
+        <!-- Dynamic results injected by JavaScript -->
       </div>
       <div class="omnisearch__footer">
         <div class="omnisearch__hint">
-          <span>Press</span>
-          <kbd class="omnisearch__kbd">/</kbd>
-          <span>to search anytime</span>
+          <kbd class="omnisearch__kbd">↑↓</kbd>
+          <span>navigate</span>
         </div>
         <div class="omnisearch__hint">
           <kbd class="omnisearch__kbd">↵</kbd>
-          <span>to select</span>
+          <span>select</span>
+        </div>
+        <div class="omnisearch__hint">
+          <kbd class="omnisearch__kbd">/</kbd>
+          <span>search anytime</span>
         </div>
       </div>
     </div>
@@ -1052,25 +1078,202 @@
       });
     });
 
-    // Omnisearch functionality
+    // Omnisearch functionality - Intelligent Search Engine
     const omnisearch = document.getElementById('omnisearch');
     const omnisearchInput = document.getElementById('omnisearchInput');
+    const omnisearchResults = document.getElementById('omnisearchResults');
     const searchTrigger = document.getElementById('searchTrigger');
+    let focusedIndex = -1;
+
+    // Search Index - All site content
+    const searchIndex = {
+      quickActions: [
+        { title: 'Apply Now', meta: 'Start your application', icon: '📝', url: 'admission.html', keywords: ['apply', 'application', 'enroll', 'admission'] },
+        { title: 'Schedule a Visit', meta: 'Campus tours available daily', icon: '🗓️', url: 'visit.html', keywords: ['visit', 'tour', 'campus', 'schedule'] },
+        { title: 'Tuition & Aid', meta: 'Cost, scholarships, financial aid', icon: '💰', url: 'tuition.html', keywords: ['tuition', 'cost', 'price', 'aid', 'scholarship', 'money', 'financial'] },
+        { title: 'Request Information', meta: 'Get info packet sent to you', icon: '📬', url: 'contact.html#request-info', keywords: ['request', 'info', 'information', 'brochure'] },
+        { title: 'Contact Us', meta: 'Get in touch with FLC', icon: '📞', url: 'contact.html', keywords: ['contact', 'phone', 'email', 'call', 'help'] }
+      ],
+      programs: [
+        { title: 'Adventure Education', meta: 'B.A. · School of Education', icon: '🏔️', url: 'programs.html', keywords: ['adventure', 'outdoor', 'education', 'recreation', 'wilderness'] },
+        { title: 'Business Administration', meta: 'B.S. · Katz School of Business', icon: '📈', url: 'programs.html', keywords: ['business', 'administration', 'management', 'mba', 'finance'] },
+        { title: 'Biology', meta: 'B.S. · School of Arts & Sciences', icon: '🔬', url: 'programs.html', keywords: ['biology', 'science', 'life', 'pre-med', 'research'] },
+        { title: 'Computer Science', meta: 'B.S. · School of Arts & Sciences', icon: '💻', url: 'programs.html', keywords: ['computer', 'science', 'programming', 'coding', 'software', 'tech'] },
+        { title: 'Psychology', meta: 'B.A. · School of Arts & Sciences', icon: '🧠', url: 'programs.html', keywords: ['psychology', 'psych', 'mental', 'behavior', 'counseling'] },
+        { title: 'Environmental Studies', meta: 'B.A. · School of Arts & Sciences', icon: '🌿', url: 'programs.html', keywords: ['environmental', 'environment', 'ecology', 'sustainability', 'climate'] },
+        { title: 'Exercise Science', meta: 'B.S. · School of Education', icon: '🏃', url: 'programs.html', keywords: ['exercise', 'fitness', 'health', 'sports', 'physical therapy'] },
+        { title: 'Nursing', meta: 'B.S.N. · School of Arts & Sciences', icon: '🏥', url: 'programs.html', keywords: ['nursing', 'nurse', 'healthcare', 'medical', 'health'] },
+        { title: 'Art', meta: 'B.A./B.F.A. · School of Arts & Sciences', icon: '🎨', url: 'programs.html', keywords: ['art', 'studio', 'drawing', 'painting', 'sculpture'] },
+        { title: 'Music', meta: 'B.A. · School of Arts & Sciences', icon: '🎵', url: 'programs.html', keywords: ['music', 'band', 'orchestra', 'performance', 'instrument'] }
+      ],
+      events: [
+        { title: 'Spring Research Symposium', meta: 'Mar 15 · Student Union', icon: '🎓', url: 'events.html', keywords: ['research', 'symposium', 'presentation', 'academic'] },
+        { title: 'Outdoor Industry Career Fair', meta: 'Feb 20 · Student Union', icon: '💼', url: 'events.html', keywords: ['career', 'fair', 'job', 'outdoor', 'industry'] },
+        { title: 'Admitted Students Day', meta: 'Apr 5 · Campus-wide', icon: '🎉', url: 'events.html', keywords: ['admitted', 'students', 'visit', 'welcome'] },
+        { title: 'Skyhawks Basketball', meta: 'Jan 25 · Whalen Gym', icon: '🏀', url: 'events.html', keywords: ['basketball', 'skyhawks', 'sports', 'game', 'athletics'] },
+        { title: 'Jazz Ensemble Concert', meta: 'Feb 8 · Roshong Hall', icon: '🎷', url: 'events.html', keywords: ['jazz', 'concert', 'music', 'performance'] }
+      ],
+      jobs: [
+        { title: 'Guest Services Manager', meta: 'Purgatory Resort · Full-time', icon: '⛷️', url: 'careers.html', keywords: ['guest', 'services', 'resort', 'ski', 'hospitality'] },
+        { title: 'Environmental Analyst', meta: 'Four Corners Research · Full-time', icon: '🌍', url: 'careers.html', keywords: ['environmental', 'analyst', 'research', 'science'] },
+        { title: 'Software Developer', meta: 'Mountain Tech · Remote', icon: '💻', url: 'careers.html', keywords: ['software', 'developer', 'programming', 'tech', 'remote'] },
+        { title: 'Registered Nurse', meta: 'Mercy Regional · Full-time', icon: '🏥', url: 'careers.html', keywords: ['nurse', 'nursing', 'healthcare', 'medical'] },
+        { title: 'Marketing Coordinator', meta: 'Ska Brewing · Full-time', icon: '📣', url: 'careers.html', keywords: ['marketing', 'coordinator', 'social', 'media', 'brand'] }
+      ],
+      pages: [
+        { title: 'Future Students', meta: 'Explore what FLC offers you', icon: '🎓', url: 'future-student.html', keywords: ['future', 'prospective', 'student', 'apply'] },
+        { title: 'Current Students', meta: 'Resources for enrolled students', icon: '📚', url: 'current-student.html', keywords: ['current', 'student', 'enrolled', 'resources'] },
+        { title: 'Parents & Families', meta: 'Information for supporters', icon: '👨‍👩‍👧', url: 'parent.html', keywords: ['parent', 'family', 'guardian'] },
+        { title: 'Alumni', meta: 'Stay connected with FLC', icon: '🎯', url: 'alumni.html', keywords: ['alumni', 'graduate', 'alumni'] },
+        { title: 'All Programs', meta: 'Browse 60+ majors and minors', icon: '📖', url: 'programs.html', keywords: ['programs', 'majors', 'degrees', 'academics'] },
+        { title: 'Campus Life', meta: 'Explore our 350-acre campus', icon: '🏛️', url: 'campus.html', keywords: ['campus', 'life', 'housing', 'facilities', 'map'] },
+        { title: 'About FLC', meta: 'Our mission and history', icon: '📜', url: 'about.html', keywords: ['about', 'mission', 'history', 'leadership'] },
+        { title: 'Events Calendar', meta: 'What\'s happening on campus', icon: '📅', url: 'events.html', keywords: ['events', 'calendar', 'happening', 'activities'] },
+        { title: 'Career Center', meta: 'Jobs and internships', icon: '💼', url: 'careers.html', keywords: ['career', 'jobs', 'internship', 'employment'] },
+        { title: 'Community', meta: 'Engage with FLC community', icon: '🏘️', url: 'community.html', keywords: ['community', 'local', 'durango', 'partners'] }
+      ]
+    };
+
+    // Simple fuzzy match function
+    function fuzzyMatch(query, text) {
+      query = query.toLowerCase();
+      text = text.toLowerCase();
+      if (text.includes(query)) return true;
+      // Check for typos with 1-character difference
+      if (query.length > 2) {
+        for (let i = 0; i < query.length; i++) {
+          const partial = query.slice(0, i) + query.slice(i + 1);
+          if (text.includes(partial)) return true;
+        }
+      }
+      return false;
+    }
+
+    // Search function
+    function searchContent(query) {
+      if (!query.trim()) return null;
+      query = query.toLowerCase().trim();
+
+      const results = { quickActions: [], programs: [], events: [], jobs: [], pages: [] };
+
+      Object.keys(searchIndex).forEach(category => {
+        searchIndex[category].forEach(item => {
+          const matchTitle = fuzzyMatch(query, item.title);
+          const matchMeta = fuzzyMatch(query, item.meta);
+          const matchKeywords = item.keywords.some(k => fuzzyMatch(query, k));
+
+          if (matchTitle || matchMeta || matchKeywords) {
+            results[category].push(item);
+          }
+        });
+      });
+
+      return results;
+    }
+
+    // Render search results
+    function renderResults(results) {
+      if (!results) {
+        // Show default content
+        omnisearchResults.innerHTML = `
+          <div class="omnisearch__section">
+            <div class="omnisearch__label">Quick Actions</div>
+            ${searchIndex.quickActions.slice(0, 3).map(item => renderItem(item)).join('')}
+          </div>
+          <div class="omnisearch__section">
+            <div class="omnisearch__label">Popular Programs</div>
+            ${searchIndex.programs.slice(0, 3).map(item => renderItem(item)).join('')}
+          </div>
+          <div class="omnisearch__section">
+            <div class="omnisearch__label">Explore Pages</div>
+            ${searchIndex.pages.slice(0, 2).map(item => renderItem(item)).join('')}
+          </div>
+        `;
+        return;
+      }
+
+      const hasResults = Object.values(results).some(arr => arr.length > 0);
+
+      if (!hasResults) {
+        omnisearchResults.innerHTML = `
+          <div class="omnisearch__empty">
+            <div class="omnisearch__empty-icon">🔍</div>
+            <div class="omnisearch__empty-text">No results found</div>
+            <div class="omnisearch__empty-hint">Try different keywords or browse our pages</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      const categoryLabels = {
+        quickActions: 'Quick Actions',
+        programs: 'Programs',
+        events: 'Upcoming Events',
+        jobs: 'Job Openings',
+        pages: 'Pages'
+      };
+
+      Object.keys(results).forEach(category => {
+        if (results[category].length > 0) {
+          html += `
+            <div class="omnisearch__section">
+              <div class="omnisearch__label">${categoryLabels[category]} (${results[category].length})</div>
+              ${results[category].slice(0, 4).map(item => renderItem(item)).join('')}
+            </div>
+          `;
+        }
+      });
+
+      omnisearchResults.innerHTML = html;
+    }
+
+    // Render single item
+    function renderItem(item) {
+      return `
+        <a href="${item.url}" class="omnisearch__item">
+          <div class="omnisearch__item-icon">${item.icon}</div>
+          <div class="omnisearch__item-content">
+            <div class="omnisearch__item-title">${item.title}</div>
+            <div class="omnisearch__item-meta">${item.meta}</div>
+          </div>
+        </a>
+      `;
+    }
+
+    // Update focus on items
+    function updateFocus() {
+      const items = omnisearchResults.querySelectorAll('.omnisearch__item');
+      items.forEach((item, i) => {
+        item.classList.toggle('focused', i === focusedIndex);
+      });
+    }
 
     function openSearch() {
       omnisearch.classList.add('active');
       omnisearchInput.focus();
       document.body.style.overflow = 'hidden';
+      focusedIndex = -1;
+      renderResults(null);
     }
 
     function closeSearch() {
       omnisearch.classList.remove('active');
       omnisearchInput.value = '';
       document.body.style.overflow = '';
+      focusedIndex = -1;
     }
 
     // Open search on button click
     searchTrigger.addEventListener('click', openSearch);
+
+    // Search input handler
+    omnisearchInput.addEventListener('input', (e) => {
+      const query = e.target.value;
+      const results = searchContent(query);
+      renderResults(results);
+      focusedIndex = -1;
+    });
 
     // Close on backdrop click
     omnisearch.addEventListener('click', (e) => {
@@ -1098,6 +1301,149 @@
         } else {
           openSearch();
         }
+      }
+
+      // Arrow key navigation
+      if (omnisearch.classList.contains('active')) {
+        const items = omnisearchResults.querySelectorAll('.omnisearch__item');
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          focusedIndex = Math.min(focusedIndex + 1, items.length - 1);
+          updateFocus();
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          focusedIndex = Math.max(focusedIndex - 1, -1);
+          updateFocus();
+          if (focusedIndex === -1) omnisearchInput.focus();
+        }
+        if (e.key === 'Enter' && focusedIndex >= 0) {
+          e.preventDefault();
+          items[focusedIndex].click();
+        }
+      }
+    });
+
+    // Counting number animation
+    const countNumbers = document.querySelectorAll('[data-count]');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+          entry.target.classList.add('counted');
+          const target = parseInt(entry.target.dataset.count);
+          const suffix = entry.target.dataset.suffix || '';
+          const format = entry.target.dataset.format;
+          const duration = 2000;
+          const start = performance.now();
+
+          function animate(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            let current = Math.floor(eased * target);
+
+            if (format === 'comma') {
+              current = current.toLocaleString();
+            }
+
+            entry.target.textContent = current + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          }
+
+          requestAnimationFrame(animate);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    countNumbers.forEach(el => countObserver.observe(el));
+
+    // Toast notification system
+    const toastContainer = document.getElementById('toastContainer');
+
+    function showToast(title, message, type = 'info', duration = 3000) {
+      const icons = {
+        success: '✓',
+        error: '✕',
+        warning: '⚠',
+        info: 'ℹ'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = `toast toast--${type}`;
+      toast.innerHTML = `
+        <span class="toast__icon">${icons[type]}</span>
+        <div class="toast__content">
+          <div class="toast__title">${title}</div>
+          ${message ? `<div class="toast__message">${message}</div>` : ''}
+        </div>
+        <button class="toast__close" aria-label="Close">×</button>
+      `;
+
+      toastContainer.appendChild(toast);
+
+      // Close button
+      toast.querySelector('.toast__close').addEventListener('click', () => {
+        toast.classList.add('hiding');
+        setTimeout(() => toast.remove(), 300);
+      });
+
+      // Auto-dismiss
+      if (duration > 0) {
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.classList.add('hiding');
+            setTimeout(() => toast.remove(), 300);
+          }
+        }, duration);
+      }
+
+      return toast;
+    }
+
+    // Dark mode toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
+    const root = document.documentElement;
+
+    // Check for saved theme preference or system preference
+    function getPreferredTheme() {
+      const savedTheme = localStorage.getItem('skyridge-theme');
+      if (savedTheme) return savedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // Apply theme
+    function setTheme(theme, showNotification = false) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('skyridge-theme', theme);
+      themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+
+      if (showNotification) {
+        showToast(
+          theme === 'dark' ? 'Dark Mode Enabled' : 'Light Mode Enabled',
+          'Your preference has been saved',
+          'success'
+        );
+      }
+    }
+
+    // Initialize theme (without notification)
+    setTheme(getPreferredTheme(), false);
+
+    // Toggle theme on button click (with notification)
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('skyridge-theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
       }
     });
   </script>

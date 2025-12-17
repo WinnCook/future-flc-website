@@ -69,15 +69,33 @@
       padding: var(--space-12) 0 var(--space-10);
       position: relative;
       overflow: hidden;
+      min-height: 60vh;
     }
 
+    /* Mountain Landscape Background */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.02)" points="0,100 30,70 60,85 100,60 100,100"/></svg>') no-repeat bottom;
-      background-size: 100% 50%;
+      background:
+        linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 51, 102, 0.6) 50%, rgba(0, 42, 84, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=80') center/cover no-repeat;
+      background-attachment: fixed;
+      z-index: 1;
+    }
+
+    /* Mountain Silhouette */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="%23ffffff" d="M0,120 L0,60 Q180,20 360,50 Q540,80 720,30 Q900,0 1080,40 Q1260,80 1440,40 L1440,120 Z"/></svg>') no-repeat bottom;
+      background-size: 100% 100%;
       pointer-events: none;
+      z-index: 2;
     }
 
     .hero__content {
@@ -553,7 +571,7 @@
           Home
         </a>
         <a href="programs.html" class="persona-nav__back">Programs</a>
-        <a href="#" class="persona-nav__cta">Apply Now</a>
+        <a href="admission.html" class="persona-nav__cta">Apply Now</a>
       </div>
     </div>
   </nav>
@@ -569,8 +587,8 @@
           Small classes. Big adventures. Affordable excellence.
         </p>
         <div class="hero__actions">
-          <a href="#" class="btn btn--primary">Start Your Application</a>
-          <a href="#" class="btn btn--ghost">Schedule a Visit</a>
+          <a href="admission.html" class="btn btn--primary">Start Your Application</a>
+          <a href="visit.html" class="btn btn--ghost">Schedule a Visit</a>
         </div>
       </div>
     </div>
@@ -580,19 +598,19 @@
   <section class="quick-actions">
     <div class="container">
       <div class="quick-actions__grid">
-        <a href="#" class="quick-action reveal">
+        <a href="admission.html" class="quick-action reveal">
           <span class="quick-action__icon">📝</span>
           <span class="quick-action__label">Apply Now</span>
         </a>
-        <a href="#" class="quick-action reveal reveal--delay-1">
+        <a href="visit.html" class="quick-action reveal reveal--delay-1">
           <span class="quick-action__icon">📅</span>
           <span class="quick-action__label">Schedule Visit</span>
         </a>
-        <a href="#" class="quick-action reveal reveal--delay-2">
+        <a href="contact.html#request-info" class="quick-action reveal reveal--delay-2">
           <span class="quick-action__icon">📬</span>
           <span class="quick-action__label">Request Info</span>
         </a>
-        <a href="#" class="quick-action reveal reveal--delay-3">
+        <a href="admission.html#apply" class="quick-action reveal reveal--delay-3">
           <span class="quick-action__icon">✅</span>
           <span class="quick-action__label">Check Requirements</span>
         </a>
@@ -660,7 +678,7 @@
       </div>
 
       <div style="text-align: center; margin-top: var(--space-5);">
-        <a href="#" class="btn btn--secondary reveal">View All Programs</a>
+        <a href="programs.html" class="btn btn--secondary reveal">View All Programs</a>
       </div>
     </div>
   </section>
@@ -695,7 +713,7 @@
       </div>
 
       <div style="text-align: center; margin-top: var(--space-5);">
-        <a href="#" class="btn btn--primary reveal">Calculate Your Cost</a>
+        <a href="tuition.html#calculator" class="btn btn--primary reveal">Calculate Your Cost</a>
       </div>
     </div>
   </section>
@@ -775,9 +793,9 @@
       <h2 class="cta__title reveal">Ready to Rise?</h2>
       <p class="cta__subtitle reveal reveal--delay-1">Take the first step toward your Fort Lewis adventure.</p>
       <div class="cta__buttons reveal reveal--delay-2">
-        <a href="#" class="btn btn--primary">Apply Now</a>
-        <a href="#" class="btn btn--secondary">Schedule a Visit</a>
-        <a href="#" class="btn btn--secondary">Request Info</a>
+        <a href="admission.html" class="btn btn--primary">Apply Now</a>
+        <a href="visit.html" class="btn btn--secondary">Schedule a Visit</a>
+        <a href="contact.html#request-info" class="btn btn--secondary">Request Info</a>
       </div>
     </div>
   </section>

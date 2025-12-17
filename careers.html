@@ -14,22 +14,38 @@
       padding: var(--space-8) 0 var(--space-10);
       position: relative;
       overflow: hidden;
+      min-height: 50vh;
     }
 
     .page-header::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.02)" points="0,100 100,50 100,100"/></svg>') no-repeat bottom;
-      background-size: 100% 50%;
+      background:
+        linear-gradient(180deg, rgba(0, 51, 102, 0.88) 0%, rgba(0, 51, 102, 0.75) 50%, rgba(0, 42, 84, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80') center/cover no-repeat;
+      background-attachment: fixed;
+      z-index: 1;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="%23f8f9fa" d="M0,80 L0,40 Q360,0 720,30 Q1080,60 1440,20 L1440,80 Z"/></svg>') no-repeat bottom;
+      background-size: 100% 100%;
       pointer-events: none;
+      z-index: 2;
     }
 
     /* Navigation */
     .nav {
       padding: var(--space-3) 0;
       position: relative;
-      z-index: 100;
+      z-index: 20;
     }
 
     .nav__inner {
@@ -88,7 +104,7 @@
     /* Header Content */
     .page-header__content {
       position: relative;
-      z-index: 5;
+      z-index: 10;
       text-align: center;
       max-width: 800px;
       margin: 0 auto;
@@ -714,7 +730,7 @@
           <li><a href="alumni.html" class="nav__link">Alumni</a></li>
           <li><a href="#" class="nav__link nav__link--active">Careers</a></li>
         </ul>
-        <a href="#" class="nav__cta">Post a Job</a>
+        <a href="contact.html" class="nav__cta">Post a Job</a>
       </div>
     </nav>
 
@@ -866,7 +882,7 @@
         <div class="cta-card__icon">🏢</div>
         <h3 class="cta-card__title">For Employers</h3>
         <p class="cta-card__text">Access a pipeline of talented graduates. Post jobs, attend career fairs, and recruit on campus.</p>
-        <a href="#" class="cta-card__btn">Partner With Us</a>
+        <a href="contact.html" class="cta-card__btn">Partner With Us</a>
       </article>
     </div>
   </section>

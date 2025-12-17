@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply to Fort Lewis College. Discover your path to Colorado's only public liberal arts college.">
+  <title>Admission | SKYRIDGE - Fort Lewis College</title>
+  <link rel="stylesheet" href="src/css/design-system.css">
+  <style>
+    /* Hero with Background Image */
+    .hero {
+      min-height: 60vh;
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.9) 0%, rgba(0, 26, 51, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80') center/cover no-repeat;
+      color: var(--color-text-inverse);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.03)" points="0,100 50,70 100,100"/></svg>') no-repeat bottom;
+      background-size: 100% 30%;
+      pointer-events: none;
+    }
+
+    /* Navigation */
+    .nav {
+      padding: var(--space-3) 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      color: var(--color-text-inverse);
+      text-decoration: none;
+    }
+
+    .nav__links {
+      display: none;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    @media (min-width: 768px) {
+      .nav__links {
+        display: flex;
+      }
+    }
+
+    .nav__link {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: var(--text-body-sm);
+      transition: color var(--duration-fast) var(--ease-default);
+    }
+
+    .nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    .nav__cta {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--text-caption);
+    }
+
+    .nav__cta:hover {
+      background: var(--color-accent-hover);
+    }
+
+    /* Hero Content */
+    .hero__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-8) var(--container-padding);
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero__badge {
+      display: inline-block;
+      background: rgba(255, 184, 28, 0.2);
+      color: var(--color-accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-caption);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+      animation: fadeInUp 0.6s var(--ease-out) forwards;
+    }
+
+    .hero__title {
+      font-size: var(--text-hero);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: var(--space-3);
+      animation: fadeInUp 0.6s var(--ease-out) 0.1s forwards;
+      opacity: 0;
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-h3);
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: var(--space-5);
+      animation: fadeInUp 0.6s var(--ease-out) 0.2s forwards;
+      opacity: 0;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      animation: fadeInUp 0.6s var(--ease-out) 0.3s forwards;
+      opacity: 0;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .timeline__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .timeline__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline__subtitle {
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .timeline__track {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline__track::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--color-border);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .timeline__track::before {
+        left: 24px;
+      }
+    }
+
+    .timeline__item {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: var(--space-6);
+    }
+
+    .timeline__item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    @media (max-width: 768px) {
+      .timeline__item,
+      .timeline__item:nth-child(odd) {
+        flex-direction: row;
+        padding-left: 60px;
+      }
+    }
+
+    .timeline__marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      z-index: 2;
+      border: 4px solid var(--color-surface);
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 768px) {
+      .timeline__marker {
+        left: 24px;
+      }
+    }
+
+    .timeline__marker--active {
+      background: var(--color-accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .timeline__content {
+      width: calc(50% - 48px);
+      padding: var(--space-4);
+      background: var(--color-bg-light);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    @media (max-width: 768px) {
+      .timeline__content {
+        width: 100%;
+      }
+    }
+
+    .timeline__date {
+      font-size: var(--text-overline);
+      font-weight: 700;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-1);
+    }
+
+    .timeline__item-title {
+      font-size: var(--text-h4);
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .timeline__text {
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+      margin: 0;
+    }
+
+    /* Requirements Section */
+    .requirements {
+      padding: var(--space-12) 0;
+      background: var(--color-bg-light);
+    }
+
+    .requirements__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .requirements__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .requirements__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+    }
+
+    .requirements__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .requirements__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .req-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      border: 1px solid var(--color-border);
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .req-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .req-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    .req-card__icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .req-card__title {
+      font-size: var(--text-h3);
+      color: var(--color-primary);
+    }
+
+    .req-card__list {
+      list-style: none;
+    }
+
+    .req-card__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-size: var(--text-body-sm);
+    }
+
+    .req-card__item:last-child {
+      border-bottom: none;
+    }
+
+    .req-card__check {
+      color: var(--color-success);
+      flex-shrink: 0;
+    }
+
+    /* Pathways Section */
+    .pathways {
+      padding: var(--space-12) 0;
+      background: var(--gradient-dark);
+      color: var(--color-text-inverse);
+    }
+
+    .pathways__header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .pathways__overline {
+      font-size: var(--text-overline);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .pathways__title {
+      font-size: var(--text-h2);
+      margin-bottom: var(--space-2);
+    }
+
+    .pathways__subtitle {
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .pathways__grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .pathways__grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .pathway-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      text-align: center;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .pathway-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+    }
+
+    .pathway-card__icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .pathway-card__title {
+      font-size: var(--text-h3);
+      color: var(--color-accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .pathway-card__text {
+      opacity: 0.8;
+      font-size: var(--text-body-sm);
+      margin-bottom: var(--space-3);
+    }
+
+    .pathway-card__link {
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: var(--text-body-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .pathway-card__link:hover {
+      gap: var(--space-2);
+    }
+
+    /* Application Section */
+    .application {
+      padding: var(--space-12) 0;
+      background: var(--color-surface);
+    }
+
+    .application__container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .application__badge {
+      display: inline-block;
+      background: rgba(255, 184, 28, 0.15);
+      color: var(--color-primary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: var(--text-caption);
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+    }
+
+    .application__title {
+      font-size: var(--text-h2);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .application__subtitle {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-5);
+    }
+
+    .application__form {
+      background: var(--color-bg-light);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      border: 2px solid var(--color-border);
+    }
+
+    .application__tabs {
+      display: flex;
+      gap: var(--space-1);
+      margin-bottom: var(--space-4);
+      background: var(--color-surface);
+      padding: var(--space-1);
+      border-radius: var(--radius-md);
+    }
+
+    .application__tab {
+      flex: 1;
+      padding: var(--space-2);
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: var(--text-body-sm);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-default);
+    }
+
+    .application__tab:hover {
+      color: var(--color-primary);
+    }
+
+    .application__tab--active {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .application__fields {
+      display: grid;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    @media (min-width: 640px) {
+      .application__fields {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-field {
+      text-align: left;
+    }
+
+    .form-field--full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field__label {
+      display: block;
+      font-weight: 600;
+      font-size: var(--text-body-sm);
+      color: var(--color-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .form-field__input {
+      width: 100%;
+      padding: var(--space-2);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: var(--text-body-sm);
+      transition: border-color var(--duration-fast) var(--ease-default);
+    }
+
+    .form-field__input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    .form-field__select {
+      appearance: none;
+      background: var(--color-surface) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236B7280" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>') right 12px center/16px no-repeat;
+    }
+
+    .application__submit {
+      width: 100%;
+    }
+
+    .application__note {
+      margin-top: var(--space-3);
+      font-size: var(--text-caption);
+      color: var(--color-text-secondary);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: var(--space-10) 0;
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .contact__inner {
+      display: grid;
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .contact__inner {
+        grid-template-columns: 1fr auto;
+      }
+    }
+
+    .contact__title {
+      font-size: var(--text-h3);
+      margin-bottom: var(--space-1);
+    }
+
+    .contact__text {
+      opacity: 0.9;
+    }
+
+    .contact__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+      padding: var(--space-6) 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      list-style: none;
+    }
+
+    .footer__link {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: var(--text-body-sm);
+    }
+
+    .footer__link:hover {
+      color: var(--color-accent);
+    }
+
+    .footer__concept {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      opacity: 0.5;
+      font-size: var(--text-caption);
+    }
+
+    .footer__pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a href="index.html" class="nav__logo">SKYRIDGE</a>
+        <ul class="nav__links">
+          <li><a href="programs.html" class="nav__link">Programs</a></li>
+          <li><a href="visit.html" class="nav__link">Visit</a></li>
+          <li><a href="tuition.html" class="nav__link">Tuition & Aid</a></li>
+          <li><a href="about.html" class="nav__link">About</a></li>
+        </ul>
+        <a href="#apply" class="nav__cta">Apply Now</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <span class="hero__badge">Admission</span>
+      <h1 class="hero__title">Begin Your Journey</h1>
+      <p class="hero__subtitle">
+        Join a community of thinkers, doers, and explorers at Colorado's only public liberal arts college.
+      </p>
+      <div class="hero__actions">
+        <a href="#apply" class="btn btn--primary">Start Application</a>
+        <a href="visit.html" class="btn btn--ghost">Schedule a Visit</a>
+        <a href="contact.html#request-info" class="btn btn--ghost">Request Info</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline">
+    <div class="container">
+      <header class="timeline__header reveal">
+        <span class="timeline__overline">Application Timeline</span>
+        <h2 class="timeline__title">Key Dates for Fall 2025</h2>
+        <p class="timeline__subtitle">Stay on track with important deadlines. Early application recommended for best scholarship consideration.</p>
+      </header>
+
+      <div class="timeline__track">
+        <div class="timeline__item reveal">
+          <div class="timeline__marker">📝</div>
+          <div class="timeline__content">
+            <span class="timeline__date">August 1</span>
+            <h3 class="timeline__item-title">Application Opens</h3>
+            <p class="timeline__text">Start your application early. Rolling admissions means faster decisions.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-1">
+          <div class="timeline__marker">🎯</div>
+          <div class="timeline__content">
+            <span class="timeline__date">November 15</span>
+            <h3 class="timeline__item-title">Early Action Deadline</h3>
+            <p class="timeline__text">Apply by this date for priority scholarship consideration and December decision.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-2">
+          <div class="timeline__marker timeline__marker--active">⭐</div>
+          <div class="timeline__content">
+            <span class="timeline__date">February 1</span>
+            <h3 class="timeline__item-title">Priority Deadline</h3>
+            <p class="timeline__text">Best chance for maximum financial aid and housing selection.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-3">
+          <div class="timeline__marker">🏠</div>
+          <div class="timeline__content">
+            <span class="timeline__date">May 1</span>
+            <h3 class="timeline__item-title">Enrollment Deposit Due</h3>
+            <p class="timeline__text">Confirm your spot at Fort Lewis College by submitting your deposit.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal reveal--delay-4">
+          <div class="timeline__marker">🎓</div>
+          <div class="timeline__content">
+            <span class="timeline__date">August</span>
+            <h3 class="timeline__item-title">Welcome Week</h3>
+            <p class="timeline__text">Move in and begin your Fort Lewis adventure!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements Section -->
+  <section class="requirements">
+    <div class="container">
+      <header class="requirements__header reveal">
+        <span class="requirements__overline">What You'll Need</span>
+        <h2 class="requirements__title">Admission Requirements</h2>
+      </header>
+
+      <div class="requirements__grid">
+        <article class="req-card reveal">
+          <div class="req-card__header">
+            <div class="req-card__icon">📋</div>
+            <h3 class="req-card__title">First-Year Students</h3>
+          </div>
+          <ul class="req-card__list">
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Completed application form
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Official high school transcript
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              SAT/ACT scores (test-optional)
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              $40 application fee (waivable)
+            </li>
+          </ul>
+        </article>
+
+        <article class="req-card reveal reveal--delay-1">
+          <div class="req-card__header">
+            <div class="req-card__icon">🔄</div>
+            <h3 class="req-card__title">Transfer Students</h3>
+          </div>
+          <ul class="req-card__list">
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Completed application form
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Official college transcripts (all institutions)
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              2.0 minimum GPA (2.5 recommended)
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              $40 application fee (waivable)
+            </li>
+          </ul>
+        </article>
+
+        <article class="req-card reveal reveal--delay-2">
+          <div class="req-card__header">
+            <div class="req-card__icon">🌎</div>
+            <h3 class="req-card__title">International Students</h3>
+          </div>
+          <ul class="req-card__list">
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Completed international application
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Certified academic credentials
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              English proficiency (TOEFL/IELTS)
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Financial documentation for visa
+            </li>
+          </ul>
+        </article>
+
+        <article class="req-card reveal reveal--delay-3">
+          <div class="req-card__header">
+            <div class="req-card__icon">🎖️</div>
+            <h3 class="req-card__title">Veteran Students</h3>
+          </div>
+          <ul class="req-card__list">
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Completed application form
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              Military transcripts (JST/CCAF)
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              DD-214 or service documentation
+            </li>
+            <li class="req-card__item">
+              <svg class="req-card__check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+              VA benefits certification
+            </li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pathways Section -->
+  <section class="pathways">
+    <div class="container">
+      <header class="pathways__header reveal">
+        <span class="pathways__overline">Your Path</span>
+        <h2 class="pathways__title">Multiple Ways to Apply</h2>
+        <p class="pathways__subtitle">Choose the application pathway that works best for you.</p>
+      </header>
+
+      <div class="pathways__grid">
+        <article class="pathway-card reveal">
+          <div class="pathway-card__icon">⚡</div>
+          <h3 class="pathway-card__title">Direct Application</h3>
+          <p class="pathway-card__text">Apply directly through our online portal. Free to apply, rolling decisions.</p>
+          <a href="#apply" class="pathway-card__link">
+            Apply Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <article class="pathway-card reveal reveal--delay-1">
+          <div class="pathway-card__icon">📱</div>
+          <h3 class="pathway-card__title">Common App</h3>
+          <p class="pathway-card__text">Already using Common App? Find Fort Lewis College and apply with your existing profile.</p>
+          <a href="#" class="pathway-card__link">
+            Find on Common App
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+
+        <article class="pathway-card reveal reveal--delay-2">
+          <div class="pathway-card__icon">📄</div>
+          <h3 class="pathway-card__title">Paper Application</h3>
+          <p class="pathway-card__text">Prefer paper? Download and mail your application materials.</p>
+          <a href="#" class="pathway-card__link">
+            Download PDF
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Section -->
+  <section class="application" id="apply">
+    <div class="container">
+      <div class="application__container">
+        <span class="application__badge reveal">Start Today</span>
+        <h2 class="application__title reveal">Begin Your Application</h2>
+        <p class="application__subtitle reveal">Takes about 15 minutes. Save and return anytime.</p>
+
+        <div class="application__form reveal">
+          <div class="application__tabs">
+            <button class="application__tab application__tab--active" type="button" data-tab="first-year">First-Year</button>
+            <button class="application__tab" type="button" data-tab="transfer">Transfer</button>
+            <button class="application__tab" type="button" data-tab="international">International</button>
+          </div>
+
+          <div class="application__fields">
+            <div class="form-field">
+              <label class="form-field__label" for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-field__input" placeholder="Enter your first name">
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-field__input" placeholder="Enter your last name">
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="email">Email Address</label>
+              <input type="email" id="email" class="form-field__input" placeholder="your.email@example.com">
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-field__input" placeholder="(555) 123-4567">
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="term">Entry Term</label>
+              <select id="term" class="form-field__input form-field__select">
+                <option value="">Select a term...</option>
+                <option value="fall-2025">Fall 2025</option>
+                <option value="spring-2026">Spring 2026</option>
+                <option value="fall-2026">Fall 2026</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-field__label" for="major">Intended Major</label>
+              <select id="major" class="form-field__input form-field__select">
+                <option value="">Select or undecided...</option>
+                <option value="adventure-ed">Adventure Education</option>
+                <option value="biology">Biology</option>
+                <option value="business">Business Administration</option>
+                <option value="computer-science">Computer Science</option>
+                <option value="psychology">Psychology</option>
+                <option value="undecided">Undecided</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn--primary application__submit" type="button" onclick="alert('This is a concept prototype. In the real application, you would continue to the full application portal.')">
+            Continue Application →
+          </button>
+
+          <p class="application__note">No application fee. You can save your progress and return anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="container">
+      <div class="contact__inner">
+        <div>
+          <h2 class="contact__title">Have Questions?</h2>
+          <p class="contact__text">Our admission team is here to help you every step of the way.</p>
+        </div>
+        <div class="contact__actions">
+          <a href="contact.html" class="btn btn--primary">Contact Admissions</a>
+          <a href="visit.html" class="btn btn--ghost">Schedule a Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <ul class="footer__links">
+        <li><a href="index.html" class="footer__link">Home</a></li>
+        <li><a href="programs.html" class="footer__link">Programs</a></li>
+        <li><a href="events.html" class="footer__link">Events</a></li>
+        <li><a href="careers.html" class="footer__link">Careers</a></li>
+        <li><a href="contact.html" class="footer__link">Contact</a></li>
+      </ul>
+      <div class="footer__concept">
+        <span class="footer__pulse"></span>
+        <span>SKYRIDGE Concept</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll reveals
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Tab switching
+    document.querySelectorAll('.application__tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.application__tab').forEach(t => t.classList.remove('application__tab--active'));
+        tab.classList.add('application__tab--active');
+      });
+    });
+  </script>
+</body>
+</html>
