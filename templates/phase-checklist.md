@@ -16,13 +16,13 @@
 - [x] README.md written
 - [x] templates/session-prompts.md created
 - [x] templates/phase-checklist.md created (this file)
-- [ ] Git initialized locally
-- [ ] Remote repository created on GitHub
-- [ ] Initial commit pushed
-- [ ] GitHub Pages enabled
-- [ ] Live URL verified
+- [x] Git initialized locally
+- [x] Remote repository created on GitHub
+- [x] Initial commit pushed
+- [x] GitHub Pages enabled
+- [x] Live URL verified
 
-**Exit Criteria:** Repository live at https://winncook.github.io/future-flc-website/
+**Exit Criteria:** Repository live at https://winncook.github.io/future-flc-website/ ✓ COMPLETE
 
 ---
 
