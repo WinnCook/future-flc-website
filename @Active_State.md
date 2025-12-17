@@ -326,15 +326,8 @@ https://winncook.github.io/future-flc-website/
 
 **Branch:** main
 **Remote:** origin (https://github.com/WinnCook/future-flc-website)
-**Last Commit:** Pending - Session 8 changes ready for commit
-**Status:** Modified files ready for commit
-
-**Files Modified:**
-- src/css/design-system.css (dark mode fixes)
-- src/js/theme.js (NEW - shared theme script)
-- index.html (hero improvements)
-- data.html (major overhaul - tabs, explorer, charts)
-- 16 other HTML pages (dark mode toggle added)
+**Last Commit:** 659143a - Phase 9: IR Dashboard Overhaul & Site-Wide Dark Mode
+**Status:** Clean - all changes committed and pushed
 
 **Live URL:** https://winncook.github.io/future-flc-website/
 **IR Dashboard:** https://winncook.github.io/future-flc-website/data.html
