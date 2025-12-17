@@ -18,20 +18,27 @@
       overflow: hidden;
     }
 
-    /* Parallax Mountain Background */
+    /* Parallax Mountain Background - Snowy Colorado Peaks */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(0, 51, 102, 0.7) 0%, rgba(0, 51, 102, 0.5) 50%, rgba(0, 51, 102, 0.8) 100%),
-        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover no-repeat;
+        linear-gradient(180deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 51, 102, 0.4) 40%, rgba(0, 51, 102, 0.7) 100%),
+        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
       background-attachment: fixed;
       z-index: 1;
+      will-change: transform;
+    }
+
+    /* Disable parallax on mobile for performance */
+    @media (max-width: 768px) {
+      .hero::before {
+        background-attachment: scroll;
+      }
     }
 
     /* Mountain Silhouette Overlay - Light Mode */
-    /* Extended gradient that starts later to avoid overlapping buttons */
     .hero::after {
       content: '';
       position: absolute;
@@ -44,11 +51,18 @@
       z-index: 2;
     }
 
-    /* Dark Mode Hero - Night Sky */
+    /* Dark Mode Hero - Night Sky with Snowy Peaks */
     [data-theme="dark"] .hero::before {
       background:
-        linear-gradient(180deg, #0a0a1a 0%, #0d1525 30%, #1a1a3a 60%, #0d1117 100%),
-        url('https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1920&q=80') center/cover no-repeat;
+        linear-gradient(180deg, rgba(10, 10, 26, 0.7) 0%, rgba(13, 21, 37, 0.5) 30%, rgba(26, 26, 58, 0.7) 60%, rgba(13, 17, 23, 0.9) 100%),
+        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+
+    @media (max-width: 768px) {
+      [data-theme="dark"] .hero::before {
+        background-attachment: scroll;
+      }
     }
 
     [data-theme="dark"] .hero::after {
@@ -648,10 +662,12 @@
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
     .activity-item__content {
       flex: 1;
+      min-width: 0;
     }
 
     .activity-item__text {
@@ -672,6 +688,164 @@
       to {
         opacity: 1;
         transform: translateX(0);
+      }
+    }
+
+    /* Mobile Activity Badge */
+    .activity-badge {
+      display: none;
+      position: fixed;
+      bottom: var(--space-3);
+      left: var(--space-3);
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0, 51, 102, 0.3);
+      transition: all 0.2s ease;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .activity-badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0, 51, 102, 0.4);
+    }
+
+    .activity-badge__icon {
+      font-size: 1.25rem;
+    }
+
+    .activity-badge__count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 18px;
+      height: 18px;
+      background: #EF4444;
+      color: white;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s ease;
+    }
+
+    .activity-badge__count.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Mobile Activity Panel (expanded) */
+    .activity-panel {
+      display: none;
+      position: fixed;
+      bottom: 60px;
+      left: var(--space-3);
+      width: 280px;
+      max-height: 300px;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      z-index: 99;
+      animation: panelSlideUp 0.2s ease-out;
+    }
+
+    .activity-panel.show {
+      display: block;
+    }
+
+    @keyframes panelSlideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .activity-panel__header {
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-bg-light);
+      border-bottom: 1px solid var(--color-border);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .activity-panel__close {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      padding: 0;
+      line-height: 1;
+    }
+
+    .activity-panel__list {
+      max-height: 250px;
+      overflow-y: auto;
+      padding: var(--space-2);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .activity-panel__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2);
+      background: var(--color-bg-light);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+    }
+
+    .activity-panel__item-icon {
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 51, 102, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .activity-panel__item-text {
+      color: var(--color-text);
+      flex: 1;
+    }
+
+    .activity-panel__item-time {
+      color: var(--color-text-secondary);
+      font-size: 10px;
+    }
+
+    .activity-panel__empty {
+      text-align: center;
+      padding: var(--space-4);
+      color: var(--color-text-secondary);
+      font-size: 12px;
+    }
+
+    /* Mobile: hide feed, show badge */
+    @media (max-width: 768px) {
+      .activity-feed {
+        display: none !important;
+      }
+      .activity-badge {
+        display: flex;
       }
     }
 
@@ -1584,6 +1758,22 @@
   <!-- Live Activity Feed -->
   <div class="activity-feed" id="activityFeed" aria-label="Live activity feed"></div>
 
+  <!-- Mobile Activity Badge & Panel -->
+  <button class="activity-badge" id="activityBadge" aria-label="View activity">
+    <span class="activity-badge__icon">📊</span>
+    <span class="activity-badge__count" id="activityCount">0</span>
+  </button>
+
+  <div class="activity-panel" id="activityPanel">
+    <div class="activity-panel__header">
+      <span>Live Activity</span>
+      <button class="activity-panel__close" id="activityPanelClose">&times;</button>
+    </div>
+    <div class="activity-panel__list" id="activityPanelList">
+      <div class="activity-panel__empty">No recent activity</div>
+    </div>
+  </div>
+
   <script>
     // Welcome Modal for first-time visitors
     function showWelcomeModal() {
@@ -2077,6 +2267,12 @@
 
     // Live Activity Feed - Simulated real-time engagement
     const activityFeed = document.getElementById('activityFeed');
+    const activityBadge = document.getElementById('activityBadge');
+    const activityCount = document.getElementById('activityCount');
+    const activityPanel = document.getElementById('activityPanel');
+    const activityPanelClose = document.getElementById('activityPanelClose');
+    const activityPanelList = document.getElementById('activityPanelList');
+
     const activities = [
       { icon: '👀', text: '14 people viewing Computer Science', time: 'now' },
       { icon: '📝', text: 'Application submitted', time: '2 min ago' },
@@ -2089,44 +2285,110 @@
     ];
 
     let activityIndex = 0;
+    let unreadCount = 0;
+    let activityLog = [];
     const maxItems = 2;
+    const maxLogItems = 10;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     function showActivity() {
       const activity = activities[activityIndex % activities.length];
-      const item = document.createElement('div');
-      item.className = 'activity-item';
-      item.innerHTML = `
-        <div class="activity-item__icon">${activity.icon}</div>
-        <div class="activity-item__content">
-          <div class="activity-item__text">${activity.text}</div>
-          <div class="activity-item__time">${activity.time}</div>
-        </div>
-      `;
 
-      activityFeed.appendChild(item);
+      // Add to activity log (for mobile panel)
+      activityLog.unshift({ ...activity, timestamp: new Date() });
+      if (activityLog.length > maxLogItems) activityLog.pop();
 
-      // Remove oldest if exceeding max
-      while (activityFeed.children.length > maxItems) {
-        activityFeed.firstChild.remove();
+      // Desktop: show floating items
+      if (!isMobile) {
+        const item = document.createElement('div');
+        item.className = 'activity-item';
+        item.innerHTML = `
+          <div class="activity-item__icon">${activity.icon}</div>
+          <div class="activity-item__content">
+            <div class="activity-item__text">${activity.text}</div>
+            <div class="activity-item__time">${activity.time}</div>
+          </div>
+        `;
+
+        activityFeed.appendChild(item);
+
+        // Remove oldest if exceeding max
+        while (activityFeed.children.length > maxItems) {
+          activityFeed.firstChild.remove();
+        }
+
+        // Auto-remove after 6 seconds
+        setTimeout(() => {
+          if (item.parentNode) {
+            item.style.opacity = '0';
+            item.style.transform = 'translateX(-100%)';
+            setTimeout(() => item.remove(), 300);
+          }
+        }, 6000);
       }
 
-      // Auto-remove after 5 seconds
-      setTimeout(() => {
-        if (item.parentNode) {
-          item.style.opacity = '0';
-          item.style.transform = 'translateX(-100%)';
-          setTimeout(() => item.remove(), 300);
-        }
-      }, 5000);
+      // Mobile: update badge count (only if panel is closed)
+      if (isMobile && !activityPanel.classList.contains('show')) {
+        unreadCount++;
+        activityCount.textContent = unreadCount > 9 ? '9+' : unreadCount;
+        activityCount.classList.add('show');
+
+        // Subtle pulse on badge
+        activityBadge.style.transform = 'scale(1.1)';
+        setTimeout(() => activityBadge.style.transform = '', 200);
+      }
 
       activityIndex++;
     }
 
-    // Show first activity after delay, then every 6-10 seconds
+    // Update mobile panel content
+    function updateActivityPanel() {
+      if (activityLog.length === 0) {
+        activityPanelList.innerHTML = '<div class="activity-panel__empty">No recent activity</div>';
+      } else {
+        activityPanelList.innerHTML = activityLog.map(a => `
+          <div class="activity-panel__item">
+            <div class="activity-panel__item-icon">${a.icon}</div>
+            <div class="activity-panel__item-text">${a.text}</div>
+            <div class="activity-panel__item-time">${a.time}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Mobile badge click - toggle panel
+    activityBadge.addEventListener('click', () => {
+      const isOpen = activityPanel.classList.contains('show');
+      if (isOpen) {
+        activityPanel.classList.remove('show');
+      } else {
+        updateActivityPanel();
+        activityPanel.classList.add('show');
+        // Clear unread count
+        unreadCount = 0;
+        activityCount.classList.remove('show');
+      }
+    });
+
+    // Close panel
+    activityPanelClose.addEventListener('click', () => {
+      activityPanel.classList.remove('show');
+    });
+
+    // Close panel on outside click
+    document.addEventListener('click', (e) => {
+      if (activityPanel.classList.contains('show') &&
+          !activityPanel.contains(e.target) &&
+          !activityBadge.contains(e.target)) {
+        activityPanel.classList.remove('show');
+      }
+    });
+
+    // Show first activity after delay, then every 12-18 seconds (slower pace)
     setTimeout(() => {
       showActivity();
-      setInterval(showActivity, 7000 + Math.random() * 3000);
-    }, 3000);
+      setInterval(showActivity, 12000 + Math.random() * 6000);
+    }, 4000);
   </script>
 </body>
 </html>
