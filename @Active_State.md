@@ -1,6 +1,6 @@
 # HORIZON - Active State
 **Mission Card | Session Continuity Document**
-**Last Updated:** 2025-12-17 | Session 17
+**Last Updated:** 2025-12-17 | Session 18
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Phase** | 17 - Additional UX Fixes |
+| **Phase** | 18 - UX Polish & Data Explorer Defaults |
 | **Status** | COMPLETE - All fixes applied |
 | **Active Task** | None - Ready for review |
 | **Blockers** | None |
@@ -16,7 +16,64 @@
 
 ---
 
-## SESSION 17 COMPLETION (Current)
+## SESSION 18 COMPLETION (Current)
+
+**Major Theme: Homepage Title, Snow Realism, Data Explorer Smart Defaults**
+
+User requested 3 UX improvements plus 2 Data Explorer cleanups.
+
+### Issues Reported & Fixed:
+
+1. Homepage "FORT LEWIS COLLEGE" title not big enough
+2. Dark mode snow too big/fake looking, light mode needs slight enhancement
+3. Data Explorer needs default configs when switching data sources
+4. Redundant "Count" measure (same as Total Enrollment)
+5. Field panel should extend to match chart height
+
+### Completed Work:
+
+**1. HOMEPAGE TITLE 2X BIGGER**
+- [x] Changed `.hero__overline` font-size from `var(--text-overline)` (0.75rem) to `1.5rem`
+- [x] Adjusted letter-spacing from 0.3em to 0.2em for visual balance at larger size
+- [x] File: `index.html` line 443
+
+**2. SNOW EFFECTS REALISM**
+- [x] **Dark mode:** Reduced from 5px to 3px, opacity from 85% to 55% (more realistic)
+- [x] **Light mode:** Increased from 3px to 4px, container opacity from 40% to 50%
+- [x] Added 10 more snowflakes (30 → 40) for smoother frequency
+- [x] Files: `index.html` (CSS lines 171-178, 776-780, HTML lines 1229-1239), `src/css/design-system.css` (lines 833-846)
+
+**3. DATA EXPLORER SMART DEFAULTS**
+- [x] When switching data sources, auto-populate meaningful chart:
+  - **Enrollment:** Total Enrollment by Enrollment Status (line chart)
+  - **Admissions:** Applications over time
+  - **Expenses:** In-State Tuition over time
+- [x] File: `data.html` lines 3493-3508
+
+**4. REMOVED REDUNDANT COUNT MEASURE**
+- [x] Deleted "Count" measure (duplicate of Total Enrollment)
+- [x] File: `data.html` (removed lines 2576-2579)
+
+**5. FIELD PANEL HEIGHT FIX**
+- [x] Changed from `max-height: 550px` to `align-self: stretch`
+- [x] Panel now extends to match chart area height
+- [x] File: `data.html` line 1122
+
+### Git Commits This Session:
+```
+8a9333f Data Explorer cleanup: remove redundant Count, extend field panel
+30f4511 UX improvements: bigger title, realistic snow, Data Explorer defaults
+```
+
+### Key Decisions (FINAL):
+- Homepage title at 1.5rem (2x original) with 0.2em letter-spacing
+- Dark snow: 3px at 55% opacity (realistic)
+- Light snow: 4px at 55% opacity, container 50% visible
+- Data Explorer always shows a default chart per data source
+
+---
+
+## SESSION 17 COMPLETION (Previous)
 
 **Major Theme: Parent Banner, Chart Opacity Bug, Data Explorer UI, Gender Labels**
 
@@ -471,31 +528,36 @@ https://github.com/WinnCook/concept-demo-flc-website-prototype
 | 15 | 2025-12-17 | Phase 15 - Site Consistency | Complete |
 | 16 | 2025-12-17 | Phase 16 - Final Polish & Repo Rename | Complete |
 | 17 | 2025-12-17 | Phase 17 - Critical Bug Fix & Labels | Complete |
+| 18 | 2025-12-17 | Phase 18 - UX Polish & Data Explorer Defaults | Complete |
 
 ---
 
 ## HANDOFF NOTES
 
-**Session 17 Summary:**
-Fixed critical CSS bug causing Data Explorer chart to be nearly invisible (10% opacity). Also updated gender labels and improved UI.
+**Session 18 Summary:**
+Enhanced homepage title visibility (2x bigger), improved snow realism, and added smart defaults to Data Explorer so switching data sources always shows a meaningful chart.
 
-**What Was Fixed:**
-1. **CRITICAL:** `.chart-area` CSS class conflict - renamed explorer container to `.explorer-chart-area`
-2. Parent page banner image (broken URL → working photo)
-3. All backgrounds changed to fully opaque (#FFFFFF instead of rgba 0.98)
-4. Tab buttons scroll toggle removed
-5. Gender labels: "Men/Women" → "Male/Female"
+**What Was Changed:**
+1. Homepage "FORT LEWIS COLLEGE" title: 0.75rem → 1.5rem (2x bigger)
+2. Dark mode snow: 5px → 3px, 85% → 55% opacity (more realistic)
+3. Light mode snow: 3px → 4px, 40% → 50% container opacity (slightly more visible)
+4. Added 10 more snowflakes (30 → 40 total)
+5. Data Explorer smart defaults per source (always shows a chart when switching)
+6. Removed redundant "Count" measure
+7. Field panel now stretches to match chart height
 
 **Current State:**
 - Site is SMOOTH and STABLE
-- Data Explorer chart now FULLY VISIBLE (was 10% opacity before)
+- Homepage title prominently visible
+- Snow effects look natural in both modes
+- Data Explorer immediately useful on source switch
 - All pages have consistent navigation
 - Clean, professional appearance
 - Ready for executive presentation
 
 **Git Status:** Clean - all changes committed and pushed
 **Branch:** main
-**Latest Commit:** 421ade3
+**Latest Commit:** 8a9333f
 
 **For Next Session (if needed):**
 - Gather user feedback from executive demo
