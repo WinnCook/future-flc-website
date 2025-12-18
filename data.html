@@ -871,14 +871,71 @@
     }
 
     /* ===== DATA EXPLORER ===== */
+    /* Explorer Source Bar - Full Width at Top */
+    .explorer__source-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+    }
+
+    .source-selector__label {
+      font-weight: 600;
+      color: var(--color-text);
+      font-size: 0.875rem;
+      white-space: nowrap;
+    }
+
+    .source-selector__dropdown {
+      padding: 8px 36px 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23003366" d="M2 4l4 4 4-4z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      min-width: 180px;
+    }
+
+    .explorer__actions {
+      margin-left: auto;
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    /* Main Explorer Grid: Left Panel | Right Workspace */
     .explorer {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 220px 1fr;
       gap: var(--space-4);
-      min-height: 600px;
+      min-height: 650px;
     }
 
     @media (max-width: 1024px) {
+      .explorer {
+        grid-template-columns: 180px 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .explorer__source-bar {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+      .explorer__actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+      }
       .explorer {
         grid-template-columns: 1fr;
       }
@@ -1061,36 +1118,21 @@
       gap: var(--space-4);
     }
 
+    /* Drop Zones - Always 4 columns in a row at top */
     .drop-zones {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-3);
     }
 
-    .drop-zones--three {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .drop-zones--four {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
     @media (max-width: 1100px) {
-      .drop-zones--four {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .drop-zones--three {
-        grid-template-columns: 1fr 1fr;
+      .drop-zones {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 768px) {
-      .drop-zones,
-      .drop-zones--three,
-      .drop-zones--four {
+      .drop-zones {
         grid-template-columns: 1fr;
       }
     }
@@ -1538,15 +1580,67 @@
       gap: var(--space-2);
     }
 
-    /* Chart Preview */
-    .chart-preview {
+    /* Chart Area - Container for toolbar + chart */
+    .chart-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: var(--space-4);
-      min-height: 400px;
+      overflow: hidden;
+    }
+
+    .chart-area__toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      background: rgba(0, 51, 102, 0.03);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    [data-theme="dark"] .chart-area__toolbar {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .chart-type-selector {
+      display: flex;
+      gap: var(--space-1);
+    }
+
+    .chart-type-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.15s ease;
+    }
+
+    .chart-type-btn:hover {
+      border-color: var(--color-primary);
+      background: rgba(0, 51, 102, 0.05);
+    }
+
+    .chart-type-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: white;
+    }
+
+    /* Chart Preview - Large and expanding */
+    .chart-preview {
+      flex: 1;
       display: flex;
       flex-direction: column;
+      padding: var(--space-4);
+      min-height: 450px;
     }
 
     .chart-preview__header {
@@ -1976,10 +2070,19 @@
       }
     }
 
-    /* Explorer SVG Chart */
+    /* Explorer SVG Chart - Large and responsive */
     .explorer-chart-svg {
       width: 100%;
-      height: 350px;
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .chart-preview__content {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -1998,25 +2101,36 @@
     <!-- Snowflakes generated by JS -->
   </div>
 
-  <!-- Page Header -->
-  <header class="page-header">
-    <div class="container page-header__inner">
-      <a href="index.html" class="page-header__logo">HORIZON</a>
-      <nav class="page-header__nav">
-        <a href="index.html" class="page-header__link">Home</a>
-        <a href="programs.html" class="page-header__link">Programs</a>
-        <a href="about.html" class="page-header__link">About</a>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+  <!-- Navigation (Standard across all pages) -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">HORIZON</a>
+      <ul class="nav__links">
+        <li><a href="programs.html" class="nav__link">Programs</a></li>
+        <li><a href="admission.html" class="nav__link">Admission</a></li>
+        <li><a href="campus.html" class="nav__link">Campus</a></li>
+        <li><a href="data.html" class="nav__link nav__link--active">Data</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__search" id="searchTrigger" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
           <span class="theme-toggle__icon">🌙</span>
         </button>
+        <a href="admission.html" class="nav__cta">Apply Now</a>
         <button class="nav__hamburger" aria-label="Menu">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- Mobile Navigation -->
   <div class="mobile-nav__backdrop"></div>
@@ -2028,6 +2142,7 @@
       <li><a href="campus.html" class="mobile-nav__link"><span class="mobile-nav__link-icon">🏔️</span>Campus</a></li>
       <li><a href="about.html" class="mobile-nav__link"><span class="mobile-nav__link-icon">ℹ️</span>About</a></li>
       <li><a href="data.html" class="mobile-nav__link"><span class="mobile-nav__link-icon">📊</span>Data</a></li>
+      <li><button class="mobile-nav__link mobile-nav__search-btn" id="mobileSearchTrigger"><span class="mobile-nav__link-icon">🔍</span>Search</button></li>
     </ul>
     <div class="mobile-nav__divider"></div>
     <a href="admission.html" class="mobile-nav__cta">Apply Now</a>
@@ -2064,7 +2179,7 @@
   <!-- Stats Cards -->
   <section class="container">
     <div class="stats-grid">
-      <div class="stat-card fade-in">
+      <div class="stat-card">
         <div class="stat-card__value" id="totalEnrollment">3,413</div>
         <div class="stat-card__label">Total Enrollment (2023-24)</div>
         <div class="stat-card__trend stat-card__trend--up">
@@ -2072,7 +2187,7 @@
           <span>+0.4% from last year</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+      <div class="stat-card">
         <div class="stat-card__value">63%</div>
         <div class="stat-card__label">Retention Rate</div>
         <div class="stat-card__trend stat-card__trend--down">
@@ -2080,7 +2195,7 @@
           <span>-3% from median</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+      <div class="stat-card">
         <div class="stat-card__value">43%</div>
         <div class="stat-card__label">6-Year Graduation Rate</div>
         <div class="stat-card__trend stat-card__trend--up">
@@ -2088,7 +2203,7 @@
           <span>+9% vs peers</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+      <div class="stat-card">
         <div class="stat-card__value">13:1</div>
         <div class="stat-card__label">Student-Faculty Ratio</div>
         <div class="stat-card__trend">
@@ -2096,7 +2211,7 @@
           <span>Small class sizes</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.4s;">
+      <div class="stat-card">
         <div class="stat-card__value">43%</div>
         <div class="stat-card__label">First-Generation Students</div>
         <div class="stat-card__trend stat-card__trend--up">
@@ -2104,7 +2219,7 @@
           <span>Above national avg</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.5s;">
+      <div class="stat-card">
         <div class="stat-card__value">52%</div>
         <div class="stat-card__label">Students of Color</div>
         <div class="stat-card__trend stat-card__trend--up">
@@ -2112,7 +2227,7 @@
           <span>Diverse campus</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.6s;">
+      <div class="stat-card">
         <div class="stat-card__value">47%</div>
         <div class="stat-card__label">In-State (Colorado)</div>
         <div class="stat-card__trend">
@@ -2120,7 +2235,7 @@
           <span>53% out-of-state</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.7s;">
+      <div class="stat-card">
         <div class="stat-card__value">93%</div>
         <div class="stat-card__label">Acceptance Rate (2023-24)</div>
         <div class="stat-card__trend stat-card__trend--up">
@@ -2300,21 +2415,26 @@
 
       <!-- TAB 3: Data Explorer -->
       <div class="ir-tab-content" id="tab-explorer" role="tabpanel">
-        <div class="explorer">
-          <!-- Data Source Dropdown -->
-          <div class="explorer__source-selector" style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4);">
-            <label class="source-selector__label" for="dataSourceSelect" style="font-weight: 600; color: var(--color-text); font-size: 0.875rem; white-space: nowrap;">Data Source:</label>
-            <select class="source-selector__dropdown" id="dataSourceSelect" style="padding: 10px 40px 10px 16px; font-size: 0.9rem; font-weight: 500; border: 2px solid var(--color-primary); border-radius: var(--radius-lg); background: var(--color-surface); color: var(--color-text); cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22><path fill=%22%23003366%22 d=%22M2 4l4 4 4-4z%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; min-width: 200px;">
-              <option value="enrollment">📊 Enrollment Trends</option>
-              <option value="admissions">🎓 Admissions Funnel</option>
-              <option value="expenses">💰 Tuition & Costs</option>
-            </select>
+        <!-- Data Source Dropdown - FULL WIDTH AT TOP -->
+        <div class="explorer__source-bar">
+          <label class="source-selector__label" for="dataSourceSelect">Data Source:</label>
+          <select class="source-selector__dropdown" id="dataSourceSelect">
+            <option value="enrollment">📊 Enrollment Trends</option>
+            <option value="admissions">🎓 Admissions Funnel</option>
+            <option value="expenses">💰 Tuition & Costs</option>
+          </select>
+          <div class="explorer__actions">
+            <button class="explorer__export" id="explorerExport">📤 Export</button>
+            <button class="explorer__reset" id="explorerReset">🔄 Reset</button>
           </div>
+        </div>
 
-          <!-- Field Panel -->
+        <!-- Main Explorer Layout: Left Panel + Right Workspace -->
+        <div class="explorer">
+          <!-- LEFT: Field Panel (Dimensions + Measures) -->
           <div class="field-panel">
             <div class="field-panel__section" id="dimensionsSection">
-              <div class="field-panel__title">Dimensions</div>
+              <div class="field-panel__title">📐 Dimensions</div>
               <div class="field field--dimension" draggable="true" data-field="year" data-type="dimension">
                 <span class="field__icon">📅</span>
                 <span>Year</span>
@@ -2334,7 +2454,7 @@
             </div>
 
             <div class="field-panel__section" id="measuresSection">
-              <div class="field-panel__title">Measures</div>
+              <div class="field-panel__title">📏 Measures</div>
               <!-- Enrollment measures (default) -->
               <div class="field field--measure measure-enrollment" draggable="true" data-field="total" data-type="measure">
                 <span class="field__icon">📊</span>
@@ -2381,82 +2501,67 @@
             </div>
           </div>
 
-          <!-- Workspace -->
+          <!-- RIGHT: Workspace (Drop Zones + Chart) -->
           <div class="explorer__workspace">
-            <!-- Drop Zones -->
-            <div class="drop-zones drop-zones--four">
+            <!-- Drop Zones Row at TOP -->
+            <div class="drop-zones">
               <div class="drop-zone" id="dropRows" data-zone="rows">
-                <div class="drop-zone__label">📊 Rows (Primary)</div>
+                <div class="drop-zone__label">📊 Rows</div>
                 <div class="drop-zone__content" id="dropRowsContent">
-                  <span class="drop-zone__placeholder">Drop a dimension here</span>
+                  <span class="drop-zone__placeholder">Dimension</span>
                 </div>
               </div>
               <div class="drop-zone drop-zone--group" id="dropCols" data-zone="columns">
-                <div class="drop-zone__label">🎨 Columns (Group By)</div>
+                <div class="drop-zone__label">🎨 Group By</div>
                 <div class="drop-zone__content" id="dropColsContent">
-                  <span class="drop-zone__placeholder">Optional: group/color by</span>
+                  <span class="drop-zone__placeholder">Optional</span>
                 </div>
               </div>
               <div class="drop-zone drop-zone--measures" id="dropValues" data-zone="values">
-                <div class="drop-zone__label">📈 Values (Measure)</div>
+                <div class="drop-zone__label">📈 Values</div>
                 <div class="drop-zone__content" id="dropValuesContent">
-                  <span class="drop-zone__placeholder">Drop a measure here</span>
+                  <span class="drop-zone__placeholder">Measure</span>
                 </div>
               </div>
               <div class="drop-zone drop-zone--filter" id="dropFilter" data-zone="filter">
                 <div class="drop-zone__label">🔍 Filter</div>
                 <div class="drop-zone__content" id="dropFilterContent">
-                  <span class="drop-zone__placeholder">Optional: filter by</span>
+                  <span class="drop-zone__placeholder">Optional</span>
                 </div>
-                <!-- Filter Popup - dynamically populated -->
+                <!-- Filter Popup -->
                 <div class="filter-popup" id="filterPopup">
                   <div class="filter-popup__header">
                     <span class="filter-popup__title" id="filterPopupTitle">Filter by Year</span>
                     <button class="filter-popup__close" id="filterPopupClose">&times;</button>
                   </div>
-                  <div class="filter-popup__body" id="filterPopupBody">
-                    <!-- Dynamically populated based on dimension -->
-                  </div>
+                  <div class="filter-popup__body" id="filterPopupBody"></div>
                   <div class="filter-popup__actions">
                     <button class="filter-popup__btn filter-popup__btn--clear" id="filterClear">Clear</button>
-                    <button class="filter-popup__btn filter-popup__btn--apply" id="filterApply">Apply Filter</button>
+                    <button class="filter-popup__btn filter-popup__btn--apply" id="filterApply">Apply</button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Chart Type Selector -->
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-2);">
-              <div class="chart-type-selector">
-                <button class="chart-type-btn active" data-chart-type="line" title="Line Chart">📈</button>
-                <button class="chart-type-btn" data-chart-type="bar" title="Bar Chart">📊</button>
-                <button class="chart-type-btn" data-chart-type="area" title="Area Chart">📉</button>
-                <button class="chart-type-btn" data-chart-type="donut" title="Donut Chart">🍩</button>
-              </div>
-              <div style="display: flex; gap: var(--space-2);">
-                <button class="explorer__export" id="explorerExport">📤 Export</button>
-                <button class="explorer__reset" id="explorerReset">Reset All</button>
-              </div>
-            </div>
-
-            <!-- Mobile instructions -->
-            <div class="mobile-explorer-hint" style="display: none; background: var(--color-bg-light); padding: var(--space-2); border-radius: var(--radius-sm); margin-bottom: var(--space-2); font-size: 12px; text-align: center;">
-              <strong>Tap</strong> a field above, then <strong>tap</strong> a zone below to place it
-            </div>
-
-            <!-- Chart Preview -->
-            <div class="chart-preview">
-              <div class="chart-preview__header">
+            <!-- Chart Type + Large Chart -->
+            <div class="chart-area">
+              <div class="chart-area__toolbar">
+                <div class="chart-type-selector">
+                  <button class="chart-type-btn active" data-chart-type="line" title="Line Chart">📈</button>
+                  <button class="chart-type-btn" data-chart-type="bar" title="Bar Chart">📊</button>
+                  <button class="chart-type-btn" data-chart-type="area" title="Area Chart">📉</button>
+                  <button class="chart-type-btn" data-chart-type="donut" title="Donut Chart">🍩</button>
+                </div>
                 <h3 class="chart-preview__title" id="explorerChartTitle">Chart Preview</h3>
               </div>
-              <div class="chart-preview__content" id="explorerChartContent">
-                <div class="chart-preview__empty">
-                  <div class="chart-preview__empty-icon">📊</div>
-                  <div class="chart-preview__empty-text">Build your visualization</div>
-                  <div class="chart-preview__empty-hint">
-                    1. Drop a dimension on <strong>Rows</strong><br>
-                    2. Optionally add a <strong>Group By</strong> dimension<br>
-                    3. Drop a measure on <strong>Values</strong>
+              <div class="chart-preview">
+                <div class="chart-preview__content" id="explorerChartContent">
+                  <div class="chart-preview__empty">
+                    <div class="chart-preview__empty-icon">📊</div>
+                    <div class="chart-preview__empty-text">Build your visualization</div>
+                    <div class="chart-preview__empty-hint">
+                      Drag dimensions & measures to the zones above
+                    </div>
                   </div>
                 </div>
               </div>
