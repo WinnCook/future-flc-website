@@ -164,15 +164,15 @@
       overflow: hidden;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.4; /* Light snow in light mode */
+      opacity: 0.5; /* Slightly more visible light snow */
       transition: opacity 0.5s ease;
     }
 
     .hero__particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.5);
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.55);
       border-radius: 50%;
       animation: snowfall linear infinite;
     }
@@ -440,8 +440,8 @@
     }
 
     .hero__overline {
-      font-size: var(--text-overline);
-      letter-spacing: 0.3em;
+      font-size: 1.5rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--color-accent);
       margin-bottom: var(--space-2);
@@ -768,15 +768,15 @@
       background: var(--color-primary-dark);
     }
 
-    /* HEAVIER snow at night, stars visible */
+    /* Realistic snow at night, stars visible */
     [data-theme="dark"] .hero__particles {
       opacity: 1;
     }
 
     [data-theme="dark"] .hero__particle {
-      width: 5px;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.85);
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.55);
     }
 
     /* Scroll Indicator */
@@ -1226,6 +1226,17 @@
       <div class="hero__particle" style="left: 98%; animation-duration: 13s; animation-delay: 7.5s;"></div>
       <div class="hero__particle" style="left: 25%; animation-duration: 7s; animation-delay: 4.8s;"></div>
       <div class="hero__particle" style="left: 55%; animation-duration: 14s; animation-delay: 6.2s;"></div>
+      <!-- Additional particles for smoother, more frequent snow -->
+      <div class="hero__particle" style="left: 12%; animation-duration: 10s; animation-delay: 1.3s;"></div>
+      <div class="hero__particle" style="left: 18%; animation-duration: 8s; animation-delay: 3.7s;"></div>
+      <div class="hero__particle" style="left: 33%; animation-duration: 11s; animation-delay: 0.9s;"></div>
+      <div class="hero__particle" style="left: 47%; animation-duration: 9s; animation-delay: 5.2s;"></div>
+      <div class="hero__particle" style="left: 57%; animation-duration: 12s; animation-delay: 2.4s;"></div>
+      <div class="hero__particle" style="left: 67%; animation-duration: 8s; animation-delay: 6.8s;"></div>
+      <div class="hero__particle" style="left: 73%; animation-duration: 10s; animation-delay: 1.6s;"></div>
+      <div class="hero__particle" style="left: 82%; animation-duration: 9s; animation-delay: 4.1s;"></div>
+      <div class="hero__particle" style="left: 92%; animation-duration: 11s; animation-delay: 0.4s;"></div>
+      <div class="hero__particle" style="left: 97%; animation-duration: 13s; animation-delay: 5.9s;"></div>
     </div>
     <!-- Animated Starfield (Dark Mode) -->
     <div class="hero__stars" aria-hidden="true">

@@ -3490,12 +3490,22 @@
         document.querySelectorAll('.measure-admissions').forEach(el => el.style.display = newSource === 'admissions' ? '' : 'none');
         document.querySelectorAll('.measure-expenses').forEach(el => el.style.display = newSource === 'expenses' ? '' : 'none');
 
-        // Reset explorer state when switching sources
+        // Set default configuration for each data source
         explorerState.rows = { field: 'year', type: 'dimension', label: 'Year' };
-        explorerState.columns = null;
-        explorerState.values = null;
         explorerState.filter = null;
         explorerState.filterValues = null;
+
+        // Source-specific defaults so there's always something to show
+        if (newSource === 'enrollment') {
+          explorerState.values = { field: 'total', type: 'measure', label: 'Total Enrollment' };
+          explorerState.columns = { field: 'statusBreakdown', type: 'dimension', label: 'Enrollment Status' };
+        } else if (newSource === 'admissions') {
+          explorerState.values = { field: 'totalApplied', type: 'measure', label: 'Applications' };
+          explorerState.columns = null;
+        } else if (newSource === 'expenses') {
+          explorerState.values = { field: 'inStateTuition', type: 'measure', label: 'In-State Tuition' };
+          explorerState.columns = null;
+        }
 
         // Update drop zones
         updateDropZoneDisplay(dropRowsContent, explorerState.rows, 'rows', 'Drop a dimension here');
