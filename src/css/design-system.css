@@ -353,6 +353,31 @@ textarea {
 }
 
 /* Dark mode toggle button */
+/* Search Button */
+.nav__search {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-inverse);
+  transition: all var(--duration-fast) var(--ease-default);
+}
+
+.nav__search:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-accent);
+}
+
+[data-theme="dark"] .nav__search {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Theme Toggle */
 .theme-toggle {
   background: rgba(255, 255, 255, 0.1);
   border: none;
@@ -968,7 +993,8 @@ textarea {
 
 /* Fall background */
 [data-season="fall"] .page-background {
-  background-image: url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1920&q=80') !important;
+  background-image: url('../assets/images/fall-background.jpg') !important;
+  background-position: top center !important; /* Avoid bottom right of image */
 }
 
 /* ===== SOFT CARD/BUTTON STYLING ===== */
