@@ -569,6 +569,7 @@
     .demographics-grid {
       display: grid;
       gap: var(--space-4);
+      align-items: start;
     }
 
     @media (min-width: 768px) {
@@ -581,6 +582,11 @@
       .demographics-grid {
         grid-template-columns: repeat(4, 1fr);
       }
+    }
+
+    .demographics-grid .chart-container {
+      height: auto;
+      margin-bottom: 0;
     }
 
     .donut-chart-container {
@@ -2139,18 +2145,20 @@
     .export-preview-modal.active {
       display: flex;
       justify-content: center;
-      padding: 20px;
+      align-items: stretch;
+      padding: 0;
     }
 
     .export-preview-modal__content {
       background: white;
-      border-radius: var(--radius-xl);
-      width: 100%;
-      max-width: 1100px;
-      max-height: 90vh;
+      border-radius: 0;
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+      box-shadow: none;
       overflow: hidden;
     }
 
@@ -3946,16 +3954,16 @@
       { label: 'Male', value: 1585, percent: 46.4, color: '#003366' }
     ];
 
-    // Pell Eligible data (42% from CDS)
+    // Pell Eligible data (42% of 3,413 total enrollment 2023-24)
     const pellData = [
-      { label: 'Pell Eligible', value: 42, percent: 42, color: '#FFB81C' },
-      { label: 'Not Pell Eligible', value: 58, percent: 58, color: '#003366' }
+      { label: 'Pell Eligible', value: 1433, percent: 42, color: '#FFB81C' },
+      { label: 'Not Pell Eligible', value: 1980, percent: 58, color: '#003366' }
     ];
 
-    // First-Generation data (43% from institutional data)
+    // First-Generation data (43% of 3,413 total enrollment 2023-24)
     const firstGenData = [
-      { label: 'First-Generation', value: 43, percent: 43, color: '#10B981' },
-      { label: 'Continuing Gen', value: 57, percent: 57, color: '#003366' }
+      { label: 'First-Generation', value: 1468, percent: 43, color: '#10B981' },
+      { label: 'Continuing Gen', value: 1945, percent: 57, color: '#003366' }
     ];
 
     // Extended data from IPEDS, DataUSA, CollegeTuitionCompare
