@@ -876,8 +876,6 @@
       gap: var(--space-1);
       border-bottom: 2px solid var(--color-border);
       margin-bottom: var(--space-6);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
     }
 
     .ir-tab {
@@ -921,22 +919,37 @@
       animation: fadeIn 0.3s ease;
     }
 
-    /* ===== DATA EXPLORER ===== */
-    /* Explorer Source Bar - Full Width at Top */
+    /* ===== DATA EXPLORER - UNIFIED UI ===== */
+    /* Unified Explorer Container */
+    .explorer-unified {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 51, 102, 0.08);
+    }
+
+    [data-theme="dark"] .explorer-unified {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Explorer Header Bar */
     .explorer__source-bar {
       display: flex;
       align-items: center;
       gap: var(--space-4);
       padding: var(--space-3) var(--space-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      margin-bottom: var(--space-4);
+      background: linear-gradient(135deg, var(--color-primary) 0%, #004080 100%);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    [data-theme="dark"] .explorer__source-bar {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
 
     .source-selector__label {
       font-weight: 600;
-      color: var(--color-text);
+      color: white;
       font-size: 0.875rem;
       white-space: nowrap;
     }
@@ -945,10 +958,10 @@
       padding: 8px 36px 8px 12px;
       font-size: 0.9rem;
       font-weight: 500;
-      border: 2px solid var(--color-primary);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: var(--radius-md);
-      background: var(--color-surface);
-      color: var(--color-text);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--color-primary);
       cursor: pointer;
       appearance: none;
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23003366" d="M2 4l4 4 4-4z"/></svg>');
@@ -963,12 +976,41 @@
       gap: var(--space-2);
     }
 
+    .explorer__actions .explorer__reset,
+    .explorer__actions .explorer__export {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    .explorer__actions .explorer__reset:hover {
+      background: rgba(220, 38, 38, 0.3);
+      border-color: rgba(220, 38, 38, 0.5);
+    }
+
+    .explorer__actions .explorer__export {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-primary);
+    }
+
+    .explorer__actions .explorer__export:hover {
+      background: var(--color-accent-hover);
+    }
+
+    /* Main Explorer Body */
+    .explorer-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      min-height: 550px;
+    }
+
     /* Main Explorer Grid: Left Panel | Right Workspace */
     .explorer {
       display: grid;
       grid-template-columns: 220px 1fr;
-      gap: var(--space-4);
-      min-height: 650px;
+      gap: 0;
+      min-height: 550px;
     }
 
     @media (max-width: 1024px) {
@@ -1071,13 +1113,17 @@
       }
     }
 
-    /* Field Panel */
+    /* Field Panel - Left sidebar in unified container */
     .field-panel {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
+      background: var(--color-bg-light);
+      border-right: 1px solid var(--color-border);
       padding: var(--space-4);
-      height: fit-content;
+      overflow-y: auto;
+      max-height: 550px;
+    }
+
+    [data-theme="dark"] .field-panel {
+      background: rgba(30, 35, 44, 0.5);
     }
 
     .field-panel__section {
@@ -1163,18 +1209,20 @@
       border-left-color: #7C3AED;
     }
 
-    /* Drop Zones */
+    /* Workspace - Right side of unified container */
     .explorer__workspace {
       display: flex;
       flex-direction: column;
-      gap: var(--space-4);
+      padding: var(--space-4);
+      background: var(--color-surface);
     }
 
-    /* Drop Zones - Always 4 columns in a row at top */
+    /* Drop Zones - Compact row at top */
     .drop-zones {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-3);
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
     }
 
     @media (max-width: 1100px) {
@@ -1190,17 +1238,17 @@
     }
 
     .drop-zone {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border: 2px dashed var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-3);
-      min-height: 90px;
+      border-radius: var(--radius-md);
+      padding: var(--space-2);
+      min-height: 70px;
       transition: all 0.2s ease;
       position: relative;
     }
 
     [data-theme="dark"] .drop-zone {
-      background: rgba(30, 35, 44, 0.95);
+      background: rgba(30, 35, 44, 0.98);
     }
 
     .drop-zone::before {
@@ -1632,23 +1680,27 @@
       gap: var(--space-2);
     }
 
-    /* Chart Area - Container for toolbar + chart */
+    /* Chart Area - Fills remaining space in workspace */
     .chart-area {
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-lg);
       overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+
+    [data-theme="dark"] .chart-area {
+      background: rgba(30, 35, 44, 0.98);
     }
 
     .chart-area__toolbar {
       display: flex;
       align-items: center;
-      gap: var(--space-4);
-      padding: var(--space-3) var(--space-4);
-      background: rgba(0, 51, 102, 0.03);
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      background: rgba(0, 51, 102, 0.05);
       border-bottom: 1px solid var(--color-border);
     }
 
@@ -1714,9 +1766,18 @@
 
     .chart-preview__content {
       flex: 1;
+      width: 100%;
+      min-height: 350px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: var(--space-2);
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--radius-md);
+    }
+
+    [data-theme="dark"] .chart-preview__content {
+      background: rgba(30, 35, 44, 0.98);
     }
 
     .chart-preview__empty {
@@ -2130,22 +2191,6 @@
       display: block;
     }
 
-    .chart-preview__content {
-      flex: 1;
-      width: 100%;
-      min-height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-2);
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: var(--radius-md);
-    }
-
-    [data-theme="dark"] .chart-preview__content {
-      background: rgba(30, 35, 44, 0.98);
-    }
-
     .chart-preview__content svg {
       max-width: 100%;
       height: auto;
@@ -2481,22 +2526,24 @@
 
       <!-- TAB 3: Data Explorer -->
       <div class="ir-tab-content" id="tab-explorer" role="tabpanel">
-        <!-- Data Source Dropdown - FULL WIDTH AT TOP -->
-        <div class="explorer__source-bar">
-          <label class="source-selector__label" for="dataSourceSelect">Data Source:</label>
-          <select class="source-selector__dropdown" id="dataSourceSelect">
-            <option value="enrollment">📊 Enrollment Trends</option>
-            <option value="admissions">🎓 Admissions Funnel</option>
-            <option value="expenses">💰 Tuition & Costs</option>
-          </select>
-          <div class="explorer__actions">
-            <button class="explorer__export" id="explorerExport">📤 Export</button>
-            <button class="explorer__reset" id="explorerReset">🔄 Reset</button>
+        <!-- Unified Explorer Container -->
+        <div class="explorer-unified">
+          <!-- Header Bar with Data Source + Actions -->
+          <div class="explorer__source-bar">
+            <label class="source-selector__label" for="dataSourceSelect">Data Source:</label>
+            <select class="source-selector__dropdown" id="dataSourceSelect">
+              <option value="enrollment">📊 Enrollment Trends</option>
+              <option value="admissions">🎓 Admissions Funnel</option>
+              <option value="expenses">💰 Tuition & Costs</option>
+            </select>
+            <div class="explorer__actions">
+              <button class="explorer__export" id="explorerExport">📤 Export</button>
+              <button class="explorer__reset" id="explorerReset">🔄 Reset</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Main Explorer Layout: Left Panel + Right Workspace -->
-        <div class="explorer">
+          <!-- Main Explorer Body: Left Panel + Right Workspace -->
+          <div class="explorer">
           <!-- LEFT: Field Panel (Dimensions + Measures) -->
           <div class="field-panel">
             <div class="field-panel__section" id="dimensionsSection">
