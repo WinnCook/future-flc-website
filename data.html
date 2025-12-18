@@ -178,6 +178,49 @@
       100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
     }
 
+    /* ===== SUN FOR DAYTIME (Light Mode) ===== */
+    .data-sun {
+      position: absolute;
+      top: 15%;
+      right: 10%;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #fff9c4 0%, #ffeb3b 30%, #ffc107 60%, transparent 70%);
+      border-radius: 50%;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow:
+        0 0 40px 20px rgba(255, 235, 59, 0.4),
+        0 0 80px 40px rgba(255, 193, 7, 0.2);
+      animation: sunGlow 4s ease-in-out infinite;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    @keyframes sunGlow {
+      0%, 100% { box-shadow: 0 0 40px 20px rgba(255, 235, 59, 0.4), 0 0 80px 40px rgba(255, 193, 7, 0.2); }
+      50% { box-shadow: 0 0 60px 30px rgba(255, 235, 59, 0.5), 0 0 100px 50px rgba(255, 193, 7, 0.25); }
+    }
+
+    [data-theme="dark"] .data-sun {
+      opacity: 0;
+    }
+
+    /* Snow: Lighter in day, heavier at night */
+    .data-snow {
+      opacity: 0.4;
+    }
+
+    [data-theme="dark"] .data-snow {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .snowflake {
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
     /* ===== Hero Section with Matrix Rain ===== */
     .ir-hero {
       background: linear-gradient(135deg, #003366 0%, #001a33 50%, #002244 100%);
@@ -2016,6 +2059,8 @@
 
   <!-- Hero Section -->
   <section class="ir-hero">
+    <!-- Sun (visible in Light Mode) -->
+    <div class="data-sun" aria-hidden="true"></div>
     <!-- Matrix Rain Effect -->
     <div class="matrix-rain" id="matrixRain" aria-hidden="true"></div>
     <div class="container ir-hero__content">
