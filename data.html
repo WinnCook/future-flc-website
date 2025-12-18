@@ -2216,6 +2216,9 @@
             <path d="M21 21l-4.35-4.35"/>
           </svg>
         </button>
+        <button class="season-toggle" id="seasonToggle" aria-label="Toggle season" title="Toggle Fall/Winter">
+          <span class="season-toggle__icon">❄️</span>
+        </button>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
           <span class="theme-toggle__icon">🌙</span>
         </button>
@@ -2776,6 +2779,7 @@
       setupTabs();
       setupDataExplorer();
       initTheme();
+      initSeasonToggle();
       initMobileNav();
     }
 
@@ -4145,6 +4149,35 @@
       themeToggle.addEventListener('click', () => {
         const currentTheme = root.getAttribute('data-theme');
         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    // Season toggle
+    function initSeasonToggle() {
+      const seasonToggle = document.getElementById('seasonToggle');
+      if (!seasonToggle) return;
+
+      const seasonIcon = seasonToggle.querySelector('.season-toggle__icon');
+      const root = document.documentElement;
+
+      function getPreferredSeason() {
+        const savedSeason = localStorage.getItem('horizon-season');
+        return savedSeason || 'winter';
+      }
+
+      function setSeason(season) {
+        root.setAttribute('data-season', season);
+        localStorage.setItem('horizon-season', season);
+        if (seasonIcon) {
+          seasonIcon.textContent = season === 'fall' ? '🍂' : '❄️';
+        }
+      }
+
+      setSeason(getPreferredSeason());
+
+      seasonToggle.addEventListener('click', () => {
+        const currentSeason = root.getAttribute('data-season');
+        setSeason(currentSeason === 'fall' ? 'winter' : 'fall');
       });
     }
 
