@@ -193,20 +193,7 @@
       background: rgba(255, 255, 255, 0.8);
     }
 
-    /* ===== CLEAN NEURAL CONSTELLATION CANVAS ===== */
-    .neural-constellation {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    #neuralCanvas {
-      width: 100%;
-      height: 100%;
-    }
-
-    /* ===== Hero Section with Neural Constellation ===== */
+    /* ===== Hero Section ===== */
     .ir-hero {
       background: linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.9) 50%, rgba(0, 34, 68, 0.85) 100%);
       color: var(--color-text-inverse);
@@ -266,135 +253,42 @@
       }
     }
 
-    /* ===== HOLOGRAPHIC METRIC CARDS ===== */
+    /* ===== CLEAN METRIC CARDS ===== */
     .stat-card {
-      --card-angle: 0deg;
-      --rotateX: 0deg;
-      --rotateY: 0deg;
-      position: relative;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.9));
+      background: rgba(255, 255, 255, 0.95);
       border-radius: var(--radius-lg);
       padding: var(--space-4);
       text-align: center;
-      overflow: hidden;
-      transform: perspective(1000px) rotateX(var(--rotateX)) rotateY(var(--rotateY));
-      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
-      box-shadow:
-        0 4px 20px rgba(0, 51, 102, 0.1),
-        0 1px 3px rgba(0, 51, 102, 0.08);
-    }
-
-    /* Animated gradient border */
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius-lg);
-      padding: 2px;
-      background: linear-gradient(var(--card-angle), #00bfff, #FFB81C, #ff00ff, #00bfff);
-      background-size: 400% 400%;
-      animation: borderRotate 6s linear infinite;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
-    }
-
-    @keyframes borderRotate {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Holographic shimmer effect */
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.6s ease;
-      pointer-events: none;
-    }
-
-    .stat-card:hover::after {
-      left: 100%;
+      box-shadow: 0 4px 12px rgba(0, 51, 102, 0.1);
+      border: 1px solid rgba(0, 51, 102, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .stat-card:hover {
-      transform: perspective(1000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateY(-8px);
-      box-shadow:
-        0 20px 40px rgba(0, 191, 255, 0.15),
-        0 8px 20px rgba(255, 184, 28, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 51, 102, 0.15);
     }
 
-    .stat-card:hover::before {
-      opacity: 1;
-    }
-
-    /* Dark mode holographic cards */
     [data-theme="dark"] .stat-card {
-      background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(30, 35, 44, 0.9));
-      box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(0, 191, 255, 0.05);
-    }
-
-    [data-theme="dark"] .stat-card::before {
-      opacity: 0.8;
+      background: rgba(22, 27, 34, 0.95);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     [data-theme="dark"] .stat-card:hover {
-      box-shadow:
-        0 20px 40px rgba(0, 191, 255, 0.2),
-        0 0 60px rgba(255, 184, 28, 0.15);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
-    /* Value with pulse indicator */
     .stat-card__value {
       font-size: clamp(2rem, 5vw, 2.5rem);
       font-weight: 700;
       color: var(--color-primary);
       line-height: 1;
       margin-bottom: var(--space-1);
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
     }
 
-    /* Live Data Pulse Indicator */
-    .pulse-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #00ff88;
-      animation: pulse 2s ease-in-out infinite;
-      box-shadow: 0 0 8px #00ff88, 0 0 16px rgba(0, 255, 136, 0.4);
-    }
-
-    .pulse-indicator--warning {
-      background: #FFB81C;
-      box-shadow: 0 0 8px #FFB81C, 0 0 16px rgba(255, 184, 28, 0.4);
-    }
-
-    .pulse-indicator--alert {
-      background: #ff4444;
-      box-shadow: 0 0 8px #ff4444, 0 0 16px rgba(255, 68, 68, 0.4);
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.4);
-        opacity: 0.7;
-      }
+    [data-theme="dark"] .stat-card__value {
+      color: var(--color-accent);
     }
 
     .stat-card__label {
@@ -2079,10 +1973,6 @@
   <!-- Mountain Background -->
   <div class="data-page-background" aria-hidden="true"></div>
 
-  <!-- Neural Constellation Canvas -->
-  <div class="neural-constellation" aria-hidden="true">
-    <canvas id="neuralCanvas"></canvas>
-  </div>
 
   <!-- Stars for Dark Mode -->
   <div class="data-stars" aria-hidden="true">
@@ -2157,47 +2047,35 @@
   <!-- Main Content (Semi-transparent overlay) -->
   <main class="ir-content-section">
 
-  <!-- Stats Cards (Holographic with Pulse Indicators) -->
+  <!-- Stats Cards -->
   <section class="container">
     <div class="stats-grid">
-      <div class="stat-card fade-in" data-tilt>
-        <div class="stat-card__value" id="totalEnrollment">
-          3,413
-          <span class="pulse-indicator" title="Live data"></span>
-        </div>
+      <div class="stat-card fade-in">
+        <div class="stat-card__value" id="totalEnrollment">3,413</div>
         <div class="stat-card__label">Total Enrollment (2023-24)</div>
         <div class="stat-card__trend stat-card__trend--up">
           <span>↑</span>
           <span>+0.4% from last year</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.1s;" data-tilt>
-        <div class="stat-card__value">
-          63%
-          <span class="pulse-indicator pulse-indicator--warning" title="Below target"></span>
-        </div>
+      <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+        <div class="stat-card__value">63%</div>
         <div class="stat-card__label">Retention Rate</div>
         <div class="stat-card__trend stat-card__trend--down">
           <span>↓</span>
           <span>-3% from median</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.2s;" data-tilt>
-        <div class="stat-card__value">
-          43%
-          <span class="pulse-indicator" title="Live data"></span>
-        </div>
+      <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+        <div class="stat-card__value">43%</div>
         <div class="stat-card__label">6-Year Graduation Rate</div>
         <div class="stat-card__trend stat-card__trend--up">
           <span>↑</span>
           <span>+9% vs peers</span>
         </div>
       </div>
-      <div class="stat-card fade-in" style="animation-delay: 0.3s;" data-tilt>
-        <div class="stat-card__value">
-          15:1
-          <span class="pulse-indicator" title="Live data"></span>
-        </div>
+      <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+        <div class="stat-card__value">15:1</div>
         <div class="stat-card__label">Student-Faculty Ratio</div>
         <div class="stat-card__trend">
           <span>—</span>
@@ -2533,8 +2411,8 @@
     ];
 
     const genderData = [
-      { label: 'Women', value: 1828, percent: 53.6, color: '#EC4899' },
-      { label: 'Men', value: 1585, percent: 46.4, color: '#3B82F6' }
+      { label: 'Women', value: 1828, percent: 53.6, color: '#FFB81C' },
+      { label: 'Men', value: 1585, percent: 46.4, color: '#003366' }
     ];
 
     // Extended data from IPEDS, DataUSA, CollegeTuitionCompare
@@ -3913,298 +3791,6 @@
 
     // ===== VISUAL EFFECTS INITIALIZATION =====
 
-    // Neural Constellation - AI/Data themed animated background
-    function initNeuralConstellation() {
-      const canvas = document.getElementById('neuralCanvas');
-      if (!canvas) return;
-
-      const ctx = canvas.getContext('2d');
-      let width, height;
-      let nodes = [];
-      let riverParticles = [];
-      let mathSymbols = [];
-      let aiNode = null;
-      let animationId;
-
-      // Responsive canvas sizing
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      // Check if dark mode
-      function isDarkMode() {
-        return document.documentElement.getAttribute('data-theme') === 'dark';
-      }
-
-      // Color palette - clean and visible
-      function getColors() {
-        const dark = isDarkMode();
-        return {
-          node: dark ? 'rgba(0, 200, 255, 0.6)' : 'rgba(0, 102, 178, 0.4)',
-          nodeBright: dark ? 'rgba(0, 255, 255, 0.9)' : 'rgba(0, 153, 255, 0.7)',
-          connection: dark ? 'rgba(0, 191, 255, 0.15)' : 'rgba(0, 102, 178, 0.08)',
-          connectionActive: dark ? 'rgba(255, 184, 28, 0.4)' : 'rgba(255, 184, 28, 0.3)',
-          river: dark ? 'rgba(0, 200, 255, 0.6)' : 'rgba(0, 153, 204, 0.4)',
-          aiNode: 'rgba(255, 184, 28, 0.9)',
-          aiGlow: dark ? 'rgba(255, 184, 28, 0.3)' : 'rgba(255, 184, 28, 0.2)',
-          math: dark ? 'rgba(255, 255, 255, 0.12)' : 'rgba(0, 102, 178, 0.08)'
-        };
-      }
-
-      // Create nodes - BALANCED for smooth performance
-      function createNodes() {
-        nodes = [];
-        const nodeCount = Math.min(40, Math.floor((width * height) / 30000));
-        for (let i = 0; i < nodeCount; i++) {
-          nodes.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: (Math.random() - 0.5) * 0.25,
-            radius: 2 + Math.random() * 3,
-            pulsePhase: Math.random() * Math.PI * 2,
-            isDataNode: Math.random() > 0.7
-          });
-        }
-        // Central AI node (gold, pulsing)
-        aiNode = {
-          x: width * 0.5,
-          y: height * 0.35,
-          radius: 12,
-          pulsePhase: 0,
-          pulseSpeed: 0.025
-        };
-      }
-
-      // Create river particles - BALANCED
-      function createRiverParticles() {
-        riverParticles = [];
-        const particleCount = 40;
-        for (let i = 0; i < particleCount; i++) {
-          riverParticles.push({
-            x: Math.random() * width,
-            y: height * 0.7 + Math.random() * height * 0.15,
-            vx: 0.5 + Math.random() * 1.5,
-            vy: (Math.random() - 0.5) * 0.3,
-            radius: 1 + Math.random() * 2,
-            alpha: 0.3 + Math.random() * 0.5
-          });
-        }
-      }
-
-      // Create floating math symbols
-      function createMathSymbols() {
-        mathSymbols = [];
-        const symbols = ['%', '#', 'Σ', 'μ', 'σ', 'π', '∞', '∂', '∫', 'Δ', '≈'];
-        for (let i = 0; i < 15; i++) {
-          mathSymbols.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            symbol: symbols[Math.floor(Math.random() * symbols.length)],
-            vx: (Math.random() - 0.5) * 0.2,
-            vy: -0.1 - Math.random() * 0.3,
-            alpha: 0.1 + Math.random() * 0.2,
-            size: 12 + Math.random() * 16
-          });
-        }
-      }
-
-      // Draw connections between nearby nodes
-      function drawConnections() {
-        const colors = getColors();
-        const maxDist = 150;
-
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < maxDist) {
-              const alpha = (1 - dist / maxDist) * 0.5;
-              ctx.beginPath();
-              ctx.moveTo(nodes[i].x, nodes[i].y);
-              ctx.lineTo(nodes[j].x, nodes[j].y);
-              ctx.strokeStyle = colors.connection.replace('0.15', alpha * 0.15);
-              ctx.lineWidth = 1;
-              ctx.stroke();
-            }
-          }
-
-          // Connect to AI node if close enough
-          const dxAI = nodes[i].x - aiNode.x;
-          const dyAI = nodes[i].y - aiNode.y;
-          const distAI = Math.sqrt(dxAI * dxAI + dyAI * dyAI);
-          if (distAI < 250) {
-            const alpha = (1 - distAI / 250) * 0.6;
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(aiNode.x, aiNode.y);
-            ctx.strokeStyle = colors.connectionActive.replace('0.4', alpha * 0.4);
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw nodes
-      function drawNodes(time) {
-        const colors = getColors();
-
-        nodes.forEach(node => {
-          const pulse = Math.sin(time * 0.002 + node.pulsePhase) * 0.3 + 0.7;
-          const radius = node.radius * pulse;
-
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = node.isDataNode ? colors.nodeBright : colors.node;
-          ctx.fill();
-
-          // Glow effect for data nodes
-          if (node.isDataNode) {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, radius * 2, 0, Math.PI * 2);
-            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 2);
-            gradient.addColorStop(0, colors.nodeBright.replace('0.9', '0.3'));
-            gradient.addColorStop(1, 'transparent');
-            ctx.fillStyle = gradient;
-            ctx.fill();
-          }
-        });
-      }
-
-      // Draw AI central node
-      function drawAINode(time) {
-        const colors = getColors();
-        aiNode.pulsePhase += aiNode.pulseSpeed;
-        const pulse = Math.sin(aiNode.pulsePhase) * 0.3 + 1;
-        const radius = aiNode.radius * pulse;
-
-        // Outer glow rings
-        for (let i = 3; i >= 0; i--) {
-          ctx.beginPath();
-          ctx.arc(aiNode.x, aiNode.y, radius * (1.5 + i * 0.8), 0, Math.PI * 2);
-          const gradient = ctx.createRadialGradient(aiNode.x, aiNode.y, 0, aiNode.x, aiNode.y, radius * (1.5 + i * 0.8));
-          gradient.addColorStop(0, colors.aiGlow);
-          gradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = gradient;
-          ctx.fill();
-        }
-
-        // Core
-        ctx.beginPath();
-        ctx.arc(aiNode.x, aiNode.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = colors.aiNode;
-        ctx.fill();
-
-        // Inner highlight
-        ctx.beginPath();
-        ctx.arc(aiNode.x - radius * 0.3, aiNode.y - radius * 0.3, radius * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.fill();
-      }
-
-      // Draw river particles
-      function drawRiver() {
-        const colors = getColors();
-
-        riverParticles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = colors.river.replace('0.7', p.alpha);
-          ctx.fill();
-
-          // Trail effect
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x - 10, p.y);
-          ctx.strokeStyle = colors.river.replace('0.7', p.alpha * 0.3);
-          ctx.lineWidth = p.radius * 0.8;
-          ctx.stroke();
-        });
-      }
-
-      // Draw math symbols
-      function drawMathSymbols() {
-        const colors = getColors();
-
-        mathSymbols.forEach(m => {
-          ctx.font = `${m.size}px monospace`;
-          ctx.fillStyle = colors.math.replace('0.15', m.alpha);
-          ctx.fillText(m.symbol, m.x, m.y);
-        });
-      }
-
-      // Update positions
-      function update() {
-        // Update nodes
-        nodes.forEach(node => {
-          node.x += node.vx;
-          node.y += node.vy;
-
-          // Bounce off edges
-          if (node.x < 0 || node.x > width) node.vx *= -1;
-          if (node.y < 0 || node.y > height) node.vy *= -1;
-
-          // Keep in bounds
-          node.x = Math.max(0, Math.min(width, node.x));
-          node.y = Math.max(0, Math.min(height, node.y));
-        });
-
-        // Update river particles
-        riverParticles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-
-          // Wrap around
-          if (p.x > width + 20) {
-            p.x = -20;
-            p.y = height * 0.7 + Math.random() * height * 0.15;
-          }
-        });
-
-        // Update math symbols
-        mathSymbols.forEach(m => {
-          m.x += m.vx;
-          m.y += m.vy;
-
-          // Reset when off screen
-          if (m.y < -30) {
-            m.y = height + 30;
-            m.x = Math.random() * width;
-          }
-        });
-      }
-
-      // Animation loop - CLEAN, no grid
-      function animate(time) {
-        ctx.clearRect(0, 0, width, height);
-
-        update();
-        drawConnections();
-        drawRiver();
-        drawMathSymbols();
-        drawNodes(time);
-        drawAINode(time);
-
-        animationId = requestAnimationFrame(animate);
-      }
-
-      // Initialize
-      createNodes();
-      createRiverParticles();
-      createMathSymbols();
-      animate(0);
-
-      // Cleanup on page unload
-      window.addEventListener('beforeunload', () => {
-        cancelAnimationFrame(animationId);
-      });
-    }
-
     // Generate Starfield
     function initStars() {
       const container = document.querySelector('.data-stars');
@@ -4249,42 +3835,9 @@
     }
 
     // Initialize visual effects
-    initNeuralConstellation();
     initStars();
     initSnow();
 
-    // ===== HOLOGRAPHIC CARD PARALLAX TILT =====
-    function initCardTilt() {
-      const cards = document.querySelectorAll('[data-tilt]');
-
-      cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
-
-          // Calculate rotation based on mouse position
-          const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 8; // Max 8 degrees
-          const rotateX = ((centerY - e.clientY) / (rect.height / 2)) * 8; // Max 8 degrees
-
-          card.style.setProperty('--rotateX', `${rotateX}deg`);
-          card.style.setProperty('--rotateY', `${rotateY}deg`);
-        });
-
-        card.addEventListener('mouseleave', () => {
-          // Reset rotation smoothly
-          card.style.setProperty('--rotateX', '0deg');
-          card.style.setProperty('--rotateY', '0deg');
-        });
-      });
-    }
-
-    // Initialize card tilt on DOM ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCardTilt);
-    } else {
-      initCardTilt();
-    }
   </script>
 
   <!-- Export Report Preview Modal -->
