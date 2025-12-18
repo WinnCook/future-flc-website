@@ -164,23 +164,26 @@
       overflow: hidden;
       z-index: 2;
       pointer-events: none;
-      opacity: 0; /* Snow hidden in light mode */
+      opacity: 0.4; /* Light snow in light mode */
+      transition: opacity 0.5s ease;
     }
 
     .hero__particle {
       position: absolute;
       width: 3px;
       height: 3px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 50%;
       animation: snowfall linear infinite;
     }
 
-    /* Navigation */
+    /* Navigation - Standardized across all pages */
     .nav {
       padding: var(--space-3) 0;
-      position: relative;
-      z-index: 20;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--gradient-hero);
     }
 
     .nav__inner {
@@ -446,7 +449,7 @@
     }
 
     .hero__title {
-      font-size: var(--text-hero);
+      font-size: clamp(2.75rem, 9vw, 5rem);
       font-weight: 700;
       line-height: 1.1;
       max-width: 900px;
@@ -473,8 +476,11 @@
       margin-bottom: var(--space-6);
       animation: fadeInUp 0.8s var(--ease-out) 0.2s forwards;
       opacity: 0;
-      color: rgba(255, 255, 255, 0.9);
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      color: rgba(255, 255, 255, 0.95);
+      -webkit-text-stroke: 0.5px var(--color-accent);
+      text-shadow:
+        0 0 10px rgba(255, 184, 28, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     /* Audience Router */
@@ -579,19 +585,19 @@
     .concept-badge {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2);
-      background: rgba(255, 184, 28, 0.15);
+      gap: var(--space-3);
+      background: rgba(255, 184, 28, 0.2);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 184, 28, 0.3);
+      border: 2px solid rgba(255, 184, 28, 0.5);
       border-radius: var(--radius-lg);
-      padding: var(--space-2) var(--space-3);
-      margin-bottom: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-5);
       animation: fadeInUp 0.8s var(--ease-out) 0.3s forwards;
       opacity: 0;
     }
 
     .concept-badge__icon {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 
     .concept-badge__content {
@@ -599,20 +605,20 @@
     }
 
     .concept-badge__label {
-      font-size: var(--text-overline);
+      font-size: var(--text-body-sm);
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--color-accent);
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
 
     .concept-badge__text {
-      font-size: var(--text-caption);
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 400px;
-      line-height: 1.4;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 550px;
+      line-height: 1.5;
     }
 
     /* IR Data Button */
@@ -768,9 +774,9 @@
     }
 
     [data-theme="dark"] .hero__particle {
-      width: 4px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.8);
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.85);
     }
 
     /* Scroll Indicator */
@@ -1209,6 +1215,17 @@
       <div class="hero__particle" style="left: 3%; animation-duration: 14s; animation-delay: 2.8s;"></div>
       <div class="hero__particle" style="left: 32%; animation-duration: 11s; animation-delay: 5.5s;"></div>
       <div class="hero__particle" style="left: 68%; animation-duration: 8s; animation-delay: 1.8s;"></div>
+      <!-- Even more particles for heavier snow -->
+      <div class="hero__particle" style="left: 8%; animation-duration: 10s; animation-delay: 6.5s;"></div>
+      <div class="hero__particle" style="left: 22%; animation-duration: 9s; animation-delay: 0.2s;"></div>
+      <div class="hero__particle" style="left: 38%; animation-duration: 12s; animation-delay: 4.2s;"></div>
+      <div class="hero__particle" style="left: 52%; animation-duration: 8s; animation-delay: 7s;"></div>
+      <div class="hero__particle" style="left: 62%; animation-duration: 11s; animation-delay: 3.2s;"></div>
+      <div class="hero__particle" style="left: 78%; animation-duration: 10s; animation-delay: 5.8s;"></div>
+      <div class="hero__particle" style="left: 88%; animation-duration: 9s; animation-delay: 2.5s;"></div>
+      <div class="hero__particle" style="left: 98%; animation-duration: 13s; animation-delay: 7.5s;"></div>
+      <div class="hero__particle" style="left: 25%; animation-duration: 7s; animation-delay: 4.8s;"></div>
+      <div class="hero__particle" style="left: 55%; animation-duration: 14s; animation-delay: 6.2s;"></div>
     </div>
     <!-- Animated Starfield (Dark Mode) -->
     <div class="hero__stars" aria-hidden="true">
