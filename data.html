@@ -1032,57 +1032,26 @@
         padding-top: calc(var(--space-8) + 20px);
       }
 
+      /* Hide the field panel and drop zones on mobile - chart is king */
+      .explorer-section:not(.explorer-section--fullscreen) .field-panel,
+      .explorer-section:not(.explorer-section--fullscreen) .drop-zones,
+      .explorer-section:not(.explorer-section--fullscreen) .chart-type-selector {
+        display: none;
+      }
+
       .explorer {
         min-height: auto;
         gap: var(--space-3);
       }
 
-      .field-panel {
-        padding: var(--space-3);
-      }
-
-      .field-panel__section {
-        margin-bottom: var(--space-3);
-      }
-
-      /* Make fields tappable instead of draggable on mobile */
-      .field {
-        cursor: pointer;
-        padding: var(--space-3);
-        font-size: var(--text-body-sm);
-      }
-
-      .field.selected {
-        background: var(--color-primary);
-        color: white;
-        border-color: var(--color-primary);
-      }
-
-      .drop-zones--three {
-        grid-template-columns: 1fr;
-        gap: var(--space-2);
-      }
-
-      .drop-zone {
-        min-height: 70px;
-        padding: var(--space-3);
-      }
-
-      .drop-zone__label {
-        font-size: 11px;
-      }
-
-      .chart-type-selector {
-        flex-wrap: wrap;
-      }
-
+      /* Make chart the hero - much larger */
       .chart-preview {
-        min-height: 300px;
+        min-height: 65vh;
         padding: var(--space-3);
       }
 
       .explorer-chart-svg {
-        min-height: 250px;
+        min-height: 55vh;
         height: auto;
       }
 
@@ -1098,10 +1067,156 @@
         font-size: 11px;
       }
 
-      /* Show mobile hint on mobile only */
-      .mobile-explorer-hint {
-        display: block !important;
+      /* Simplified source bar - just essentials */
+      .explorer__source-bar {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        padding: var(--space-3);
       }
+
+      /* Hide fullscreen button on mobile */
+      .explorer__fullscreen {
+        display: none;
+      }
+
+      /* Show mobile edit button */
+      .mobile-edit-btn {
+        display: flex !important;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+
+    /* Mobile Edit Inputs Button - hidden by default */
+    .mobile-edit-btn {
+      display: none;
+      padding: 10px 16px;
+      background: var(--color-accent);
+      color: var(--color-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Mobile Input Modal */
+    .mobile-input-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .mobile-input-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-input-modal__content {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalSlideIn 0.25s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .mobile-input-modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-4);
+      background: linear-gradient(135deg, var(--color-primary), #001a33);
+      color: white;
+    }
+
+    .mobile-input-modal__header h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .mobile-input-modal__close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .mobile-input-modal__body {
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .mobile-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .mobile-input-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-input-group select {
+      padding: var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-size: 16px;  /* Prevents iOS zoom */
+      background: white;
+      cursor: pointer;
+    }
+
+    .mobile-input-modal__footer {
+      padding: var(--space-4);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .mobile-input-apply {
+      width: 100%;
+      padding: var(--space-4);
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .mobile-input-apply:hover {
+      background: #002952;
+    }
+
+    [data-theme="dark"] .mobile-input-modal__content {
+      background: var(--color-surface);
+    }
+
+    [data-theme="dark"] .mobile-input-group select {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     /* Field Panel - Left sidebar in unified container */
@@ -1953,10 +2068,11 @@
       justify-content: space-between;
       align-items: center;
       padding: var(--space-3) var(--space-4);
+      padding-top: 20px; /* Safe area for browser chrome */
       background: linear-gradient(135deg, var(--color-primary), #001a33);
       margin-bottom: 0;
       flex-shrink: 0;
-      height: 60px;
+      height: 80px; /* Increased from 60px for safe area */
       box-sizing: border-box;
     }
 
@@ -2008,7 +2124,7 @@
       flex: 1;
       padding: var(--space-3);
       background: linear-gradient(180deg, rgba(0, 51, 102, 0.03), rgba(0, 51, 102, 0.08));
-      height: calc(100vh - 60px);
+      height: calc(100vh - 80px); /* Adjusted for taller toolbar */
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -2115,6 +2231,10 @@
 
     .explorer-section--fullscreen .executive-insights,
     .explorer-section--fullscreen .preset-quick-views {
+      display: none;
+    }
+
+    .explorer-section--fullscreen .explorer-unified {
       display: none;
     }
 
@@ -3129,21 +3249,72 @@
           </div>
         </div>
 
+        <!-- Mobile Input Modal -->
+        <div class="mobile-input-modal" id="mobileInputModal">
+          <div class="mobile-input-modal__content">
+            <div class="mobile-input-modal__header">
+              <h3>Configure Chart</h3>
+              <button class="mobile-input-modal__close" id="closeMobileModal">&times;</button>
+            </div>
+            <div class="mobile-input-modal__body">
+              <div class="mobile-input-group">
+                <label>Data Source</label>
+                <select id="mobileDataSource">
+                  <option value="enrollment">Enrollment</option>
+                  <option value="admissions">Admissions</option>
+                  <option value="expenses">Costs</option>
+                  <option value="ethnicity">Ethnicity</option>
+                </select>
+              </div>
+              <div class="mobile-input-group">
+                <label>Rows (X-Axis)</label>
+                <select id="mobileRows">
+                  <option value="year">Year</option>
+                  <option value="genderBreakdown">Gender</option>
+                  <option value="statusBreakdown">Status</option>
+                </select>
+              </div>
+              <div class="mobile-input-group">
+                <label>Group By</label>
+                <select id="mobileCols">
+                  <option value="">No Breakdown</option>
+                  <option value="genderBreakdown">By Gender</option>
+                  <option value="statusBreakdown">By Status</option>
+                  <option value="ethnicityBreakdown">By Ethnicity</option>
+                </select>
+              </div>
+              <div class="mobile-input-group">
+                <label>Chart Type</label>
+                <select id="mobileChartType">
+                  <option value="line">Line</option>
+                  <option value="bar">Bar</option>
+                  <option value="area">Area</option>
+                </select>
+              </div>
+            </div>
+            <div class="mobile-input-modal__footer">
+              <button class="mobile-input-apply" id="applyMobileInputs">Apply & View Chart</button>
+            </div>
+          </div>
+        </div>
+
         <!-- Unified Explorer Container (normal mode) -->
         <div class="explorer-unified">
           <!-- Header Bar with Data Source + Actions -->
           <div class="explorer__source-bar">
             <label class="source-selector__label" for="dataSourceSelect">Data Source:</label>
             <select class="source-selector__dropdown" id="dataSourceSelect">
-              <option value="enrollment">📊 Enrollment Trends</option>
-              <option value="admissions">🎓 Admissions Funnel</option>
-              <option value="expenses">💰 Tuition & Costs</option>
+              <option value="enrollment">📊 Enrollment</option>
+              <option value="admissions">🎓 Admissions</option>
+              <option value="expenses">💰 Costs</option>
+              <option value="ethnicity">🌈 Ethnicity</option>
             </select>
             <div class="explorer__actions">
               <button class="explorer__fullscreen" id="explorerFullscreen" title="Toggle Fullscreen">⛶</button>
               <button class="explorer__export" id="explorerExport">📤 Export</button>
               <button class="explorer__reset" id="explorerReset">🔄 Reset</button>
             </div>
+            <button class="mobile-edit-btn" id="mobileEditBtn">Edit Inputs</button>
           </div>
 
           <!-- Main Explorer Body: Left Panel + Right Workspace -->
@@ -4321,6 +4492,57 @@
           toggleFullscreen();
         }
       });
+
+      // ===== MOBILE INPUT MODAL =====
+      const mobileModal = document.getElementById('mobileInputModal');
+      const mobileEditBtn = document.getElementById('mobileEditBtn');
+      const closeMobileBtn = document.getElementById('closeMobileModal');
+      const applyMobileBtn = document.getElementById('applyMobileInputs');
+
+      if (mobileEditBtn) {
+        mobileEditBtn.addEventListener('click', () => {
+          mobileModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      function closeMobileModal() {
+        mobileModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMobileModal);
+      if (mobileModal) {
+        mobileModal.addEventListener('click', (e) => {
+          if (e.target === mobileModal) closeMobileModal();
+        });
+      }
+
+      if (applyMobileBtn) {
+        applyMobileBtn.addEventListener('click', () => {
+          // Get values from mobile inputs
+          const source = document.getElementById('mobileDataSource').value;
+          const rows = document.getElementById('mobileRows').value;
+          const cols = document.getElementById('mobileCols').value;
+          const chartType = document.getElementById('mobileChartType').value;
+
+          // Sync to main explorer state
+          document.getElementById('dataSourceSelect').value = source;
+          explorerState.dataSource = source;
+          explorerState.rows = rows === 'year' ? 'year' : rows;
+          explorerState.columns = cols || null;
+
+          // Update chart type
+          chartTypeButtons.forEach(b => b.classList.remove('active'));
+          const chartBtn = document.querySelector(`[data-chart-type="${chartType}"]`);
+          if (chartBtn) chartBtn.classList.add('active');
+          explorerState.chartType = chartType;
+
+          // Render chart
+          updateExplorerChart();
+          closeMobileModal();
+        });
+      }
 
       // ===== MULTI-CHART COMPARISON SYSTEM =====
 

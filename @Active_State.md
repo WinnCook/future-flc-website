@@ -1,6 +1,6 @@
 # HORIZON - Active State
 **Mission Card | Session Continuity Document**
-**Last Updated:** 2025-12-18 | Session 21
+**Last Updated:** 2025-12-18 | Session 22
 
 ---
 
@@ -8,15 +8,66 @@
 
 | Field | Value |
 |-------|-------|
-| **Phase** | 21 - Data Explorer Executive Features |
+| **Phase** | 22 - Fullscreen & Mobile UX Fixes |
 | **Status** | COMPLETE |
-| **Active Task** | None - Ready for presentation |
+| **Active Task** | None - Ready for testing |
 | **Blockers** | None |
-| **Next Milestone** | Executive presentation |
+| **Next Milestone** | User testing |
 
 ---
 
-## SESSION 21 COMPLETION (Current)
+## SESSION 22 COMPLETION (Current)
+
+**Major Theme: Fullscreen Mode Fixes & Mobile UX Overhaul**
+
+### Bug Fixes:
+
+1. **Fullscreen Mode Not Showing Charts** - Fixed by hiding `.explorer-unified` in fullscreen CSS
+2. **Panel Buttons Blocked by Browser Toolbar** - Added 20px safe-area padding to comparison toolbar
+3. **Duplicate/Confusing Data Source Selectors** - Unified options and hidden source bar in fullscreen
+
+### New Features Added:
+
+**1. MOBILE UX OVERHAUL**
+- [x] Hidden field panel, drop zones, and chart type selector on mobile
+- [x] Chart now takes 65% viewport height (much larger)
+- [x] Added "Edit Inputs" button visible only on mobile
+- [x] Modal-based input system with smooth animation
+- [x] 4 selectors: Data Source, Rows, Group By, Chart Type
+- [x] "Apply & View Chart" button renders chart and closes modal
+- [x] Dark mode support for modal
+
+**2. FULLSCREEN MODE FIXES**
+- [x] Explorer-unified container now hidden in fullscreen
+- [x] Only comparison toolbar + panels visible
+- [x] Toolbar height increased to 80px with safe-area padding
+- [x] Grid height adjusted to `calc(100vh - 80px)`
+
+**3. DATA SOURCE CONSISTENCY**
+- [x] Main dropdown now matches panel selectors: Enrollment, Admissions, Costs, Ethnicity
+- [x] Removed confusing different naming conventions
+
+### Files Modified:
+- `data.html` - All changes (CSS + HTML + JS)
+
+### Key CSS Changes:
+- Line ~1029-1087: New mobile CSS hiding field panel/drop zones
+- Line ~1090-1220: Mobile modal CSS with animation
+- Line ~1956: Toolbar padding-top: 20px
+- Line ~1960: Toolbar height: 80px
+- Line ~2012: Grid height: calc(100vh - 80px)
+- Line ~2121: `.explorer-unified` hidden in fullscreen
+
+### Key HTML Changes:
+- Line ~3252-3299: Mobile input modal
+- Line ~3317: Mobile edit button
+
+### Key JS Changes:
+- Line ~4496-4545: Mobile modal event handlers
+
+---
+
+## SESSION 21 COMPLETION
 
 **Major Theme: Executive-Ready Data Explorer Enhancements**
 
@@ -308,68 +359,57 @@ z-index: 100;
 | 19 | 2025-12-17 | Phase 19 - Season Toggle & Aesthetic Consistency | Complete |
 | 20 | 2025-12-18 | Phase 20 - Data Explorer UX & Fall Background | Complete |
 | 21 | 2025-12-18 | Phase 21 - Data Explorer Executive Features | Complete |
+| 22 | 2025-12-18 | Phase 22 - Fullscreen & Mobile UX Fixes | Complete |
 
 ---
 
 ## HANDOFF NOTES
 
-**Session 21 Summary:**
-Added executive-ready features to Data Explorer: fixed ethnicity line chart bug, changed female color to FLC Gold, added fullscreen mode with multi-chart comparison (up to 4 panels), executive insights auto-generation, and preset quick views.
+**Session 22 Summary:**
+Fixed fullscreen mode issues (charts not showing, buttons blocked by browser) and completely overhauled mobile UX with modal-based input system.
 
 **What Was Changed This Session:**
-1. **Ethnicity Line Chart Fix** (`data.html`):
-   - Parsed all 10 CDS files for Section B2 ethnicity data
-   - Created `ethnicityByYear` data structure with 7 ethnic groups over 10 years
-   - Updated buildChartData() to render multiple line series when ethnicity is in columns
-   - Ethnicity dropdown now shows all 7 groups with proper filtering
+1. **Fullscreen Mode Fix** (`data.html`):
+   - Added CSS rule to hide `.explorer-unified` in fullscreen mode
+   - Now only comparison toolbar and panels are visible
+   - No more duplicate/confusing data source selectors
 
-2. **Female Color Fix** (`data.html`):
-   - Changed all 5 instances of #EC4899 (pink) to #FFB81C (FLC Gold)
-   - Affects: colors.gender.female, CSS classes, static chart config, legend
+2. **Toolbar Safe Area** (`data.html`):
+   - Added 20px padding-top to comparison toolbar
+   - Increased toolbar height from 60px to 80px
+   - Adjusted grid height to calc(100vh - 80px)
+   - Panel count buttons now visible (not blocked)
 
-3. **Fullscreen Toggle**:
-   - Added ⛶ button to explorer controls
-   - ESC key or button click to exit
-   - Smooth scale-in animation
-   - Body scroll locked when active
+3. **Data Source Consistency** (`data.html`):
+   - Unified dropdown options: Enrollment, Admissions, Costs, Ethnicity
+   - Removed inconsistent naming (was "Enrollment Trends" vs "Enrollment")
+   - Added Ethnicity option to main dropdown
 
-4. **Multi-Chart Comparison System** (fullscreen only):
-   - Panel count selector: 1, 2, or 4 panels
-   - Each panel has independent selectors (data source, rows, columns, chart type)
-   - Grid layout adapts to panel count
-   - Real-time chart rendering on selector change
-
-5. **Executive Insights Panel**:
-   - Auto-generates bullet points from chart data
-   - Detects: overall trend (>3%), peaks, significant YoY changes (>10%)
-   - Shows top 4 insights with icons
-
-6. **Preset Quick Views**:
-   - 📊 Enrollment Trends (by status breakdown)
-   - 🌈 Diversity (by ethnicity breakdown)
-   - 💰 Costs (tuition over time)
-   - 📥 Admissions (applications trend)
+4. **Mobile UX Overhaul** (`data.html`):
+   - Hidden field panel, drop zones, chart type selector on mobile
+   - Chart now takes 65vh (much larger, hero element)
+   - "Edit Inputs" button only visible on mobile
+   - Modal-based input system with 4 selectors
+   - Smooth slide-in animation
+   - Dark mode support
+   - Click outside or X to close
 
 **Current State:**
-- ALL main pages have fixed mountain background visible while scrolling
-- Season toggle on ALL main pages, falling effects ONLY on homepage
-- Data Explorer now has executive-ready features:
-  - Fullscreen mode with multi-chart comparison
-  - Executive insights auto-generation
-  - Preset quick view buttons
-  - Fixed ethnicity line chart (10 years of data)
-  - Female color uses FLC Gold
-- Site is presentation-ready
+- Fullscreen mode works correctly (only comparison panels visible)
+- Panel buttons no longer blocked by browser toolbar
+- Mobile users can configure charts via modal
+- Chart is prominent on mobile (65vh)
+- All fixes in single file (data.html)
 
-**Key Decisions (Session 21 - FINAL):**
+**Key Decisions (Session 22 - FINAL):**
 | Decision | Status | Rationale |
 |----------|--------|-----------|
-| Use actual CDS B2 data for ethnicity | FINAL | User specified real data from downloaded files |
-| Female color #FFB81C (FLC Gold) | FINAL | Consistent with FLC branding |
-| Simplified dropdown selectors in comparison | FINAL | User preference over drag-drop |
-| 4 preset quick views | FINAL | User approved all 4 presets |
+| Hide explorer-unified in fullscreen | FINAL | Fixes duplicate selector confusion |
+| 20px toolbar safe area | FINAL | Prevents browser chrome overlap |
+| Modal-based mobile input | FINAL | User requested this approach |
+| 65vh chart height on mobile | FINAL | Chart as hero element |
 
-**Git Status:** Clean - all changes committed and pushed
+**Git Status:** Pending commit
 **Branch:** main
 **Latest Commit:** 2855d66
 
