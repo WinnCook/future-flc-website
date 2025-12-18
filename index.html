@@ -791,6 +791,44 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
+    /* Hero Button Group */
+    .hero__button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      align-items: center;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-2);
+    }
+
+    .hero__button-group .hero__data-btn {
+      margin-top: 0;
+      margin-bottom: 0;
+      animation-delay: 0.5s;
+    }
+
+    .hero__button-group .hero__data-btn:nth-child(2) {
+      animation-delay: 0.7s;
+    }
+
+    /* AI Comparison Button Variant */
+    .hero__data-btn--ai {
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.3), rgba(0, 51, 102, 0.2));
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero__data-btn--ai:hover {
+      background: linear-gradient(135deg, #003366, #001a33);
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .data-btn__badge--new {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: white;
+    }
+
     /* AI Chat Bubble */
     .ai-chat-bubble {
       position: fixed;
@@ -1539,6 +1577,7 @@
           <li><a href="admission.html" class="nav__link">Admission</a></li>
           <li><a href="campus.html" class="nav__link">Campus</a></li>
           <li><a href="data.html" class="nav__link">Data</a></li>
+          <li><a href="ai-comparison.html" class="nav__link">AI Review</a></li>
           <li><a href="about.html" class="nav__link">About</a></li>
         </ul>
         <div class="nav__actions">
@@ -1578,6 +1617,7 @@
         <li><a href="campus.html" class="mobile-nav__link">Campus</a></li>
         <li><a href="about.html" class="mobile-nav__link">About</a></li>
         <li><a href="data.html" class="mobile-nav__link">Data</a></li>
+        <li><a href="ai-comparison.html" class="mobile-nav__link">AI Review</a></li>
       </ul>
       <a href="admission.html" class="mobile-nav__cta">Apply Now</a>
     </nav>
@@ -1602,12 +1642,21 @@
         </div>
       </div>
 
-      <!-- IR Data Button -->
-      <a href="data.html" class="hero__data-btn">
-        <span class="data-btn__icon">📊</span>
-        <span>Institutional Research & Data</span>
-        <span class="data-btn__badge">LIVE</span>
-      </a>
+      <!-- Hero Buttons -->
+      <div class="hero__button-group">
+        <!-- IR Data Button -->
+        <a href="data.html" class="hero__data-btn">
+          <span class="data-btn__icon">📊</span>
+          <span>Institutional Research & Data</span>
+          <span class="data-btn__badge">LIVE</span>
+        </a>
+        <!-- AI Comparison Button -->
+        <a href="ai-comparison.html" class="hero__data-btn hero__data-btn--ai">
+          <span class="data-btn__icon">🤖</span>
+          <span>AI Website Comparison</span>
+          <span class="data-btn__badge data-btn__badge--new">NEW</span>
+        </a>
+      </div>
 
       <div class="router">
         <p class="router__label">I am a...</p>
