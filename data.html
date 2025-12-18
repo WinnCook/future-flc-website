@@ -2089,13 +2089,15 @@
       display: none;
       justify-content: space-between;
       align-items: center;
-      padding: var(--space-3) var(--space-4);
-      padding-top: 20px; /* Safe area for browser chrome */
+      padding: var(--space-4) var(--space-4);
+      padding-top: 40px; /* Much larger safe area */
       background: linear-gradient(135deg, var(--color-primary), #001a33);
       margin-bottom: 0;
       flex-shrink: 0;
-      height: 80px; /* Increased from 60px for safe area */
+      height: 100px; /* Taller for safe area */
       box-sizing: border-box;
+      position: relative;
+      z-index: 100000;
     }
 
     .explorer-section--fullscreen .comparison-toolbar {
@@ -2146,7 +2148,7 @@
       flex: 1;
       padding: var(--space-3);
       background: linear-gradient(180deg, rgba(0, 51, 102, 0.03), rgba(0, 51, 102, 0.08));
-      height: calc(100vh - 80px); /* Adjusted for taller toolbar */
+      height: calc(100vh - 100px); /* Adjusted for taller toolbar */
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -3210,7 +3212,9 @@
                 <option value="area">📉 Area</option>
               </select>
             </div>
-            <div class="panel-chart-area" id="panelChart1"></div>
+            <div class="panel-chart-area" id="panelChart1">
+              <div style="color: #666; text-align: center; padding: 20px;">Loading chart...</div>
+            </div>
           </div>
 
           <!-- Panel 2 -->
@@ -4798,29 +4802,43 @@
 
       // Render single comparison panel
       function renderComparisonPanel(panelNum) {
-        const sourceSelect = document.querySelector(`.panel-source[data-panel="${panelNum}"]`);
-        const rowsSelect = document.querySelector(`.panel-rows[data-panel="${panelNum}"]`);
-        const colsSelect = document.querySelector(`.panel-cols[data-panel="${panelNum}"]`);
-        const chartSelect = document.querySelector(`.panel-chart[data-panel="${panelNum}"]`);
+        try {
+          const sourceSelect = document.querySelector(`.panel-source[data-panel="${panelNum}"]`);
+          const rowsSelect = document.querySelector(`.panel-rows[data-panel="${panelNum}"]`);
+          const colsSelect = document.querySelector(`.panel-cols[data-panel="${panelNum}"]`);
+          const chartSelect = document.querySelector(`.panel-chart[data-panel="${panelNum}"]`);
+          const chartContainer = document.getElementById(`panelChart${panelNum}`);
 
-        if (!sourceSelect) return;
+          if (!sourceSelect) {
+            if (chartContainer) chartContainer.innerHTML = '<div style="color:red;padding:20px;">Panel select not found</div>';
+            return;
+          }
 
-        const source = sourceSelect.value;
-        const rows = rowsSelect.value;
-        const cols = colsSelect.value;
-        const chartType = chartSelect.value;
+          const source = sourceSelect.value;
+          const rows = rowsSelect.value;
+          const cols = colsSelect.value;
+          const chartType = chartSelect.value;
 
-        const chartData = buildPanelChartData(source, rows, cols, chartType);
-        renderPanelChart(`panelChart${panelNum}`, chartData, chartType);
+          const chartData = buildPanelChartData(source, rows, cols, chartType);
+          renderPanelChart(`panelChart${panelNum}`, chartData, chartType);
+        } catch (err) {
+          const chartContainer = document.getElementById(`panelChart${panelNum}`);
+          if (chartContainer) chartContainer.innerHTML = '<div style="color:red;padding:20px;">Error: ' + err.message + '</div>';
+        }
       }
 
       // Render all visible comparison panels
       function renderAllComparisonPanels() {
-        const panelClass = Array.from(explorerSection.classList).find(c => c.startsWith('panels-'));
-        const count = panelClass ? parseInt(panelClass.split('-')[1]) : 1;
+        try {
+          const panelClass = Array.from(explorerSection.classList).find(c => c.startsWith('panels-'));
+          const count = panelClass ? parseInt(panelClass.split('-')[1]) : 1;
+          console.log('Rendering', count, 'comparison panels');
 
-        for (let i = 1; i <= count; i++) {
-          renderComparisonPanel(i);
+          for (let i = 1; i <= count; i++) {
+            renderComparisonPanel(i);
+          }
+        } catch (err) {
+          console.error('Error rendering comparison panels:', err);
         }
       }
 
