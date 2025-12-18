@@ -7,31 +7,24 @@
   <title>Academic Programs | HORIZON</title>
   <link rel="stylesheet" href="src/css/design-system.css">
   <style>
-    /* Page Header */
+    /* Page Header - Semi-transparent to show mountain background */
     .page-header {
-      background: var(--gradient-hero);
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.7) 0%, rgba(0, 26, 51, 0.5) 100%);
       color: var(--color-text-inverse);
       padding: 0 0 var(--space-10);
       position: relative;
       overflow: hidden;
     }
 
-    .page-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.02)" points="0,100 100,50 100,100"/></svg>') no-repeat bottom;
-      background-size: 100% 50%;
-      pointer-events: none;
-    }
-
-    /* Navigation - Sticky at top */
+    /* Navigation - Semi-transparent */
     .nav {
       padding: var(--space-3) 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gradient-hero);
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.8) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .nav__inner {
@@ -205,14 +198,21 @@
       display: flex;
     }
 
-    /* Filters Section */
+    /* Filters Section - Semi-transparent with cream/gold tint */
     .filters {
       padding: var(--space-4) 0;
-      background: var(--color-surface);
-      border-bottom: 1px solid var(--color-border);
+      background: rgba(255, 248, 230, 0.85);
+      border-bottom: 1px solid rgba(255, 184, 28, 0.2);
       position: sticky;
-      top: 0;
+      top: 64px;
       z-index: 50;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    [data-theme="dark"] .filters {
+      background: rgba(30, 30, 40, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .filters__inner {
@@ -241,16 +241,22 @@
       border-radius: var(--radius-full);
       font-size: var(--text-caption);
       font-weight: 500;
-      border: 1px solid var(--color-border);
-      background: var(--color-surface);
+      border: 1px solid rgba(255, 184, 28, 0.3);
+      background: rgba(255, 248, 230, 0.9);
       color: var(--color-text-primary);
       cursor: pointer;
       transition: all var(--duration-fast) var(--ease-default);
     }
 
+    [data-theme="dark"] .filter-btn {
+      background: rgba(40, 40, 50, 0.9);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--color-text-inverse);
+    }
+
     .filter-btn:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
+      border-color: var(--color-accent);
+      background: rgba(255, 184, 28, 0.2);
     }
 
     .filter-btn.active {
@@ -296,16 +302,22 @@
       font-size: var(--text-caption);
       font-weight: 500;
       white-space: nowrap;
-      border: 2px solid var(--color-border);
-      background: var(--color-surface);
+      border: 2px solid rgba(255, 184, 28, 0.3);
+      background: rgba(255, 248, 230, 0.9);
       color: var(--color-text-primary);
       cursor: pointer;
       transition: all var(--duration-fast) var(--ease-default);
     }
 
+    [data-theme="dark"] .interest-tag {
+      background: rgba(40, 40, 50, 0.9);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--color-text-inverse);
+    }
+
     .interest-tag:hover {
       border-color: var(--color-accent);
-      background: rgba(255, 184, 28, 0.1);
+      background: rgba(255, 184, 28, 0.2);
     }
 
     .interest-tag.active {
@@ -318,9 +330,10 @@
       font-size: 1.125rem;
     }
 
-    /* Programs Grid */
+    /* Programs Grid - Transparent background to show mountain */
     .programs {
       padding: var(--space-6) 0 var(--space-12);
+      background: transparent;
     }
 
     .programs__grid {
@@ -340,9 +353,10 @@
       }
     }
 
-    /* Program Card */
+    /* Program Card - Semi-translucent cream/gold */
     .program-card {
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.9);
+      border: 1px solid rgba(255, 184, 28, 0.2);
       border-radius: var(--radius-lg);
       padding: var(--space-4);
       box-shadow: var(--shadow-md);
@@ -350,6 +364,13 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .program-card {
+      background: rgba(30, 30, 40, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .program-card::before {

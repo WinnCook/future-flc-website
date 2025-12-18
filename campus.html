@@ -7,24 +7,25 @@
   <title>Campus Life | HORIZON - Fort Lewis College</title>
   <link rel="stylesheet" href="src/css/design-system.css">
   <style>
-    /* Hero */
+    /* Hero - Semi-transparent overlay to show mountain background */
     .hero {
       min-height: 70vh;
-      background: linear-gradient(135deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.9) 100%),
-                  url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&q=80') center/cover no-repeat fixed;
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 26, 51, 0.4) 100%);
       color: var(--color-text-inverse);
       display: flex;
       flex-direction: column;
       position: relative;
     }
 
-    /* Navigation - Standardized across all pages */
+    /* Navigation - Semi-transparent with blur */
     .nav {
       padding: var(--space-3) 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gradient-hero);
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.8) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .nav__inner {
@@ -142,10 +143,16 @@
       justify-content: center;
     }
 
-    /* Map Section */
+    /* Map Section - Semi-transparent */
     .map {
       padding: var(--space-12) 0;
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .map {
+      background: rgba(30, 30, 40, 0.85);
     }
 
     .map__header {
@@ -167,7 +174,7 @@
     }
 
     .map__container {
-      background: var(--color-bg-light);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: var(--radius-xl);
       overflow: hidden;
       border: 2px solid var(--color-border);
@@ -226,10 +233,10 @@
     .map__legend-color--dining { background: #F57C00; }
     .map__legend-color--services { background: #7B1FA2; }
 
-    /* Facilities Section */
+    /* Facilities Section - Transparent */
     .facilities {
       padding: var(--space-12) 0;
-      background: var(--color-bg-light);
+      background: transparent;
     }
 
     .facilities__header {
@@ -268,7 +275,15 @@
     }
 
     .facility-card {
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.9);
+      border: 1px solid rgba(255, 184, 28, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .facility-card {
+      background: rgba(30, 30, 40, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 2px solid var(--color-border);
@@ -305,10 +320,16 @@
       font-size: var(--text-body-sm);
     }
 
-    /* Housing Section */
+    /* Housing Section - Semi-transparent */
     .housing {
       padding: var(--space-12) 0;
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .housing {
+      background: rgba(30, 30, 40, 0.85);
     }
 
     .housing__header {
@@ -348,11 +369,16 @@
     }
 
     .housing-card {
-      background: var(--color-bg-light);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: var(--radius-lg);
       padding: var(--space-5);
-      border: 2px solid var(--color-border);
+      border: 2px solid rgba(255, 184, 28, 0.2);
       transition: all var(--duration-fast);
+    }
+
+    [data-theme="dark"] .housing-card {
+      background: rgba(40, 40, 50, 0.9);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .housing-card:hover {
@@ -481,10 +507,10 @@
       opacity: 0.7;
     }
 
-    /* Recreation Section */
+    /* Recreation Section - Transparent */
     .recreation {
       padding: var(--space-12) 0;
-      background: var(--color-surface);
+      background: transparent;
     }
 
     .recreation__header {

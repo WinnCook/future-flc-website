@@ -7,11 +7,10 @@
   <title>Admission | HORIZON - Fort Lewis College</title>
   <link rel="stylesheet" href="src/css/design-system.css">
   <style>
-    /* Hero with Background Image */
+    /* Hero - Semi-transparent overlay to show mountain background */
     .hero {
       min-height: 60vh;
-      background: linear-gradient(135deg, rgba(0, 51, 102, 0.9) 0%, rgba(0, 26, 51, 0.95) 100%),
-                  url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80') center/cover no-repeat;
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 26, 51, 0.4) 100%);
       color: var(--color-text-inverse);
       display: flex;
       flex-direction: column;
@@ -19,22 +18,15 @@
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.03)" points="0,100 50,70 100,100"/></svg>') no-repeat bottom;
-      background-size: 100% 30%;
-      pointer-events: none;
-    }
-
-    /* Navigation - Standardized across all pages */
+    /* Navigation - Semi-transparent with blur */
     .nav {
       padding: var(--space-3) 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gradient-hero);
+      background: linear-gradient(180deg, rgba(0, 51, 102, 0.85) 0%, rgba(0, 26, 51, 0.8) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .nav__inner {
@@ -164,10 +156,16 @@
       opacity: 0;
     }
 
-    /* Timeline Section */
+    /* Timeline Section - Semi-transparent */
     .timeline {
       padding: var(--space-12) 0;
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .timeline {
+      background: rgba(30, 30, 40, 0.85);
     }
 
     .timeline__header {
@@ -269,9 +267,14 @@
     .timeline__content {
       width: calc(50% - 48px);
       padding: var(--space-4);
-      background: var(--color-bg-light);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
+      border: 1px solid rgba(255, 184, 28, 0.2);
+    }
+
+    [data-theme="dark"] .timeline__content {
+      background: rgba(40, 40, 50, 0.9);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     @media (max-width: 768px) {
@@ -301,10 +304,10 @@
       margin: 0;
     }
 
-    /* Requirements Section */
+    /* Requirements Section - Semi-transparent */
     .requirements {
       padding: var(--space-12) 0;
-      background: var(--color-bg-light);
+      background: transparent;
     }
 
     .requirements__header {
@@ -337,11 +340,18 @@
     }
 
     .req-card {
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.9);
       border-radius: var(--radius-lg);
       padding: var(--space-5);
-      border: 1px solid var(--color-border);
+      border: 1px solid rgba(255, 184, 28, 0.2);
       transition: all var(--duration-fast) var(--ease-default);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .req-card {
+      background: rgba(30, 30, 40, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .req-card:hover {
@@ -482,10 +492,16 @@
       gap: var(--space-2);
     }
 
-    /* Application Section */
+    /* Application Section - Semi-transparent */
     .application {
       padding: var(--space-12) 0;
-      background: var(--color-surface);
+      background: rgba(255, 248, 230, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    [data-theme="dark"] .application {
+      background: rgba(30, 30, 40, 0.85);
     }
 
     .application__container {
@@ -517,10 +533,15 @@
     }
 
     .application__form {
-      background: var(--color-bg-light);
+      background: rgba(255, 255, 255, 0.9);
       border-radius: var(--radius-xl);
       padding: var(--space-6);
-      border: 2px solid var(--color-border);
+      border: 2px solid rgba(255, 184, 28, 0.2);
+    }
+
+    [data-theme="dark"] .application__form {
+      background: rgba(40, 40, 50, 0.9);
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     .application__tabs {
