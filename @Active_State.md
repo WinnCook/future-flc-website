@@ -152,7 +152,7 @@
 
 **Branch:** main
 **Remote:** origin (https://github.com/WinnCook/concept-demo-flc-website-prototype)
-**Last Commit:** bfe6d07 - Add AI Website Comparison feature with new page
+**Last Commit:** 13258d5 - Update @Active_State.md with Session 24 notes
 **Status:** Clean - all changes committed and pushed
 
 **Live URL:** https://winncook.github.io/concept-demo-flc-website-prototype/
@@ -163,7 +163,19 @@
 
 ## OPEN DECISIONS
 
-**None** - All decisions from Session 23 are FINAL.
+**None** - All decisions from Session 24 are FINAL.
+
+---
+
+## KEY DECISIONS (Session 24 - FINAL)
+
+| Decision | Status | Rationale |
+|----------|--------|-----------|
+| AI button uses blue gradient (not gold) | FINAL | Visual distinction from IR/Data button |
+| "NEW" badge uses green gradient | FINAL | Draws attention, indicates fresh content |
+| Button group uses flex wrap | FINAL | Responsive layout on mobile |
+| AI Comparison page standalone (not modal) | FINAL | Full-page report format more appropriate for executive content |
+| Nav link labeled "AI Review" | FINAL | Short, fits nav pattern |
 
 ---
 
@@ -265,8 +277,9 @@ https://github.com/WinnCook/concept-demo-flc-website-prototype
 ```
 
 **Key Files:**
+- `index.html` - Homepage with AI modal, hero buttons
 - `data.html` - IR Dashboard with Data Explorer, fullscreen mode, export feature
-- `index.html` - Homepage with AI modal
+- `ai-comparison.html` - AI Strategic Review page (5-LLM comparison report)
 - `@Project_Manifest.md` - Project constitution
 - `@Active_State.md` - This file (session state)
 
