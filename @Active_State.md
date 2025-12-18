@@ -18,13 +18,17 @@
 
 ## SESSION 17 COMPLETION (Current)
 
-**Major Theme: Parent Banner, Chart Background, Data Explorer UI**
+**Major Theme: Parent Banner, Chart Opacity Bug, Data Explorer UI, Gender Labels**
 
-User reported 4 issues after Session 16:
+User reported issues after Session 16, culminating in discovery of critical CSS bug.
+
+### Issues Reported & Fixed:
+
 1. Parent/family page banner image not showing
-2. Data Explorer chart still translucent
+2. Data Explorer chart still translucent (CRITICAL BUG)
 3. Data Explorer UI needs cleaner unified layout
-4. Tab buttons (Dashboard/Data Tables/Data Explorer) have scroll toggle
+4. Tab buttons have scroll toggle
+5. Change "Men/Women" to "Male/Female"
 
 ### Completed Work:
 
@@ -32,27 +36,39 @@ User reported 4 issues after Session 16:
 - [x] Fixed broken Unsplash URL (404 error)
 - [x] Replaced with working graduation ceremony photo (photo-1541339907198-e08756dedf3f)
 
-**2. DATA EXPLORER CHART BACKGROUND**
-- [x] Found duplicate .chart-preview__content CSS definitions (lines 1715 vs 2133)
-- [x] Consolidated into single definition with solid white background
-- [x] Removed duplicate at line 2140+
+**2. CRITICAL BUG: CHART OPACITY**
+- [x] **ROOT CAUSE:** CSS class `.chart-area` at line 491 had `opacity: 0.1` (for SVG fill areas)
+- [x] Data Explorer container at line 2660 also used `class="chart-area"`
+- [x] **Result:** Entire chart container was at 10% opacity!
+- [x] **FIX:** Renamed Data Explorer container to `.explorer-chart-area`
+- [x] Updated all CSS selectors (.explorer-chart-area, .explorer-chart-area__toolbar)
+- [x] Changed all backgrounds from rgba(0.98) to solid #FFFFFF / #1E232C
 
 **3. DATA EXPLORER UNIFIED UI**
 - [x] Created .explorer-unified container wrapping entire explorer
 - [x] Gradient header bar (FLC blue) with white text
 - [x] Styled dropdown and action buttons for header
-- [x] Field panel now has right border separator
-- [x] Compact drop zones (reduced min-height to 70px)
-- [x] Chart area has solid white background
+- [x] Field panel has right border separator
+- [x] Compact drop zones (min-height: 70px)
+- [x] Drop zones now fully opaque (#FFFFFF)
 
 **4. TAB BUTTONS SCROLL FIX**
 - [x] Removed overflow-x: auto from .ir-tabs
-- [x] Tabs now display without scroll toggle
+
+**5. GENDER LABELS**
+- [x] Changed all "Men" → "Male" and "Women" → "Female"
+- [x] Updated in: table headers, genderData array, legend, dimension configs, chart builders
 
 ### Git Commits This Session:
 ```
+421ade3 CRITICAL FIX: Chart opacity bug + Male/Female labels
+b74a1bf Fix chart backgrounds: fully opaque white (#FFFFFF) instead of rgba
 380b782 Fix UX issues: parent banner, chart background, Data Explorer UI
 ```
+
+### Key Decision (FINAL):
+- `.chart-area` class is RESERVED for SVG fill area styling (opacity: 0.1)
+- Data Explorer chart container uses `.explorer-chart-area` (no opacity)
 
 ---
 
@@ -451,31 +467,45 @@ https://github.com/WinnCook/concept-demo-flc-website-prototype
 | 11 | 2025-12-17 | Phase 11 Polish | Complete |
 | 12 | 2025-12-17 | Phase 12 - Production Stability | Complete |
 | 13 | 2025-12-17 | Phase 13 - CDS Data Integration | Complete |
+| 14 | 2025-12-17 | Phase 14 - UX/UI Perfection | Complete |
+| 15 | 2025-12-17 | Phase 15 - Site Consistency | Complete |
+| 16 | 2025-12-17 | Phase 16 - Final Polish & Repo Rename | Complete |
+| 17 | 2025-12-17 | Phase 17 - Critical Bug Fix & Labels | Complete |
 
 ---
 
 ## HANDOFF NOTES
 
-**Session 13 Summary:**
-User requested major data integration with Common Data Set (CDS) Excel files. This session accomplished:
+**Session 17 Summary:**
+Fixed critical CSS bug causing Data Explorer chart to be nearly invisible (10% opacity). Also updated gender labels and improved UI.
 
-1. **Quick wins executed** - Cost & Aid button added, Mario Martinez updated as Provost
-2. **Enhanced fact sheet data** - 5 new stat cards with first-gen%, diversity%, in-state%, acceptance rate
-3. **CDS Data Parsing (HUGE LIFT)** - Parsed 8 years of CDS Excel files from Downloads folder
-4. **Data Explorer upgraded** - Three data sources (Enrollment/Admissions/Expenses) with 8+ new measures
-5. **10 years of trend data** - Can now chart applications, acceptance rates, tuition costs over time
+**What Was Fixed:**
+1. **CRITICAL:** `.chart-area` CSS class conflict - renamed explorer container to `.explorer-chart-area`
+2. Parent page banner image (broken URL → working photo)
+3. All backgrounds changed to fully opaque (#FFFFFF instead of rgba 0.98)
+4. Tab buttons scroll toggle removed
+5. Gender labels: "Men/Women" → "Male/Female"
 
 **Current State:**
 - Site is SMOOTH and STABLE
-- No glitchy animations
+- Data Explorer chart now FULLY VISIBLE (was 10% opacity before)
+- All pages have consistent navigation
 - Clean, professional appearance
-- Data Explorer fully functional with working export preview
 - Ready for executive presentation
+
+**Git Status:** Clean - all changes committed and pushed
+**Branch:** main
+**Latest Commit:** 421ade3
 
 **For Next Session (if needed):**
 - Gather user feedback from executive demo
 - Address any issues discovered during presentation
-- Consider adding back subtle animations if user wants them (but keep simple)
+- Site is presentation-ready, no known issues
+
+**Quick Start:**
+```
+continue
+```
 
 ---
 
