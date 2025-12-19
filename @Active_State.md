@@ -1,6 +1,6 @@
 # HORIZON - Active State
 **Mission Card | Session Continuity Document**
-**Last Updated:** 2025-12-18 | Session 24
+**Last Updated:** 2025-12-18 | Session 25
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Phase** | 24 - AI Comparison Feature |
+| **Phase** | 25 - Mobile UX & Default Season |
 | **Status** | COMPLETE |
 | **Active Task** | None - Ready for next session |
 | **Blockers** | None |
@@ -16,7 +16,46 @@
 
 ---
 
-## SESSION 24 COMPLETION (Current)
+## SESSION 25 COMPLETION (Current)
+
+**Major Theme: Mobile Header Icons & Default Season Change**
+
+### Bug Investigation:
+
+**1. PARTICLES NOT FALLING ON ANOTHER COMPUTER**
+- **Root Cause:** User's other computer had "Reduce motion" accessibility setting enabled
+- **Resolution:** User toggled the setting - no code change required
+- **Note:** CSS `@media (prefers-reduced-motion: reduce)` disables all animations globally
+
+### New Features Added:
+
+**1. FALL SEASON AS DEFAULT**
+- [x] Changed default season from 'winter' to 'fall' in `index.html` (line 2395)
+- [x] Changed default season from 'winter' to 'fall' in `src/js/theme.js` (line 126)
+- [x] New visitors now see falling leaves instead of snow by default
+- [x] Users with existing localStorage preference retain their choice
+
+**2. MOBILE HEADER TOGGLE ICONS**
+- [x] Season toggle (🍂/❄️) now visible on mobile
+- [x] Theme toggle (🌙/☀️) now visible on mobile
+- [x] Icons positioned LEFT of hamburger menu
+- [x] 32px button size with 0.4rem gap spacing
+- [x] Updated CSS selectors to exclude toggles from mobile hide rules
+
+### Files Modified:
+- `index.html` - Default season change (line 2395)
+- `src/js/theme.js` - Default season change (line 126)
+- `src/css/design-system.css` - Mobile toggle visibility (lines 776, 783, 789-796, 828)
+
+### Key CSS Changes:
+- Line 776: `.nav__actions > *:not(.nav__hamburger):not(.season-toggle):not(.theme-toggle)`
+- Line 783: Same pattern for `.persona-nav__links`
+- Lines 789-796: New rule showing `.season-toggle, .theme-toggle` with `display: flex !important`
+- Line 828: Added `gap: 0.4rem` to `.nav__actions` for mobile
+
+---
+
+## SESSION 24 COMPLETION
 
 **Major Theme: AI Website Comparison Feature**
 
@@ -152,7 +191,7 @@
 
 **Branch:** main
 **Remote:** origin (https://github.com/WinnCook/concept-demo-flc-website-prototype)
-**Last Commit:** 13258d5 - Update @Active_State.md with Session 24 notes
+**Last Commit:** f6e0ac8 - Make fall default season and show toggle icons on mobile
 **Status:** Clean - all changes committed and pushed
 
 **Live URL:** https://winncook.github.io/concept-demo-flc-website-prototype/
@@ -163,7 +202,19 @@
 
 ## OPEN DECISIONS
 
-**None** - All decisions from Session 24 are FINAL.
+**None** - All decisions from Session 25 are FINAL.
+
+---
+
+## KEY DECISIONS (Session 25 - FINAL)
+
+| Decision | Status | Rationale |
+|----------|--------|-----------|
+| Fall is the default season (not winter) | FINAL | User preference for fall aesthetic on homepage |
+| Show season + theme toggles on mobile | FINAL | User requested icons visible left of hamburger |
+| Toggle size 32px on mobile | FINAL | Smaller than desktop (40px) to fit mobile header |
+| Gap 0.4rem between mobile icons | FINAL | Tight spacing appropriate for mobile |
+| No code fix for reduced-motion issue | FINAL | Root cause was user's system setting, not code bug |
 
 ---
 
@@ -210,39 +261,37 @@
 | 22 | 2025-12-18 | Phase 22 - Fullscreen & Mobile UX Fixes | Complete |
 | 23 | 2025-12-18 | Phase 23 - UX Polish, Dashboard Fixes, Export Feature | Complete |
 | 24 | 2025-12-18 | Phase 24 - AI Comparison Feature | Complete |
+| 25 | 2025-12-18 | Phase 25 - Mobile UX & Default Season | Complete |
 
 ---
 
 ## HANDOFF NOTES
 
-**Session 24 Summary:**
-Added AI Website Comparison feature - a new button on homepage linking to a professional executive report page presenting 5-LLM consensus comparing HORIZON prototype vs current FLC website.
+**Session 25 Summary:**
+Changed default season to fall (leaves falling) and added season/theme toggle icons to mobile header, positioned left of hamburger menu. Also investigated particle animation issue on another computer (root cause: user's system "Reduce motion" setting).
 
 **What Was Accomplished This Session:**
 
-1. **AI Comparison Button Added** - New button next to IR/Data button on homepage:
-   - Robot icon with "AI Website Comparison" text
-   - Blue gradient styling (distinct from gold IR button)
-   - Green "NEW" badge to draw attention
-   - Responsive flex container for both buttons
+1. **Fall Season Now Default**
+   - Changed from 'winter' to 'fall' in both `index.html` and `src/js/theme.js`
+   - New visitors see falling leaves instead of snow
+   - Existing users keep their saved preference (localStorage)
 
-2. **AI Comparison Page Created** (ai-comparison.html):
-   - Professional executive report layout
-   - Consolidated grading table (B- current vs A- prototype)
-   - Three source rationale cards with AI model badges
-   - Proof of concept stats (~3 hrs dev time, $0 cost, Tier-1 quality)
-   - Elevator pitch blockquote with "Project HORIZON" branding
-   - Dark mode support with starfield background
-   - Scroll reveal animations
+2. **Mobile Header Toggle Icons**
+   - Season toggle (🍂/❄️) and theme toggle (🌙/☀️) now visible on mobile
+   - Positioned left of hamburger menu
+   - 32px size with 0.4rem gap
+   - Updated CSS selectors in `design-system.css`
 
-3. **Navigation Updated**:
-   - Added "AI Review" link to desktop nav
-   - Added "AI Review" link to mobile nav
+3. **Bug Investigation (No Code Change)**
+   - Particles not animating on another computer
+   - Root cause: System accessibility setting "Reduce motion" was enabled
+   - User resolved by toggling the setting
 
 **Current State:**
 - Site is demo-ready and executive-presentation ready
-- AI Comparison report demonstrates value proposition
-- All features working across light/dark modes
+- Fall leaves default on all devices
+- Mobile header shows season and theme toggles
 - All changes committed and pushed
 
 **For Next Session (if needed):**
