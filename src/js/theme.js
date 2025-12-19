@@ -123,7 +123,7 @@
   function getPreferredSeason() {
     const savedSeason = localStorage.getItem(SEASON_STORAGE_KEY);
     if (savedSeason) return savedSeason;
-    return 'winter'; // Winter is the default
+    return 'fall'; // Fall is the default
   }
 
   function setSeason(season, showNotification = false) {

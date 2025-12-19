@@ -768,23 +768,31 @@ textarea {
 
 /* Show hamburger on mobile, hide everything else */
 @media (max-width: 767px) {
-  /* Hide ALL nav elements on mobile except logo and hamburger */
+  /* Hide ALL nav elements on mobile except logo, hamburger, and toggles */
   .nav__links,
   .nav__link,
   .nav__cta,
   .nav__search,
-  .nav__actions > *:not(.nav__hamburger),
+  .nav__actions > *:not(.nav__hamburger):not(.season-toggle):not(.theme-toggle),
   .page-header__link,
   .page-header__nav > a:not(.page-header__logo),
   .persona-nav__back,
   .persona-nav__cta,
   .persona-nav__link,
   .persona-nav__links > a,
-  .persona-nav__links > .nav__actions > *:not(.nav__hamburger),
-  .theme-toggle,
+  .persona-nav__links > .nav__actions > *:not(.nav__hamburger):not(.season-toggle):not(.theme-toggle),
   .search-trigger,
   .omnisearch-trigger {
     display: none !important;
+  }
+
+  /* Show season and theme toggles on mobile */
+  .season-toggle,
+  .theme-toggle {
+    display: flex !important;
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
   }
 
   /* Ensure hamburger stays visible everywhere */
@@ -817,6 +825,7 @@ textarea {
   .nav__actions {
     display: flex !important;
     align-items: center;
+    gap: 0.4rem;
   }
 
   /* Fix page-header layout for mobile */
